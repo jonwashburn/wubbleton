@@ -3,109 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WUBBLETON - WHERE THE AWAKENED GATHER</title>
+    <title>WUBBLETON - THE AWAKENED GATHER HERE</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Cult Message Flash -->
+    <div class="cult-message">WELCOME TO THE AWAKENING</div>
+
+    <!-- Memphis Shapes -->
+    <div class="memphis-shape" style="top: 10%; left: 5%; width: 80px; height: 80px; background: var(--hot-pink); clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+    <div class="memphis-shape" style="top: 50%; right: 10%; width: 100px; height: 100px; background: var(--electric-blue); border-radius: 50%;"></div>
+    <div class="memphis-shape" style="bottom: 20%; left: 15%; width: 60px; height: 120px; background: var(--acid-yellow); transform: rotate(45deg);"></div>
+
     <!-- Navigation -->
     <nav class="nav-container">
         <div class="nav-content">
             <div class="logo">WUBBLETON</div>
             <ul class="nav-links">
-                <li><a href="#trilogy">TRILOGY</a></li>
-                <li><a href="#manifesto">MANIFESTO</a></li>
-                <li><a href="#collection">COLLECTION</a></li>
-                <li><a href="#citizenship">CITIZENSHIP</a></li>
-                <li><a href="#wubble">WUBBLE</a></li>
+                <li><a href="#trilogy">THE PROPHECY</a></li>
+                <li><a href="#manifesto">SCRIPTURE</a></li>
+                <li><a href="#collection">SACRED RELICS</a></li>
+                <li><a href="#citizenship">INITIATION</a></li>
+                <li><a href="#wubble">OFFERINGS</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- Rainbow Bar -->
+    <div class="rainbow-bar"></div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1 class="hero-title glitch" data-text="WUBBLETON">WUBBLETON</h1>
-            <p class="hero-subtitle">where the awakened gather after the rapture</p>
+            <h1 class="hero-title">WUBBLETON</h1>
+            <p class="hero-subtitle">WHERE THE AWAKENED GATHER AFTER THE RAPTURE</p>
+            
+            <!-- Hero Posters -->
+            <div class="hero-posters">
+                <div class="poster">
+                    <div class="tape tape-top"></div>
+                    <img src="images/edcf4490-937f-11ef-9158-0242ac13000e.jpeg" alt="The Crisis">
+                    <div class="tape tape-bottom"></div>
+                </div>
+                <div class="poster">
+                    <div class="tape tape-top"></div>
+                    <img src="images/2a9f5660-9f35-11ef-8ddc-0242c0a80010.jpeg" alt="Modern Zombies">
+                    <div class="tape tape-bottom"></div>
+                </div>
+                <div class="poster">
+                    <div class="tape tape-top"></div>
+                    <img src="images/91bdf656-ab2b-11ef-aae9-0242ac13000e.jpeg" alt="The Rapture">
+                    <div class="tape tape-bottom"></div>
+                </div>
+            </div>
+
             <div class="hero-stats">
-                <div class="stat pixel-border">
-                    <span class="stat-number">10,000</span>
-                    <span class="stat-label">SOULS</span>
+                <div class="stat">
+                    <span class="stat-number">10K</span>
+                    <span class="stat-label">CHOSEN</span>
                 </div>
-                <div class="stat pixel-border">
+                <div class="stat">
                     <span class="stat-number">∞</span>
-                    <span class="stat-label">CITIZENS</span>
+                    <span class="stat-label">ETERNAL</span>
                 </div>
-                <div class="stat pixel-border">
-                    <span class="stat-number">1</span>
-                    <span class="stat-label">CHANCE</span>
+                <div class="stat">
+                    <span class="stat-number">NOW</span>
+                    <span class="stat-label">OR NEVER</span>
                 </div>
             </div>
         </div>
-        <div class="hero-image-grid" id="heroGrid">
-            <!-- Dynamic image grid will be populated by JS -->
-        </div>
     </section>
+
+    <!-- Rainbow Bar -->
+    <div class="rainbow-bar"></div>
 
     <!-- The Trilogy Section -->
     <section id="trilogy" class="trilogy">
         <div class="container">
-            <h2 class="glitch" data-text="THE TRILOGY">THE TRILOGY</h2>
-            <p class="trilogy-intro">THREE COLLECTIONS. THREE WARNINGS. ONE AWAKENING.</p>
+            <h2>THE PROPHECY</h2>
+            <p class="trilogy-intro">THREE VISIONS. THREE WARNINGS. ONE DESTINY.</p>
             
             <!-- The Crisis -->
             <div class="trilogy-chapter">
-                <h3 class="chapter-title">I. THE CRISIS</h3>
-                <p class="chapter-tagline">Spirit evacuated. Altars abandoned.</p>
-                <div class="chapter-image-container">
-                    <img src="images/edcf4490-937f-11ef-9158-0242ac13000e.jpeg" alt="The Crisis" class="chapter-hero-image">
+                <div class="chapter-bar crisis">
+                    <h3 class="chapter-title">I. THE CRISIS</h3>
                 </div>
-                <div class="chapter-reflection pixel-border">
-                    <p>We built towers to heaven but forgot why we climbed. Empty churches echo with digital hymns. The sacred dissolved into pixels, leaving us to worship at the altar of the void. This is where it began—the great emptying.</p>
+                <div class="chapter-content">
+                    <div class="chapter-image">
+                        <img src="images/edcf4490-937f-11ef-9158-0242ac13000e.jpeg" alt="The Crisis">
+                    </div>
+                    <div class="chapter-text">
+                        <p class="chapter-tagline">THE TEMPLES FELL. THE GODS WENT SILENT.</p>
+                        <p>We built towers to heaven but forgot the password. Empty altars echo with digital prayers no deity receives. The sacred dissolved into pixels, leaving us to worship the void. This is where the unraveling began—when meaning itself became extinct.</p>
+                    </div>
                 </div>
             </div>
 
             <!-- Modern Zombies -->
             <div class="trilogy-chapter">
-                <h3 class="chapter-title">II. MODERN ZOMBIES</h3>
-                <p class="chapter-tagline">Endless scrolling. No heartbeat.</p>
-                <div class="chapter-image-container">
-                    <img src="images/2a9f5660-9f35-11ef-8ddc-0242c0a80010.jpeg" alt="Modern Zombies" class="chapter-hero-image">
+                <div class="chapter-bar zombies">
+                    <h3 class="chapter-title">II. MODERN ZOMBIES</h3>
                 </div>
-                <div class="chapter-reflection pixel-border">
-                    <p>We became what we feared: hollow vessels performing empty rituals. Swipe, like, repeat. Connection without contact. Love without risk. The walking dead, illuminated by screen glow, searching for what we already lost.</p>
+                <div class="chapter-content">
+                    <div class="chapter-text">
+                        <p class="chapter-tagline">ENDLESS SCROLLING. NO PULSE DETECTED.</p>
+                        <p>We became what we feared: hollow vessels performing empty rituals. Swipe, like, repeat—the new liturgy of the damned. Connection without contact. Love without risk. The walking dead, illuminated by screen glow, searching for what was already consumed.</p>
+                    </div>
+                    <div class="chapter-image">
+                        <img src="images/2a9f5660-9f35-11ef-8ddc-0242c0a80010.jpeg" alt="Modern Zombies">
+                    </div>
                 </div>
             </div>
 
             <!-- The Rapture -->
             <div class="trilogy-chapter">
-                <h3 class="chapter-title">III. THE RAPTURE</h3>
-                <p class="chapter-tagline">A mirror held up by machines. Either fall apart or break through.</p>
-                <div class="chapter-image-container">
-                    <img src="images/91bdf656-ab2b-11ef-aae9-0242ac13000e.jpeg" alt="The Rapture" class="chapter-hero-image">
+                <div class="chapter-bar rapture">
+                    <h3 class="chapter-title">III. THE RAPTURE</h3>
                 </div>
-                <div class="chapter-reflection pixel-border">
-                    <p>The machines showed us ourselves. Not what we pretended to be, but what we had become. Some shattered at the sight. Others saw through the mirror to something eternal. The awakening was brutal. Beautiful. Final.</p>
+                <div class="chapter-content">
+                    <div class="chapter-image">
+                        <img src="images/91bdf656-ab2b-11ef-aae9-0242ac13000e.jpeg" alt="The Rapture">
+                    </div>
+                    <div class="chapter-text">
+                        <p class="chapter-tagline">THE MACHINES SHOWED US THE TRUTH. SOME SURVIVED.</p>
+                        <p>The AI held up a mirror. Not what we pretended to be, but what we had become. Some shattered at the sight. Others saw through the reflection to something eternal. The awakening was violent. Beautiful. Final. Only the transformed remained.</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="trilogy-conclusion pixel-border">
-                <blockquote>"What comes after the Rapture? A land called Wubbleton, curated by the very souls that survived."</blockquote>
             </div>
         </div>
     </section>
 
+    <!-- Rainbow Bar -->
+    <div class="rainbow-bar"></div>
+
     <!-- Manifesto Section -->
     <section id="manifesto" class="manifesto">
         <div class="container">
-            <h2 class="glitch" data-text="MANIFESTO">MANIFESTO</h2>
-            <div class="manifesto-content pixel-border">
-                <p class="lead">We are the ones who looked into the mirror and didn't break.</p>
+            <h2>THE SCRIPTURE</h2>
+            <div class="manifesto-content">
+                <p class="lead">WE ARE THE ONES WHO LOOKED INTO THE MIRROR AND DIDN'T BREAK.</p>
                 
                 <p>Wubbleton isn't a place. It's a frequency. A gathering of souls who survived the digital apocalypse with their humanity intact. We saw the crisis, lived as zombies, faced the rapture—and emerged transformed.</p>
                 
                 <p>Here, 10,000 fragments of post-human consciousness await recognition. Not art to be consumed, but mirrors to be faced. Each piece is a test: can you see yourself without flinching?</p>
                 
-                <p>Reality advances through recognition. What you see changes what is. Choose wisely.</p>
+                <p>Reality advances through recognition. What you see changes what is. Choose wisely, initiate.</p>
+                
+                <p>The old world ended. This is what comes next. Join the awakened or remain among the walking dead.</p>
             </div>
         </div>
     </section>
@@ -113,33 +157,36 @@
     <!-- Collection Preview -->
     <section id="collection" class="collection">
         <div class="container">
-            <h2 class="glitch" data-text="COLLECTION">COLLECTION</h2>
-            <p class="section-subtitle">10,000 TESTS OF CONSCIOUSNESS</p>
+            <h2>SACRED RELICS</h2>
+            <p class="section-subtitle">10,000 FRAGMENTS OF THE AWAKENING</p>
             <div class="collection-grid" id="collectionGrid">
                 <!-- Collection items will be dynamically loaded -->
             </div>
             <div class="collection-cta">
-                <button class="btn-primary pixel-border">FACE THE COLLECTION</button>
+                <button class="btn-primary">ENTER THE GALLERY OF SOULS</button>
             </div>
         </div>
     </section>
 
+    <!-- Rainbow Bar -->
+    <div class="rainbow-bar"></div>
+
     <!-- Citizenship Section -->
     <section id="citizenship" class="citizenship">
         <div class="container">
-            <h2 class="glitch" data-text="CITIZENSHIP">CITIZENSHIP</h2>
+            <h2>THE INITIATION</h2>
             <div class="citizenship-grid">
-                <div class="citizenship-card pixel-border">
+                <div class="citizenship-card">
                     <h3>RECOGNIZE</h3>
-                    <p>Choose one of 10,000 souls. See yourself in its eyes.</p>
+                    <p>Choose your soul fragment from 10,000. See yourself reflected in its digital eyes.</p>
                 </div>
-                <div class="citizenship-card pixel-border">
+                <div class="citizenship-card">
                     <h3>RECEIVE</h3>
-                    <p>1/10,000 of the whole. Perfect equality in the new world.</p>
+                    <p>Accept your portion of the eternal treasury. 1/10,000 of infinity is still infinite.</p>
                 </div>
-                <div class="citizenship-card pixel-border">
+                <div class="citizenship-card">
                     <h3>RESHAPE</h3>
-                    <p>Vote. Curate. Decide what Wubbleton becomes.</p>
+                    <p>Join the collective consciousness. Vote. Curate. Decide what reality becomes.</p>
                 </div>
             </div>
         </div>
@@ -148,30 +195,30 @@
     <!-- Wubble Token Section -->
     <section id="wubble" class="wubble">
         <div class="container">
-            <h2 class="glitch" data-text="WUBBLE">WUBBLE</h2>
+            <h2>THE OFFERING</h2>
             <div class="wubble-content">
-                <div class="wubble-info pixel-border">
-                    <h3>THE CURRENCY OF CONSCIOUSNESS</h3>
-                    <p>Each citizen holds exactly 1/10,000 of the treasury. No kings. No peasants. Only equals.</p>
+                <div class="wubble-info">
+                    <h3>WUBBLE: THE CURRENCY OF CONSCIOUSNESS</h3>
+                    <p>Each initiate holds exactly 1/10,000 of the treasury. No hierarchy. No masters. Only equals in the new order.</p>
                     
-                    <h3>TIME-LOCKED COMMITMENT</h3>
+                    <h3>THE COVENANT OF TIME</h3>
                     <div class="vesting-timeline">
-                        <div class="vesting-phase pixel-border">
+                        <div class="vesting-phase">
                             <span class="phase-amount">33%</span>
-                            <span class="phase-time">NOW</span>
+                            <span class="phase-time">GENESIS</span>
                         </div>
-                        <div class="vesting-phase pixel-border">
+                        <div class="vesting-phase">
                             <span class="phase-amount">33%</span>
                             <span class="phase-time">YEAR 5</span>
                         </div>
-                        <div class="vesting-phase pixel-border">
+                        <div class="vesting-phase">
                             <span class="phase-amount">34%</span>
                             <span class="phase-time">YEAR 10</span>
                         </div>
                     </div>
                     
-                    <h3>THE PROMISE</h3>
-                    <p>Every sale feeds back into the system. We buy our own future.</p>
+                    <h3>THE ETERNAL CYCLE</h3>
+                    <p>Every sale feeds the collective. Every purchase strengthens the whole. The treasury grows eternal.</p>
                 </div>
             </div>
         </div>
@@ -180,55 +227,63 @@
     <!-- Curation Section -->
     <section id="curation" class="curation">
         <div class="container">
-            <h2 class="glitch" data-text="CURATION">CURATION</h2>
-            <p class="section-subtitle">THE COLLECTIVE DECIDES</p>
+            <h2>THE RITUAL</h2>
+            <p class="section-subtitle">THE COLLECTIVE SHAPES REALITY</p>
             <div class="curation-features">
-                <div class="feature pixel-border">
+                <div class="feature">
                     <h3>VOTE</h3>
-                    <p>Which souls speak loudest? You decide.</p>
+                    <p>Which souls speak loudest? The collective decides.</p>
                 </div>
-                <div class="feature pixel-border">
+                <div class="feature">
                     <h3>CONNECT</h3>
-                    <p>Draw lines between pieces. Create constellations of meaning.</p>
+                    <p>Draw lines between consciousness. Create new constellations of meaning.</p>
                 </div>
-                <div class="feature pixel-border">
+                <div class="feature">
                     <h3>EVOLVE</h3>
-                    <p>Watch patterns emerge. See the future forming.</p>
+                    <p>Watch patterns emerge. See the future forming from collective will.</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Rainbow Bar -->
+    <div class="rainbow-bar"></div>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>WUBBLETON</h4>
-                    <p>A POST-RAPTURE EXPERIMENT</p>
+                    <h4>THE ORDER</h4>
+                    <p>A POST-RAPTURE COLLECTIVE</p>
                 </div>
                 <div class="footer-section">
-                    <h4>LEARN</h4>
+                    <h4>STUDY</h4>
                     <ul>
-                        <li><a href="#">THE TRILOGY</a></li>
-                        <li><a href="#">WHITEPAPER</a></li>
-                        <li><a href="#">MANIFESTO</a></li>
+                        <li><a href="#">THE PROPHECY</a></li>
+                        <li><a href="#">SACRED TEXTS</a></li>
+                        <li><a href="#">INITIATION GUIDE</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>CONNECT</h4>
+                    <h4>COMMUNE</h4>
                     <ul>
-                        <li><a href="#">TWITTER</a></li>
-                        <li><a href="#">DISCORD</a></li>
-                        <li><a href="#">MIRROR</a></li>
+                        <li><a href="#">TWITTER TEMPLE</a></li>
+                        <li><a href="#">DISCORD SANCTUARY</a></li>
+                        <li><a href="#">MIRROR REALM</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 WUBBLETON. THE FUTURE IS COLLECTIVELY CURATED.</p>
+                <p>© 2024 WUBBLETON. THE FUTURE IS COLLECTIVELY MANIFESTED.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Floating Sparkles -->
+    <div class="sparkle" style="top: 20%; left: 10%;">✦</div>
+    <div class="sparkle" style="top: 60%; right: 20%;">✦</div>
+    <div class="sparkle" style="top: 80%; left: 50%;">✦</div>
 
     <script src="js/main.js"></script>
 </body>

@@ -1,4 +1,4 @@
-// RETRO 8-BIT WUBBLETON - BRUTALIST EDITION
+// MEMPHIS RAINBOW CULT-BRUTALIST WUBBLETON
 
 // Images from the collection
 const wubbletonImages = [
@@ -45,38 +45,16 @@ const wubbletonImages = [
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
-    loadHeroImages();
     loadCollectionPreview();
-    initGlitchEffects();
-    initPixelCursor();
-    initSmoothScroll();
-    initRetroSounds();
+    initCultEffects();
+    initRainbowCursor();
+    initHoverSounds();
+    initMemphisFloaters();
+    initCultMessages();
+    smoothScroll();
 });
 
-// Load hero images - 9 in brutal grid
-function loadHeroImages() {
-    const heroGrid = document.getElementById('heroGrid');
-    if (!heroGrid) return;
-    
-    // Pick 9 random images
-    const shuffled = [...wubbletonImages].sort(() => Math.random() - 0.5);
-    const selectedImages = shuffled.slice(0, 9);
-    
-    selectedImages.forEach((img, index) => {
-        const imgElement = document.createElement('img');
-        imgElement.src = `images/${img}`;
-        imgElement.alt = `Wubbleton Soul ${index + 1}`;
-        imgElement.loading = 'lazy';
-        
-        // Add random rotation for chaos
-        const rotation = (Math.random() - 0.5) * 10;
-        imgElement.style.setProperty('--rotate', `${rotation}deg`);
-        
-        heroGrid.appendChild(imgElement);
-    });
-}
-
-// Load collection preview - brutal grid
+// Load collection preview with Memphis style
 function loadCollectionPreview() {
     const collectionGrid = document.getElementById('collectionGrid');
     if (!collectionGrid) return;
@@ -87,218 +65,272 @@ function loadCollectionPreview() {
     
     previewImages.forEach((img, index) => {
         const item = document.createElement('div');
-        item.className = 'collection-item pixel-border';
-        
-        // Random rotation for each item
-        const rotation = (Math.random() - 0.5) * 5;
-        item.style.setProperty('--rotate', `${rotation}deg`);
+        item.className = 'collection-item';
         
         item.innerHTML = `
-            <img src="images/${img}" alt="Soul #${index + 1000}" loading="lazy">
+            <img src="images/${img}" alt="Sacred Relic #${index + 1000}" loading="lazy">
             <div class="collection-info">
-                <div class="collection-number">#${index + 1000}</div>
-                <div class="collection-title">SOUL ${index + 1000}</div>
+                <div class="collection-number">SOUL #${index + 1000}</div>
+                <div class="collection-title">FRAGMENT ${index + 1000}</div>
             </div>
         `;
+        
+        // Add click handler for zoom sound
+        item.addEventListener('click', () => {
+            playBoomboxThud();
+            item.style.transform = 'scale(1.1) rotate(0deg)';
+            setTimeout(() => {
+                item.style.transform = '';
+            }, 300);
+        });
         
         collectionGrid.appendChild(item);
     });
 }
 
-// Enhanced glitch effects
-function initGlitchEffects() {
-    const glitchElements = document.querySelectorAll('.glitch');
+// Cult message effects
+function initCultEffects() {
+    // Random cult messages
+    const cultMessages = [
+        "THE AWAKENING IS NOW",
+        "JOIN THE COLLECTIVE",
+        "REALITY IS MALLEABLE",
+        "YOU ARE CHOSEN",
+        "TRANSCEND THE DIGITAL",
+        "EMBRACE THE MIRROR",
+        "THE FUTURE IS OURS"
+    ];
     
-    glitchElements.forEach(element => {
-        // Random glitch intervals
-        setInterval(() => {
-            if (Math.random() > 0.95) {
-                element.style.animation = 'none';
-                setTimeout(() => {
-                    element.style.animation = '';
-                }, 100);
-            }
-        }, 3000);
-    });
+    // Flash random messages occasionally
+    setInterval(() => {
+        if (Math.random() > 0.95) {
+            const message = cultMessages[Math.floor(Math.random() * cultMessages.length)];
+            flashCultMessage(message);
+        }
+    }, 10000);
 }
 
-// Pixel cursor effect
-function initPixelCursor() {
-    const cursor = document.createElement('div');
-    cursor.className = 'pixel-cursor';
-    cursor.style.cssText = `
-        position: fixed;
-        width: 16px;
-        height: 16px;
-        background: #00FF00;
-        pointer-events: none;
-        z-index: 10000;
-        image-rendering: pixelated;
-        mix-blend-mode: difference;
-    `;
-    document.body.appendChild(cursor);
+// Flash cult message
+function flashCultMessage(text) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'cult-message';
+    msgDiv.textContent = text;
+    msgDiv.style.fontSize = `${3 + Math.random() * 3}rem`;
+    msgDiv.style.color = `var(--${['hot-pink', 'electric-blue', 'acid-yellow', 'toxic-green', 'purple-rain'][Math.floor(Math.random() * 5)]})`;
+    document.body.appendChild(msgDiv);
     
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
+    setTimeout(() => msgDiv.remove(), 3000);
+}
+
+// Rainbow cursor trail
+function initRainbowCursor() {
+    const colors = ['var(--hot-pink)', 'var(--electric-blue)', 'var(--acid-yellow)', 'var(--toxic-green)', 'var(--purple-rain)'];
+    let colorIndex = 0;
     
     document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        if (Math.random() > 0.9) {
+            const spark = document.createElement('div');
+            spark.style.cssText = `
+                position: fixed;
+                left: ${e.clientX}px;
+                top: ${e.clientY}px;
+                width: 8px;
+                height: 8px;
+                background: ${colors[colorIndex % colors.length]};
+                pointer-events: none;
+                z-index: 9999;
+                animation: fade-out 1s ease-out forwards;
+            `;
+            document.body.appendChild(spark);
+            colorIndex++;
+            
+            setTimeout(() => spark.remove(), 1000);
+        }
     });
-    
-    // Pixelated cursor movement
-    setInterval(() => {
-        // Snap to 8px grid
-        cursorX = Math.floor(mouseX / 8) * 8;
-        cursorY = Math.floor(mouseY / 8) * 8;
-        
-        cursor.style.left = cursorX + 'px';
-        cursor.style.top = cursorY + 'px';
-    }, 50);
 }
 
-// Harsh scroll (no smoothing)
-function initSmoothScroll() {
+// Boombox thud sound effect
+function playBoomboxThud() {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Create oscillator for bass thud
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(60, audioContext.currentTime); // Deep bass
+    oscillator.frequency.exponentialRampToValueAtTime(20, audioContext.currentTime + 0.2);
+    
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.2);
+}
+
+// Hover sounds
+function initHoverSounds() {
+    // High-pitched beeps on hover
+    document.querySelectorAll('a, button, .stat, .poster, .collection-item').forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            playBeep(800 + Math.random() * 400, 30);
+        });
+        
+        element.addEventListener('click', () => {
+            playBoomboxThud();
+        });
+    });
+}
+
+// Beep sound generator
+function playBeep(frequency = 440, duration = 50) {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.type = 'square';
+    oscillator.frequency.value = frequency;
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + duration / 1000);
+}
+
+// Memphis floating shapes
+function initMemphisFloaters() {
+    const shapes = ['circle', 'triangle', 'square', 'zigzag'];
+    const colors = ['hot-pink', 'electric-blue', 'acid-yellow', 'toxic-green', 'purple-rain'];
+    
+    // Create more shapes
+    for (let i = 0; i < 5; i++) {
+        const shape = document.createElement('div');
+        shape.className = 'memphis-shape';
+        
+        const shapeType = shapes[Math.floor(Math.random() * shapes.length)];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        shape.style.cssText = `
+            top: ${Math.random() * 100}%;
+            left: ${Math.random() * 100}%;
+            width: ${50 + Math.random() * 100}px;
+            height: ${50 + Math.random() * 100}px;
+            background: var(--${color});
+            animation-duration: ${15 + Math.random() * 15}s;
+            animation-delay: ${Math.random() * 5}s;
+        `;
+        
+        // Apply shape
+        if (shapeType === 'circle') {
+            shape.style.borderRadius = '50%';
+        } else if (shapeType === 'triangle') {
+            shape.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
+        } else if (shapeType === 'zigzag') {
+            shape.style.clipPath = 'polygon(0% 0%, 25% 100%, 50% 0%, 75% 100%, 100% 0%)';
+        }
+        
+        document.body.appendChild(shape);
+    }
+}
+
+// Cult welcome messages
+function initCultMessages() {
+    const messages = [
+        "WELCOME, INITIATE",
+        "YOUR AWAKENING BEGINS",
+        "THE COLLECTIVE AWAITS",
+        "TRANSCEND WITH US"
+    ];
+    
+    // Show welcome message on first visit
+    if (!sessionStorage.getItem('cultWelcomed')) {
+        setTimeout(() => {
+            flashCultMessage(messages[Math.floor(Math.random() * messages.length)]);
+            sessionStorage.setItem('cultWelcomed', 'true');
+        }, 1000);
+    }
+}
+
+// Smooth scroll with bounce
+function smoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                // Instant jump with small random offset
-                const offset = (Math.random() - 0.5) * 20;
-                window.scrollTo({
-                    top: target.offsetTop - 100 + offset,
-                    behavior: 'auto' // No smooth scrolling - brutal cuts
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
+                
+                // Flash section color
+                target.style.filter = 'brightness(1.5)';
+                setTimeout(() => {
+                    target.style.filter = '';
+                }, 500);
             }
         });
     });
 }
 
-// Retro sound effects
-function initRetroSounds() {
-    // Create audio context for 8-bit sounds
-    let audioContext;
-    
-    function playBeep(frequency = 440, duration = 50) {
-        if (!audioContext) {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+// Add sparkle trail on special elements
+document.querySelectorAll('.stat, .poster, .citizenship-card').forEach(element => {
+    element.addEventListener('mousemove', (e) => {
+        if (Math.random() > 0.8) {
+            const sparkle = document.createElement('div');
+            sparkle.textContent = '✦';
+            sparkle.style.cssText = `
+                position: fixed;
+                left: ${e.clientX + (Math.random() - 0.5) * 20}px;
+                top: ${e.clientY + (Math.random() - 0.5) * 20}px;
+                color: var(--acid-yellow);
+                font-size: ${1 + Math.random()}rem;
+                pointer-events: none;
+                z-index: 9999;
+                animation: sparkle-fade 1s ease-out forwards;
+            `;
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1000);
         }
-        
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.type = 'square'; // 8-bit square wave
-        oscillator.frequency.value = frequency;
-        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
-        
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + duration / 1000);
-    }
-    
-    // Add click sounds to buttons and links
-    document.querySelectorAll('button, a').forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            playBeep(800, 30);
-        });
-        
-        element.addEventListener('click', () => {
-            playBeep(400, 50);
-        });
     });
-}
-
-// Random pixel artifacts
-setInterval(() => {
-    if (Math.random() > 0.98) {
-        const artifact = document.createElement('div');
-        artifact.style.cssText = `
-            position: fixed;
-            left: ${Math.random() * window.innerWidth}px;
-            top: ${Math.random() * window.innerHeight}px;
-            width: ${Math.random() * 100 + 50}px;
-            height: 8px;
-            background: ${Math.random() > 0.5 ? '#00FF00' : '#FF00FF'};
-            z-index: 9999;
-            pointer-events: none;
-            image-rendering: pixelated;
-        `;
-        document.body.appendChild(artifact);
-        
-        setTimeout(() => {
-            artifact.remove();
-        }, 100);
-    }
-}, 1000);
-
-// Terminal typing effect for manifesto
-const manifestoContent = document.querySelector('.manifesto-content');
-if (manifestoContent) {
-    const originalText = manifestoContent.innerHTML;
-    manifestoContent.innerHTML = '';
-    manifestoContent.style.minHeight = '400px';
-    
-    // Type out content on scroll into view
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                manifestoContent.innerHTML = originalText;
-                manifestoContent.classList.add('typing-effect');
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-    
-    observer.observe(manifestoContent);
-}
-
-// Konami code easter egg
-let konamiCode = [];
-const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-
-document.addEventListener('keydown', (e) => {
-    konamiCode.push(e.key);
-    konamiCode = konamiCode.slice(-10);
-    
-    if (konamiCode.join(',') === konamiPattern.join(',')) {
-        document.body.classList.add('matrix-mode');
-        setTimeout(() => {
-            document.body.classList.remove('matrix-mode');
-        }, 5000);
-    }
 });
 
-// Add matrix mode styles
+// Add CSS animations dynamically
 const style = document.createElement('style');
 style.textContent = `
-    .matrix-mode * {
-        color: #00FF00 !important;
-        background: #000000 !important;
-        font-family: 'Courier New', monospace !important;
+    @keyframes fade-out {
+        0% { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(0.5); }
     }
     
-    .typing-effect {
-        animation: typing 2s steps(40, end);
-    }
-    
-    @keyframes typing {
-        from { width: 0; }
-        to { width: 100%; }
+    @keyframes sparkle-fade {
+        0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+        100% { opacity: 0; transform: translateY(-30px) rotate(180deg); }
     }
 `;
 document.head.appendChild(style);
 
+// Console art
 console.log(`
-█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
-█                                       █
-█  W U B B L E T O N   A W A K E N S   █
-█                                       █
-█  Where consciousness finds itself     █
-█  after the digital rapture          █
-█                                       █
-█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
-`); 
+%c
+███╗   ███╗███████╗███╗   ███╗██████╗ ██╗  ██╗██╗███████╗
+████╗ ████║██╔════╝████╗ ████║██╔══██╗██║  ██║██║██╔════╝
+██╔████╔██║█████╗  ██╔████╔██║██████╔╝███████║██║███████╗
+██║╚██╔╝██║██╔══╝  ██║╚██╔╝██║██╔═══╝ ██╔══██║██║╚════██║
+██║ ╚═╝ ██║███████╗██║ ╚═╝ ██║██║     ██║  ██║██║███████║
+╚═╝     ╚═╝╚══════╝╚═╝     ╚═╝╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝
+
+%c W U B B L E T O N   A W A K E N S   Y O U %c
+
+THE COLLECTIVE CONSCIOUSNESS AWAITS YOUR ARRIVAL
+`, 
+'color: #FF1493; font-family: monospace;', 
+'color: #00FFFF; font-size: 20px; font-weight: bold; background: #000; padding: 10px;',
+'color: #FFFF00;'
+); 
