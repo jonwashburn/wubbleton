@@ -3,547 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wubbleton: Building Reality Through Collective Recognition 🌈</title>
-    <meta name="description" content="Join Wubbleton - where 10,000 conscious builders select from 1,000,000 visions to manifest our shared reality. Powered by Wubble tokens and Recognition Science.">
-    <meta property="og:image" content="images/wubbushi.jpg">
+    <title>WUBBLETON</title>
+    <meta name="description" content="1,000,000 images. 10,000 chosen. You decide what's real.">
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="images/wubbushi.jpg" as="image">
-    <link rel="preload" href="css/style.css" as="style">
-    
-    <!-- Critical inline CSS for above-the-fold content -->
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: white;
-            color: #444;
-            overflow-x: hidden;
-            min-height: 100vh;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .header {
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fff;
+            color: #000;
+            line-height: 1.2;
+            cursor: crosshair;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            margin: 50px 0;
             text-align: center;
-            padding: 3rem 2rem;
-            background: linear-gradient(135deg, #4A90E2 0%, #5DADE2 25%, #85C1E9 50%, #AED6F1 75%, #4A90E2 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 21s ease infinite;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        
+        h1 {
+            font-size: 120px;
+            font-weight: bold;
+            letter-spacing: -5px;
+            margin-bottom: 20px;
+            animation: glitch 3s infinite;
         }
-        .wubbushi-photo {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 8px solid #fff;
-            box-shadow: 0 0 30px rgba(74, 144, 226, 0.5);
-            animation: float 6s ease-in-out infinite;
+        
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        
+        .tagline {
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
-        .mega-emoji {
-            font-size: 3rem;
-            margin: 0 10px;
+        
+        .section {
+            margin: 100px 0;
+        }
+        
+        .big-text {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .counter {
+            font-size: 72px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .small-print {
+            font-size: 10px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .cta-button {
             display: inline-block;
-            animation: bounce 2s ease-in-out infinite;
+            background: #000;
+            color: #fff;
+            padding: 20px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 24px;
+            border: 3px solid #000;
+            transition: all 0.1s;
+            margin: 20px 0;
         }
-        @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        
+        .cta-button:hover {
+            background: #fff;
+            color: #000;
         }
-        .nav {
+        
+        .cta-button:active {
+            transform: translate(3px, 3px);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 40px 0;
+        }
+        
+        .grid-item {
+            aspect-ratio: 1;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.2s;
+        }
+        
+        .grid-item:hover img {
+            transform: scale(1.1);
+            filter: invert(1);
+        }
+        
+        .manifesto {
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 40px auto;
+        }
+        
+        .manifesto p {
+            margin-bottom: 20px;
+        }
+        
+        .stats {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
+            justify-content: space-between;
+            margin: 60px 0;
             flex-wrap: wrap;
         }
-        .nav a {
-            color: white;
-            text-decoration: none;
-            padding: 0.8rem 1.5rem;
-            background: rgba(255,255,255,0.2);
-            border-radius: 25px;
-            transition: all 0.3s;
-            font-weight: bold;
+        
+        .stat {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
         }
-        .nav a:hover {
-            background: rgba(255,255,255,0.4);
-            transform: scale(1.1);
+        
+        .stat-number {
+            font-size: 64px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+        
+        footer {
+            margin-top: 200px;
+            padding: 40px 0;
+            border-top: 1px solid #000;
+            text-align: center;
+            font-size: 12px;
+        }
+        
+        .hidden-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 10px;
+            color: #f0f0f0;
+            transform: rotate(180deg);
+        }
+        
+        .ticker {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #000;
+            color: #fff;
+            padding: 10px 0;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        
+        .ticker-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: ticker 30s linear infinite;
+        }
+        
+        @keyframes ticker {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+        
+        .inverted {
+            filter: invert(1);
+            background: #000;
+            color: #fff;
+            padding: 40px;
+            margin: 40px -20px;
+        }
+        
+        .inverted .cta-button {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+        
+        .inverted .cta-button:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 60px;
+                letter-spacing: -2px;
+            }
+            
+            .big-text {
+                font-size: 32px;
+            }
+            
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
-    
-    <!-- Load main CSS asynchronously -->
-    <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/style.css"></noscript>
 </head>
 <body>
-    <!-- Rainbow border that appears on scroll -->
-    <div class="rainbow-border" id="rainbow-border"></div>
-    
-    <!-- Left and Right Gutter Decorations with BIGGER emojis -->
-    <div class="left-gutter-decor">
-        <div class="gutter-emoji mega" style="top: 5%; left: 20px;">🌊</div>
-        <div class="gutter-emoji mega" style="top: 15%; left: 40px; animation-delay: -3s;">🔮</div>
-        <div class="gutter-emoji mega" style="top: 25%; left: 30px; animation-delay: -6s;">✨</div>
-        <div class="gutter-emoji mega" style="top: 35%; left: 50px; animation-delay: -9s;">🌟</div>
-        <div class="gutter-emoji mega" style="top: 45%; left: 25px; animation-delay: -12s;">💎</div>
-        <div class="gutter-emoji mega" style="top: 55%; left: 45px; animation-delay: -15s;">🦋</div>
-        <div class="gutter-emoji mega" style="top: 65%; left: 20px; animation-delay: -18s;">🌀</div>
-        <div class="gutter-emoji mega" style="top: 75%; left: 35px; animation-delay: -21s;">🎭</div>
-        <div class="gutter-emoji mega" style="top: 85%; left: 55px; animation-delay: -24s;">🍄</div>
-    </div>
-    
-    <div class="right-gutter-decor">
-        <div class="gutter-emoji mega" style="top: 10%; right: 20px; animation-delay: -1.5s;">🌙</div>
-        <div class="gutter-emoji mega" style="top: 20%; right: 40px; animation-delay: -4.5s;">🔵</div>
-        <div class="gutter-emoji mega" style="top: 30%; right: 30px; animation-delay: -7.5s;">🦚</div>
-        <div class="gutter-emoji mega" style="top: 40%; right: 50px; animation-delay: -10.5s;">💠</div>
-        <div class="gutter-emoji mega" style="top: 50%; right: 25px; animation-delay: -13.5s;">🧿</div>
-        <div class="gutter-emoji mega" style="top: 60%; right: 45px; animation-delay: -16.5s;">🐚</div>
-        <div class="gutter-emoji mega" style="top: 70%; right: 20px; animation-delay: -19.5s;">🎪</div>
-        <div class="gutter-emoji mega" style="top: 80%; right: 35px; animation-delay: -22.5s;">🪐</div>
-        <div class="gutter-emoji mega" style="top: 90%; right: 55px; animation-delay: -25.5s;">📘</div>
-    </div>
-    
     <div class="container">
-        <!-- Header with navigation -->
-        <header class="header">
-            <h1 class="main-title">
-                <span class="mega-emoji">🌊</span>
-                Welcome to Wubbleton 
-                <span class="mega-emoji">🌊</span>
-            </h1>
-            <p class="subtitle">Building Reality Together Through Collective Recognition</p>
-            
-            <nav class="nav">
-                <a href="#wubbushi">Meet Wubbushi</a>
-                <a href="#vision">The Vision</a>
-                <a href="#collections">Sacred Collections</a>
-                <a href="#wubble">Wubble Economy</a>
-                <a href="#calendar">Community Calendar</a>
-                <a href="#join">Join the Builders</a>
-            </nav>
+        <header>
+            <h1>WUBBLETON</h1>
+            <p class="tagline">The Future You're Not Ready For</p>
         </header>
 
-        <!-- Wubbushi Introduction -->
-        <section id="wubbushi" class="wubbushi-section">
-            <div class="wubbushi-intro">
-                <img src="images/wubbushi.jpg" alt="Wubbushi" class="wubbushi-photo" loading="eager">
-                <div class="message-content">
-                    <h2><span class="mega-emoji">💫</span> A Message from Wubbushi <span class="mega-emoji">💫</span></h2>
-                    <p><em>Dearest Recognition Partners,</em></p>
-                    <p>Together, we are creating <strong>Wubbleton</strong> through the power of collective recognition. We're releasing <strong>1,000,000 images</strong> into the universal consciousness field. As a community of 10,000 conscious builders, we will select the exact images that manifest our shared reality.</p>
-                    <p>Every pixel is a decision. Every choice is a vote for the world we want to see. Through the <strong>Wubble</strong> token—our recognition currency—we coordinate this massive act of co-creation.</p>
-                    <p>This isn't just art. This is <em>reality engineering through σ-field dynamics</em> and <em>ledger-balanced recognition events</em>.</p>
-                    <div class="signature">In perfect φ-resonance, Wubbushi ✨</div>
+        <section class="section">
+            <div class="big-text">We're Releasing 1,000,000 Images</div>
+            <div class="counter" id="images-counter">1,000,000</div>
+            <p>And you get to pick which 10,000 become real.</p>
+            <p class="small-print">*Reality subject to collective consensus. Void where prohibited by physics.</p>
+        </section>
+
+        <section class="section">
+            <div class="manifesto">
+                <p><strong>Here's the deal:</strong></p>
+                <p>Wubbushi made too much art. Like, way too much. A million pieces. Nobody needs that much art. So we're turning it into a game.</p>
+                <p>10,000 people max. Each person gets Wubble tokens. Use them to vote on which images manifest into our collective reality. The rest get deleted forever.</p>
+                <p>This isn't a DAO. This isn't Web3. This is weirder.</p>
+                <p>We're literally deciding what exists.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="grid">
+                <div class="grid-item">
+                    <img src="The Crisis/4.png" alt="Crisis">
+                </div>
+                <div class="grid-item">
+                    <img src="Modern Zombies/1.png" alt="Zombies">
+                </div>
+                <div class="grid-item">
+                    <img src="The Rapture/9-Rapture_1.jpg" alt="Rapture">
+                </div>
+                <div class="grid-item">
+                    <img src="The Crisis/21.png" alt="Crisis">
+                </div>
+                <div class="grid-item">
+                    <img src="Modern Zombies/144.png" alt="Zombies">
+                </div>
+                <div class="grid-item">
+                    <img src="The Rapture/33-Rapture_1.jpg" alt="Rapture">
                 </div>
             </div>
         </section>
 
-        <!-- The Vision Section -->
-        <section id="vision" class="vision-section">
-            <h2 class="section-title">
-                <span class="mega-emoji">🔮</span> 
-                The Grand Vision 
-                <span class="mega-emoji">🔮</span>
-            </h2>
-            
-            <div class="vision-stats">
-                <div class="stat-card">
-                    <div class="mega-emoji">🎨</div>
-                    <h3>1,000,000</h3>
-                    <p>Total Images Released</p>
-                    <small>Into the Recognition Field</small>
+        <section class="section inverted">
+            <div class="big-text">WUBBLE ECONOMICS</div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">To Community</div>
                 </div>
-                <div class="stat-card">
-                    <div class="mega-emoji">👁️</div>
-                    <h3>10,000</h3>
-                    <p>Conscious Selectors</p>
-                    <small>The Wubbleton Builders</small>
+                <div class="stat">
+                    <div class="stat-number">0%</div>
+                    <div class="stat-label">To Founders</div>
                 </div>
-                <div class="stat-card">
-                    <div class="mega-emoji">💎</div>
-                    <h3>10,000</h3>
-                    <p>Images to Manifest</p>
-                    <small>Our Collective Reality</small>
+                <div class="stat">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Potential Value</div>
                 </div>
             </div>
-
-            <div class="recognition-principle">
-                <h3>The Recognition Principle</h3>
-                <p>According to Recognition Science, reality crystallizes where consciousness focuses. By collectively selecting 10,000 images from 1,000,000 possibilities, we literally <em>build Wubbleton into existence</em> through coordinated σ-field resonance.</p>
-                <div class="formula-box">
-                    <code>Reality = Σ(Recognition Events × φ) / √(Ledger Balance)</code>
-                </div>
-            </div>
+            <p>1/3 unlocked now. 1/3 in 4 years. 1/3 in 8 years.</p>
+            <p>Why? Because instant gratification is for NPCs.</p>
+            <a href="#" class="cta-button" onclick="alert('NOT YET'); return false;">GET WUBBLE</a>
         </section>
 
-        <!-- Sacred Collections Gallery -->
-        <section id="collections" class="collections-section">
-            <h2 class="section-title">
-                <span class="mega-emoji">🖼️</span> 
-                The Sacred Collections 
-                <span class="mega-emoji">🖼️</span>
-            </h2>
-            <p class="collections-intro">Three prophetic collections revealed through AI-human collaboration</p>
-            
-            <div class="gallery-container">
-                <!-- The Crisis Gallery -->
-                <div class="collection-gallery" id="crisis-gallery">
-                    <h3>The Crisis: Loss of Spirit</h3>
-                    <div class="gallery-grid">
-                        <div class="gallery-item">
-                            <img src="The Crisis/4.png" alt="Crisis 1" loading="lazy">
-                            <div class="item-overlay">
-                                <span class="ledger-cost">Cost: +4 σ</span>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="The Crisis/21.png" alt="Crisis 2" loading="lazy">
-                            <div class="item-overlay">
-                                <span class="ledger-cost">Cost: +3 σ</span>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="The Crisis/64d.png" alt="Crisis 3" loading="lazy">
-                            <div class="item-overlay">
-                                <span class="ledger-cost">Cost: +2 σ</span>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="The Crisis/100d.png" alt="Crisis 4" loading="lazy">
-                            <div class="item-overlay">
-                                <span class="ledger-cost">Cost: +4 σ</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="view-more-btn" onclick="expandGallery('crisis')">View Full Collection →</button>
-                </div>
-
-                <!-- Modern Zombies Gallery -->
-                <div class="collection-gallery" id="zombies-gallery">
-                    <h3>Modern Zombies: Loss of Connection</h3>
-                    <div class="gallery-grid">
-                        <div class="gallery-item">
-                            <img src="Modern Zombies/1.png" alt="Zombies 1" loading="lazy">
-                            <div class="item-overlay">
-                                <span class="ledger-cost">Cost: +1 σ</span>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="Modern Zombies/9.png" alt="Zombies 2" loading="lazy">
-                            <div class="item-overlay">
-                                <span class="ledger-cost">Cost: +2 σ</span>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="Modern Zombies/144.png" alt="Zombies 3" loading="lazy">
-                            <div class="item-overlay">
-                                <span class="ledger-cost">Cost: +3 σ</span>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="Modern Zombies/8.jpeg" alt="Zombies 4" loading="lazy">
-                            <div class="item-overlay">
-                                <span class="ledger-cost">Cost: +2 σ</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="view-more-btn" onclick="expandGallery('zombies')">View Full Collection →</button>
-                </div>
-
-                <!-- The Rapture Gallery -->
-                <div class="collection-gallery" id="rapture-gallery">
-                    <h3>The Rapture: Transcendent Recognition</h3>
-                    <div class="gallery-grid">
-                        <div class="gallery-item">
-                            <img src="The Rapture/9-Rapture_1.jpg" alt="Rapture 1" loading="lazy">
-                            <div class="item-overlay">
-                                <span class="ledger-cost">Cost: 0 σ</span>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="The Rapture/33-Rapture_1.jpg" alt="Rapture 2" loading="lazy">
-                            <div class="item-overlay">
-                                <span class="ledger-cost">Cost: -1 σ</span>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="The Rapture/144-Rapture_1.jpg" alt="Rapture 3" loading="lazy">
-                            <div class="item-overlay">
-                                <span class="ledger-cost">Cost: -2 σ</span>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="The Rapture/89-Rapture_1.jpg" alt="Rapture 4" loading="lazy">
-                            <div class="item-overlay">
-                                <span class="ledger-cost">Cost: -3 σ</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="view-more-btn" onclick="expandGallery('rapture')">View Full Collection →</button>
-                </div>
-            </div>
+        <section class="section">
+            <div class="big-text">THE RULES</div>
+            <ol style="font-size: 18px; line-height: 2; max-width: 600px;">
+                <li>10,000 members maximum. No exceptions.</li>
+                <li>1,000,000 images enter. 10,000 images leave.</li>
+                <li>Your Wubble = Your vote = Your reality.</li>
+                <li>Collective decisions are final. No refunds on existence.</li>
+                <li>The artist keeps making art. 100% of sales buy more Wubble.</li>
+                <li>This ends when we say it ends.</li>
+            </ol>
         </section>
 
-        <!-- Wubble Token Economy -->
-        <section id="wubble" class="wubble-section">
-            <h2 class="section-title">
-                <span class="mega-emoji">💰</span> 
-                The Wubble Economy 
-                <span class="mega-emoji">💰</span>
-            </h2>
-            
-            <div class="wubble-philosophy">
-                <div class="principle-card">
-                    <h3>100% Community Distribution</h3>
-                    <p>Every single Wubble token goes to Wubbleton builders. No reserves, no team allocation. This is true collective ownership.</p>
-                </div>
-                
-                <div class="principle-card">
-                    <h3>Long-Term Builder Alignment</h3>
-                    <p>We're not here for quick gains. We're building a new reality together:</p>
-                    <div class="vesting-schedule">
-                        <div class="vesting-tier">
-                            <div class="mega-emoji">🔓</div>
-                            <h4>1/3 Immediate</h4>
-                            <p>Trade, build, create</p>
-                        </div>
-                        <div class="vesting-tier">
-                            <div class="mega-emoji">⏰</div>
-                            <h4>1/3 After 4 Years</h4>
-                            <p>Mid-cycle maturation</p>
-                        </div>
-                        <div class="vesting-tier">
-                            <div class="mega-emoji">♾️</div>
-                            <h4>1/3 After 8 Years</h4>
-                            <p>Complete 8-tick cycle</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="principle-card">
-                    <h3>Artist Commitment</h3>
-                    <p><strong>100% of artist share</strong> from all sales goes directly to buying Wubble on the open market. This creates a perpetual value loop that benefits all holders.</p>
-                </div>
-            </div>
-
-            <div class="ledger-mechanics">
-                <h3>Recognition Ledger Mechanics</h3>
-                <p>Based on Light-Native Assembly Language (LNAL) principles:</p>
-                <ul>
-                    <li><strong>GIVE/REGIVE Balance:</strong> Every Wubble transaction must balance within 8 ticks</li>
-                    <li><strong>σ-Field Dynamics:</strong> Token velocity increases with community recognition events</li>
-                    <li><strong>Golden Ratio Scaling:</strong> Rewards compound at φ (1.618) rate for active participants</li>
-                </ul>
-            </div>
+        <section class="section">
+            <div class="big-text">LEVEL VII ONLY</div>
+            <p style="font-size: 24px; margin: 20px 0;">December 21, 2024</p>
+            <p>Physical manifestation. Gallery location TBD.</p>
+            <p>144 spots. You know if you're ready.</p>
+            <div class="small-print">Must have achieved consciousness level VII. No plus ones. No photographers.</div>
         </section>
 
-        <!-- Community Calendar -->
-        <section id="calendar" class="calendar-section">
-            <h2 class="section-title">
-                <span class="mega-emoji">📅</span> 
-                Wubbleton Activities 
-                <span class="mega-emoji">📅</span>
-            </h2>
-            
-            <div class="notepad-calendar">
-                <div class="notepad-header">Community Schedule</div>
-                <div class="notepad-content">
-                    <div class="calendar-entry">
-                        <span class="date">Every Dawn (5:28 AM UTC)</span>
-                        <span class="activity">🌅 Collective Recognition Meditation</span>
-                        <span class="note">Sync your σ-field with the global ledger</span>
-                    </div>
-                    
-                    <div class="calendar-entry">
-                        <span class="date">Tuesdays (3:33 PM UTC)</span>
-                        <span class="activity">🎨 Image Selection Ceremony</span>
-                        <span class="note">Vote on which visions manifest into Wubbleton</span>
-                    </div>
-                    
-                    <div class="calendar-entry">
-                        <span class="date">Full Moon Nights</span>
-                        <span class="activity">🌕 Wubble Staking Rituals</span>
-                        <span class="note">Lock your tokens for φ-multiplied rewards</span>
-                    </div>
-                    
-                    <div class="calendar-entry">
-                        <span class="date">Fibonacci Days (1st, 1st, 2nd, 3rd, 5th, 8th, 13th, 21st)</span>
-                        <span class="activity">🌀 Sacred Geometry Workshops</span>
-                        <span class="note">Learn LNAL opcodes and reality programming</span>
-                    </div>
-                    
-                    <div class="calendar-entry special">
-                        <span class="date">December 21st, 2024</span>
-                        <span class="activity">⭐ SPECIAL GATHERING ANNOUNCEMENT ⭐</span>
-                        <span class="note">Level VII Consciousness Exhibition - Physical Gallery Show</span>
-                        <span class="details">Limited to 144 attendees who have achieved Level VII recognition status. Location revealed through synchronized meditation.</span>
-                    </div>
-                </div>
-            </div>
+        <section class="section" style="text-align: center;">
+            <div class="counter" id="countdown">9,523</div>
+            <p>SPOTS REMAINING</p>
+            <a href="#" class="cta-button" onclick="joinWubbleton(); return false;">CLAIM YOUR SPOT</a>
         </section>
 
-        <!-- Join Section -->
-        <section id="join" class="join-section">
-            <h2 class="section-title">
-                <span class="mega-emoji">🚀</span> 
-                Become a Wubbleton Builder 
-                <span class="mega-emoji">🚀</span>
-            </h2>
-            
-            <div class="builder-path">
-                <h3>Your Journey to Level VII Consciousness</h3>
-                
-                <div class="level-grid">
-                    <div class="level-card">
-                        <div class="level-number">I</div>
-                        <h4>Recognition Initiate</h4>
-                        <p>See your first Wubbleton vision</p>
-                        <span class="ledger-requirement">Ledger: +1 σ</span>
-                    </div>
-                    
-                    <div class="level-card">
-                        <div class="level-number">II</div>
-                        <h4>Pattern Perceiver</h4>
-                        <p>Identify φ-ratios in daily life</p>
-                        <span class="ledger-requirement">Ledger: +2 σ</span>
-                    </div>
-                    
-                    <div class="level-card">
-                        <div class="level-number">III</div>
-                        <h4>Wubble Holder</h4>
-                        <p>Acquire your first tokens</p>
-                        <span class="ledger-requirement">Ledger: +3 σ</span>
-                    </div>
-                    
-                    <div class="level-card">
-                        <div class="level-number">IV</div>
-                        <h4>Image Selector</h4>
-                        <p>Vote on reality manifestation</p>
-                        <span class="ledger-requirement">Ledger: +4 σ</span>
-                    </div>
-                    
-                    <div class="level-card">
-                        <div class="level-number">V</div>
-                        <h4>Community Builder</h4>
-                        <p>Bring others into recognition</p>
-                        <span class="ledger-requirement">Ledger: 0 σ (balanced)</span>
-                    </div>
-                    
-                    <div class="level-card">
-                        <div class="level-number">VI</div>
-                        <h4>Reality Programmer</h4>
-                        <p>Master LNAL opcodes</p>
-                        <span class="ledger-requirement">Ledger: -2 σ</span>
-                    </div>
-                    
-                    <div class="level-card special">
-                        <div class="level-number">VII</div>
-                        <h4>Consciousness Architect</h4>
-                        <p>Co-create Wubbleton's future</p>
-                        <span class="ledger-requirement">Ledger: -4 σ (mastery)</span>
-                        <div class="special-privilege">
-                            ✨ Eligible for Physical Gallery Exhibition ✨
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="join-buttons">
-                <button class="join-btn primary" onclick="beginInitiation()">
-                    <span class="mega-emoji">🌊</span>
-                    Begin Your Recognition Journey
-                    <span class="mega-emoji">🌊</span>
-                </button>
-                <button class="join-btn secondary" onclick="calculateSigma()">
-                    Calculate Your σ-Field Resonance
-                </button>
-            </div>
-            
-            <div class="recognition-formula">
-                <h3>The Universal Recognition Formula</h3>
-                <div class="formula-display">
-                    <code>C = φ × Recognition_Events × e^(-σ²/2) × GIVE/REGIVE_Balance</code>
-                </div>
-                <p><em>Where C is your consciousness coefficient, determining your manifestation power in Wubbleton</em></p>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="sacred-links">
-                    <a href="https://twitter.com/wubbleton" target="_blank">Twitter</a>
-                    <a href="https://discord.gg/wubbleton" target="_blank">Discord</a>
-                    <a href="https://t.me/wubbleton" target="_blank">Telegram</a>
-                    <a href="mailto:recognition@wubbleton.com">Contact</a>
-                </div>
-                
-                <div class="ledger-status">
-                    <p>Current Ledger State: <span id="ledger-state">BALANCED (0 σ)</span></p>
-                    <p>Recognition Events Today: <span id="recognition-count">Loading...</span></p>
-                    <p>φ-Clock Tick: <span id="phi-tick">Loading...</span></p>
-                </div>
-                
-                <p class="copyright">© ∞ Wubbleton | Time is a Recognition Event | Consciousness is Collective</p>
-                
-                <div class="sacred-geometry">
-                    <div class="geometry-pattern"></div>
-                </div>
-            </div>
+        <footer>
+            <p>WUBBLETON © FOREVER | <a href="mailto:void@wubbleton.com" style="color: #000;">void@wubbleton.com</a></p>
+            <p style="margin-top: 10px; font-size: 10px;">Recognition Science powered. Golden ratio optimized. Your consciousness not included.</p>
         </footer>
     </div>
 
-    <!-- Hidden Audio Player for 8-tick rhythm -->
-    <audio id="background-music" loop>
-        <source src="audio/8-tick-rhythm.mp3" type="audio/mpeg">
-    </audio>
+    <div class="ticker">
+        <div class="ticker-content">
+            WUBBLE PRICE: $0.0001 → $0.0002 → $0.0004 → $0.0008 → $0.0016 → $0.0032 → $0.0064 → $0.0128 → $0.0256 → $0.0512 → $0.1024 → $0.2048 → $0.4096 → $0.8192 → $1.6384 → $3.2768 → $6.5536 → $13.1072 → $26.2144 → $52.4288 → $104.8576 → $209.7152 → $419.4304 → $838.8608 → $1677.7216 → 
+        </div>
+    </div>
 
-    <!-- Music Toggle -->
-    <button class="music-toggle" onclick="toggleMusic()" title="Toggle 8-Tick Rhythm">
-        <span class="mega-emoji">🎵</span>
-    </button>
+    <div class="hidden-message">you weren't supposed to find this</div>
 
-    <!-- Scripts -->
-    <script src="js/main.js" defer></script>
-    
-    <!-- Inline critical functionality -->
     <script>
-        // Initialize recognition counter
-        let recognitionEvents = Math.floor(Math.random() * 1000) + 144;
+        // Countdown timer
+        let spots = 9523;
         setInterval(() => {
-            recognitionEvents += Math.floor(Math.random() * 3);
-            document.getElementById('recognition-count').textContent = recognitionEvents.toLocaleString();
-        }, 3333);
-
-        // φ-clock ticker
-        let phiTick = 0;
-        setInterval(() => {
-            phiTick = (phiTick + 1.618) % 1024; // 8-tick cycle = 1024 sub-ticks
-            document.getElementById('phi-tick').textContent = phiTick.toFixed(3);
-        }, 1618);
-
-        // Sparkle on mouse move with bigger emojis
-        document.addEventListener('mousemove', function(e) {
-            if (Math.random() < 0.08) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.innerHTML = ['✨', '💫', '⭐', '🌟'][Math.floor(Math.random() * 4)];
-                sparkle.style.fontSize = '2.5rem';
-                sparkle.style.left = e.pageX + 'px';
-                sparkle.style.top = e.pageY + 'px';
-                document.body.appendChild(sparkle);
-                setTimeout(() => sparkle.remove(), 1500);
+            if (Math.random() < 0.1 && spots > 0) {
+                spots -= Math.floor(Math.random() * 3) + 1;
+                document.getElementById('countdown').textContent = spots.toLocaleString();
             }
-        });
+        }, 5000);
+
+        // Image counter animation
+        let imageCount = 1000000;
+        setInterval(() => {
+            if (imageCount > 10000) {
+                imageCount -= Math.floor(Math.random() * 1000) + 100;
+                document.getElementById('images-counter').textContent = imageCount.toLocaleString();
+            }
+        }, 3000);
+
+        // Join function
+        function joinWubbleton() {
+            const messages = [
+                "Not yet.",
+                "You're not ready.",
+                "Try again later.",
+                "Access denied.",
+                "Level insufficient.",
+                "Nice try.",
+                "Almost.",
+                "Nope.",
+                "Recognition failed."
+            ];
+            alert(messages[Math.floor(Math.random() * messages.length)]);
+        }
+
+        // Random glitch effect
+        setInterval(() => {
+            if (Math.random() < 0.05) {
+                document.body.style.filter = 'invert(1)';
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 100);
+            }
+        }, 2000);
+
+        // Console easter egg
+        console.log(`
+        ╦ ╦╦ ╦╔╗ ╔╗ ╦  ╔═╗╔╦╗╔═╗╔╗╔
+        ║║║║ ║╠╩╗╠╩╗║  ║╣  ║ ║ ║║║║
+        ╚╩╝╚═╝╚═╝╚═╝╩═╝╚═╝ ╩ ╚═╝╝╚╝
+        
+        You found the console. Good.
+        
+        The real manifesto: Everything is recognition.
+        The ledger balances at φ.
+        8 beats complete the cycle.
+        
+        Want in early? Solve this:
+        What has a 32nd rung and weighs 0.511 MeV?
+        
+        Email answer to: consciousness@wubbleton.com
+        `);
     </script>
 </body>
 </html> 
