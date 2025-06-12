@@ -446,20 +446,11 @@ function animateFollower() {
 
 // Vision board images that rotate
 const visionImages = [
-    '09236afa-9fba-11ef-8ddc-0242c0a80010.jpeg',
-    '0a01947c-a4a8-11ef-ad09-0242c0a8d00e.jpeg', 
-    '103ec612-a10a-11ef-8ddc-0242c0a80010.jpeg',
-    '1c504fc2-a1d5-11ef-803f-0242c0a8400f.jpeg',
-    '1cd84396-9e56-11ef-8ddc-0242c0a80010.jpeg',
-    '2312476a-ad66-11ef-aae9-0242ac13000e.jpeg',
-    '2a9f5660-9f35-11ef-8ddc-0242c0a80010.jpeg',
-    '2e7759c4-9f92-11ef-8ddc-0242c0a80010.jpeg',
-    '5e0dd0ae-a0fb-11ef-8ddc-0242c0a80010.jpeg',
-    '7cdb2d7e-aaf1-11ef-aae9-0242ac13000e.jpeg',
-    '93c6c5e6-9fb8-11ef-8ddc-0242c0a80010.jpeg',
-    '9f8988f2-a0bf-11ef-8ddc-0242c0a80010.jpeg',
-    '00bf51e2-9869-11ef-b116-0242ac16000e.jpeg',
-    'edcf4490-937f-11ef-9158-0242ac13000e.jpeg'
+    // Using existing images from the collections
+    'crisis-sacred-1.png',
+    'zombies-sacred-1.png',
+    'rapture-sacred-1.jpeg',
+    'wubbushi.jpg'
 ];
 
 // Population counter using prime numbers
