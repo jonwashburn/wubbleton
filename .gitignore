@@ -28,6 +28,10 @@
 !images/9f8988f2-a0bf-11ef-8ddc-0242c0a80010.jpeg
 !images/edcf4490-937f-11ef-9158-0242ac13000e.jpeg
 
+# Include magnific images
+!images/magnific-dLeTatdTtII8zSPh6BN5-asas.jpeg
+!images/magnific-qUzjmzUsy5iJ6dJYjbkr-1.jpeg
+
 # Ignore other files
 .DS_Store
 *.tex
