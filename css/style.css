@@ -379,17 +379,38 @@ body::before {
 
 .vision-item {
     position: relative;
-    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    background: white;
+    border-radius: 15px;
+    transition: all 0.5s ease;
 }
 
-.vision-item img {
+.vision-image {
     width: 100%;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
-    display: block;
+    transition: transform 0.5s ease;
+}
+
+.vision-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(255, 145, 164, 0.9), transparent);
+    color: white;
+    padding: 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.vision-item:hover .vision-overlay {
+    opacity: 1;
+}
+
+.vision-item:hover .vision-image {
+    transform: scale(1.1);
 }
 
 .vision-caption {
@@ -1150,4 +1171,139 @@ body {
 @keyframes shimmer {
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
+}
+
+/* Synchronicity elements */
+.synchronicity {
+    position: fixed;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 1.5rem;
+    color: var(--rainbow-pink);
+    font-weight: bold;
+    pointer-events: none;
+    z-index: 1000;
+    transition: all 3s ease-out;
+}
+
+/* Ultimate truth overlay */
+.ultimate-truth {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 145, 164, 0.95), rgba(221, 160, 221, 0.95));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10000;
+    color: white;
+    font-family: 'Comic Sans MS', cursive;
+    animation: fadeIn 1s ease-in;
+    transition: opacity 2s ease-out;
+}
+
+.ultimate-truth h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.ultimate-truth p {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    max-width: 600px;
+}
+
+/* Welcome overlay */
+.welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.welcome-content {
+    background: var(--soft-pink);
+    padding: 3rem;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-content h2 {
+    color: var(--rainbow-pink);
+    margin-bottom: 1.5rem;
+}
+
+.welcome-content button {
+    background: var(--rainbow-pink);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-family: 'Comic Sans MS', cursive;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.welcome-content button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 145, 164, 0.4);
+}
+
+/* Sparkle effect */
+.sparkle {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkleFloat 1s ease-out forwards;
+    z-index: 9999;
+}
+
+@keyframes sparkleFloat {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(0, -50px) scale(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Add pulse animation for music toggle */
+.music-toggle.playing {
+    animation: musicPulse 1s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
 } 

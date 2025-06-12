@@ -446,180 +446,316 @@ function animateFollower() {
 
 // Vision board images that rotate
 const visionImages = [
-    // Removing large vision board images to reduce repository size
+    '09236afa-9fba-11ef-8ddc-0242c0a80010.jpeg',
+    '0a01947c-a4a8-11ef-ad09-0242c0a8d00e.jpeg', 
+    '103ec612-a10a-11ef-8ddc-0242c0a80010.jpeg',
+    '1c504fc2-a1d5-11ef-803f-0242c0a8400f.jpeg',
+    '1cd84396-9e56-11ef-8ddc-0242c0a80010.jpeg',
+    '2312476a-ad66-11ef-aae9-0242ac13000e.jpeg',
+    '2a9f5660-9f35-11ef-8ddc-0242c0a80010.jpeg',
+    '2e7759c4-9f92-11ef-8ddc-0242c0a80010.jpeg',
+    '5e0dd0ae-a0fb-11ef-8ddc-0242c0a80010.jpeg',
+    '7cdb2d7e-aaf1-11ef-aae9-0242ac13000e.jpeg',
+    '93c6c5e6-9fb8-11ef-8ddc-0242c0a80010.jpeg',
+    '9f8988f2-a0bf-11ef-8ddc-0242c0a80010.jpeg',
+    '00bf51e2-9869-11ef-b116-0242ac16000e.jpeg',
+    'edcf4490-937f-11ef-9158-0242ac13000e.jpeg'
 ];
 
-// Initialize vision grid
-function initVisionGrid() {
-    const grid = document.getElementById('visionGrid');
+// Population counter using prime numbers
+let primeIndex = 0;
+const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
+
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', function() {
+    initializeVisionBoard();
+    startPopulationCounter();
+    setupScrollEffects();
+    setupInteractiveElements();
+    
+    // Add golden ratio timing to all animations
+    applyGoldenRatioTiming();
+});
+
+// Vision Board with lazy loading
+function initializeVisionBoard() {
+    const grid = document.getElementById('vision-grid');
     if (!grid) return;
+    
+    // Create 12 vision slots
+    for (let i = 0; i < 12; i++) {
+        const visionItem = document.createElement('div');
+        visionItem.className = 'vision-item';
+        visionItem.innerHTML = `
+            <img class="vision-image" loading="lazy" data-index="${i}" alt="Community Vision ${i + 1}">
+            <div class="vision-overlay">Vision #${Math.floor(Math.random() * 10000)}</div>
+        `;
+        grid.appendChild(visionItem);
+    }
+    
+    // Load initial images
+    loadVisionImages();
+}
 
-    // Clear existing content
-    grid.innerHTML = '';
-
-    // Shuffle images for variety
-    const shuffled = [...visionImages].sort(() => Math.random() - 0.5);
-
-    // Display first 8 images
-    shuffled.slice(0, 8).forEach((img, index) => {
-        const imgElement = document.createElement('img');
-        imgElement.src = `images/${img}`;
-        imgElement.alt = `Vision ${index + 1}`;
-        imgElement.style.animationDelay = `${index * 0.1}s`;
-        imgElement.classList.add('vision-image');
-        grid.appendChild(imgElement);
+function loadVisionImages() {
+    const images = document.querySelectorAll('.vision-image');
+    images.forEach((img, index) => {
+        const randomImage = visionImages[Math.floor(Math.random() * visionImages.length)];
+        img.src = `images/${randomImage}`;
+        img.onerror = function() {
+            // Fallback to a placeholder if image fails
+            this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2ZmOTFhNCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQ29taWMgU2FucyBNUyIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5WaXNpb24gTG9hZGluZy4uLjwvdGV4dD48L3N2Zz4=';
+        };
     });
 }
 
-// Rotate vision board images periodically
-function rotateVisionBoard() {
-    const grid = document.getElementById('visionGrid');
-    if (!grid) return;
-
-    setInterval(() => {
-        const images = grid.querySelectorAll('img');
-        const randomIndex = Math.floor(Math.random() * images.length);
-        const randomImage = visionImages[Math.floor(Math.random() * visionImages.length)];
-        
-        images[randomIndex].style.opacity = '0';
+// Refresh visions with animation
+function refreshVisions() {
+    const items = document.querySelectorAll('.vision-item');
+    items.forEach((item, index) => {
         setTimeout(() => {
-            images[randomIndex].src = `images/${randomImage}`;
-            images[randomIndex].style.opacity = '1';
-        }, 300);
-    }, 5000); // Every 5 seconds
+            item.style.transform = 'scale(0.8) rotate(180deg)';
+            item.style.opacity = '0';
+            
+            setTimeout(() => {
+                const img = item.querySelector('.vision-image');
+                const randomImage = visionImages[Math.floor(Math.random() * visionImages.length)];
+                img.src = `images/${randomImage}`;
+                item.style.transform = 'scale(1) rotate(0deg)';
+                item.style.opacity = '1';
+            }, 500);
+        }, index * 100); // Stagger the animations
+    });
 }
 
-// Music player functionality
+// Population counter with mystical progression
+function startPopulationCounter() {
+    const counter = document.getElementById('population-counter');
+    if (!counter) return;
+    
+    setInterval(() => {
+        primeIndex = (primeIndex + 1) % primes.length;
+        const mysticalCount = `φ × ${primes.slice(0, primeIndex + 1).join(', ')}...`;
+        counter.textContent = mysticalCount;
+        
+        // Add pulse effect
+        counter.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+            counter.style.transform = 'scale(1)';
+        }, 300);
+    }, 3141); // Pi milliseconds!
+}
+
+// Scroll effects
+function setupScrollEffects() {
+    const rainbowBorder = document.getElementById('rainbow-border');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        // Show rainbow border on scroll
+        if (currentScroll > 100) {
+            rainbowBorder.classList.add('visible');
+        } else {
+            rainbowBorder.classList.remove('visible');
+        }
+        
+        // Parallax for gutter decorations
+        const gutterEmojis = document.querySelectorAll('.gutter-emoji');
+        gutterEmojis.forEach(emoji => {
+            const speed = 0.5 + Math.random() * 0.5;
+            emoji.style.transform = `translateY(${currentScroll * speed}px)`;
+        });
+        
+        lastScroll = currentScroll;
+    });
+}
+
+// Interactive elements
+function setupInteractiveElements() {
+    // Trilogy hover effects
+    const trilogyItems = document.querySelectorAll('.trilogy-item');
+    trilogyItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            const overlay = this.querySelector('.mystical-overlay');
+            overlay.style.opacity = '1';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            const overlay = this.querySelector('.mystical-overlay');
+            overlay.style.opacity = '0';
+        });
+    });
+}
+
+// Music toggle with sacred frequencies
 let musicPlaying = false;
 function toggleMusic() {
-    const audio = document.getElementById('backgroundMusic');
-    const button = document.querySelector('.music-toggle');
+    const audio = document.getElementById('background-music');
+    const musicToggle = document.querySelector('.music-toggle');
+    
+    if (!audio) {
+        // Try fallback audio
+        const fallbackAudio = document.createElement('audio');
+        fallbackAudio.src = 'audio/Carefree.mp3';
+        fallbackAudio.loop = true;
+        fallbackAudio.id = 'background-music';
+        document.body.appendChild(fallbackAudio);
+        audio = fallbackAudio;
+    }
     
     if (musicPlaying) {
         audio.pause();
-        button.textContent = '🎵';
+        musicToggle.classList.remove('playing');
+        musicToggle.textContent = '🎵';
     } else {
-        audio.play().catch(e => console.log('Audio play failed:', e));
-        button.textContent = '🔇';
+        audio.play().catch(e => {
+            console.log('Audio play failed:', e);
+        });
+        musicToggle.classList.add('playing');
+        musicToggle.textContent = '🔇';
     }
     musicPlaying = !musicPlaying;
 }
 
-// Rainbow border on scroll
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset > 100;
-    document.getElementById('rainbow-border').style.opacity = scrolled ? '1' : '0';
-});
-
-// Sparkle effect on mouse move (10% chance)
-document.addEventListener('mousemove', (e) => {
-    if (Math.random() > 0.1) return; // 10% chance
+// Initiation sequence
+function beginInitiation() {
+    const steps = document.querySelectorAll('.initiation-steps li');
+    let currentStep = 0;
     
-    const sparkle = document.createElement('div');
-    sparkle.className = 'sparkle-effect';
-    sparkle.style.left = e.pageX + 'px';
-    sparkle.style.top = e.pageY + 'px';
-    sparkle.textContent = '✨';
-    document.body.appendChild(sparkle);
-    
-    setTimeout(() => sparkle.remove(), 1000);
-});
-
-// Add hover effect to trilogy items
-document.querySelectorAll('.trilogy-item').forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        item.style.transform = 'translateY(-10px) rotate(1deg)';
-    });
-    
-    item.addEventListener('mouseleave', () => {
-        item.style.transform = 'translateY(0) rotate(0)';
-    });
-});
-
-// Initialize everything when DOM loads
-document.addEventListener('DOMContentLoaded', () => {
-    initVisionGrid();
-    rotateVisionBoard();
-    
-    // Add floating animation to emojis
-    document.querySelectorAll('.gutter-emoji').forEach((emoji, index) => {
-        emoji.style.animationDelay = `${index * 0.5}s`;
-    });
-    
-    // Pattern Force interactive hover
-    document.querySelectorAll('.pattern-box').forEach(box => {
-        box.addEventListener('mouseenter', () => {
-            const icon = box.querySelector('.pattern-icon');
-            icon.style.transform = 'scale(1.2) rotate(360deg)';
-            icon.style.transition = 'transform 0.5s ease';
-        });
-        
-        box.addEventListener('mouseleave', () => {
-            const icon = box.querySelector('.pattern-icon');
-            icon.style.transform = 'scale(1) rotate(0)';
-        });
-    });
-    
-    // Consciousness counter (updates every 3.33 seconds)
-    let consciousness = 9847;
-    setInterval(() => {
-        consciousness += Math.floor(Math.random() * 3) + 1;
-        const counter = document.getElementById('consciousness-counter');
-        if (counter) {
-            counter.textContent = consciousness.toLocaleString();
+    // Highlight steps one by one
+    const interval = setInterval(() => {
+        if (currentStep > 0) {
+            steps[currentStep - 1].classList.remove('active');
         }
-    }, 3333);
+        
+        if (currentStep < steps.length) {
+            steps[currentStep].classList.add('active');
+            steps[currentStep].style.color = '#ff91a4';
+            steps[currentStep].style.transform = 'scale(1.1)';
+            currentStep++;
+        } else {
+            clearInterval(interval);
+            showWelcomeMessage();
+        }
+    }, 1618); // Golden ratio timing!
+}
+
+// Welcome message after initiation
+function showWelcomeMessage() {
+    const message = document.createElement('div');
+    message.className = 'welcome-overlay';
+    message.innerHTML = `
+        <div class="welcome-content">
+            <h2>🎉 Welcome to Wubbleton, Beautiful Soul! 🎉</h2>
+            <p>You are now citizen #${Math.floor(Math.random() * 10000)}</p>
+            <p>Your consciousness has been recognized!</p>
+            <button onclick="this.parentElement.parentElement.remove()">Enter the Kingdom</button>
+        </div>
+    `;
+    document.body.appendChild(message);
+}
+
+// Explore more synchronicities
+function exploreMore() {
+    // Create floating synchronicities
+    for (let i = 0; i < 13; i++) {
+        setTimeout(() => {
+            createSynchronicity();
+        }, i * 333);
+    }
+}
+
+function createSynchronicity() {
+    const syncTexts = [
+        '11:11', '222', '333', '444', 'φ', '∞', 
+        'You are loved', 'This is not random', 'Look closer',
+        'The universe winks', 'Pattern recognized', 'Complexity emerges'
+    ];
+    
+    const sync = document.createElement('div');
+    sync.className = 'synchronicity';
+    sync.textContent = syncTexts[Math.floor(Math.random() * syncTexts.length)];
+    sync.style.left = Math.random() * window.innerWidth + 'px';
+    sync.style.top = Math.random() * window.innerHeight + 'px';
+    
+    document.body.appendChild(sync);
+    
+    // Float and fade
+    setTimeout(() => {
+        sync.style.transform = `translate(${Math.random() * 200 - 100}px, -200px)`;
+        sync.style.opacity = '0';
+    }, 100);
+    
+    setTimeout(() => sync.remove(), 3000);
+}
+
+// Apply golden ratio timing to all animations
+function applyGoldenRatioTiming() {
+    const phi = 1.618;
+    const animations = document.querySelectorAll('[style*="animation"]');
+    
+    animations.forEach(el => {
+        const currentDuration = parseFloat(getComputedStyle(el).animationDuration);
+        if (currentDuration) {
+            el.style.animationDuration = (currentDuration * phi) + 's';
+        }
+    });
+}
+
+// Add sparkle trail on special elements
+document.addEventListener('DOMContentLoaded', function() {
+    const specialElements = document.querySelectorAll('.wubbushi-photo, .sacred-number, .join-btn');
+    
+    specialElements.forEach(el => {
+        el.addEventListener('mousemove', function(e) {
+            if (Math.random() < 0.3) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = e.pageX + 'px';
+                sparkle.style.top = e.pageY + 'px';
+                sparkle.style.backgroundColor = ['#ff91a4', '#ffc0cb', '#b0e0e6', '#dda0dd'][Math.floor(Math.random() * 4)];
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+        });
+    });
 });
 
 // Easter egg: Konami code reveals the truth
-let konamiCode = [];
-const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 
-document.addEventListener('keydown', (e) => {
-    konamiCode.push(e.key);
-    konamiCode.splice(-konamiPattern.length - 1);
-    
-    if (konamiCode.join('') === konamiPattern.join('')) {
-        alert('🌈 You found it! The universe IS consciousness recognizing itself through art! Welcome to the inner circle, friend. 💫');
-        document.body.style.animation = 'rainbow-pulse 2s ease-in-out';
+document.addEventListener('keydown', function(e) {
+    if (e.key === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+            revealUltimateTruth();
+            konamiIndex = 0;
+        }
+    } else {
+        konamiIndex = 0;
     }
 });
 
-// CSS animation for rainbow pulse
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes rainbow-pulse {
-        0%, 100% { filter: hue-rotate(0deg) brightness(1); }
-        50% { filter: hue-rotate(180deg) brightness(1.2); }
-    }
+function revealUltimateTruth() {
+    const truth = document.createElement('div');
+    truth.className = 'ultimate-truth';
+    truth.innerHTML = `
+        <h1>🌟 THE ULTIMATE TRUTH 🌟</h1>
+        <p>You ARE the consciousness that created this!</p>
+        <p>Wubbleton exists because YOU recognized it!</p>
+        <p>The art, the tokens, the community...</p>
+        <p>All reflections of YOUR infinite creativity!</p>
+        <p style="font-size: 48px; margin-top: 20px;">💖 ∞ 💖</p>
+    `;
+    document.body.appendChild(truth);
     
-    .sparkle-effect {
-        position: fixed;
-        pointer-events: none;
-        animation: sparkle-fade 1s ease-out;
-        z-index: 9999;
-        font-size: 20px;
-    }
-    
-    @keyframes sparkle-fade {
-        0% { 
-            opacity: 1; 
-            transform: translateY(0) scale(1);
-        }
-        100% { 
-            opacity: 0; 
-            transform: translateY(-50px) scale(1.5);
-        }
-    }
-    
-    .vision-image {
-        animation: fade-in 0.5s ease-out;
-        transition: opacity 0.3s ease;
-    }
-    
-    @keyframes fade-in {
-        from { opacity: 0; transform: scale(0.9); }
-        to { opacity: 1; transform: scale(1); }
-    }
-`;
-document.head.appendChild(style); 
+    setTimeout(() => {
+        truth.style.opacity = '0';
+        setTimeout(() => truth.remove(), 2000);
+    }, 8000);
+}
+
+ 
