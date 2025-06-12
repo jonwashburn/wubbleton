@@ -170,12 +170,12 @@
             height: 300px;
             width: auto;
             margin-right: 20px;
-            filter: grayscale(100%);
-            transition: filter 0.3s;
+            /* Removed grayscale filter for color images */
+            transition: transform 0.3s;
         }
         
         .image-scroll img:hover {
-            filter: grayscale(0%) invert(100%);
+            transform: scale(1.05);
         }
         
         .trilogy-wall {
@@ -214,19 +214,19 @@
             width: 100%;
             height: 150px;
             object-fit: cover;
-            filter: grayscale(100%);
+            filter: invert(100%); /* Start inverted */
             transition: all 0.3s;
         }
         
         .trilogy-section:hover img {
-            filter: grayscale(0%);
+            filter: none; /* Normal color on section hover */
         }
         
         .trilogy-grid img:hover {
             transform: scale(1.1);
             z-index: 10;
             position: relative;
-            filter: invert(100%);
+            filter: none; /* Normal color on individual hover */
         }
         
         .formula {
@@ -253,36 +253,6 @@
             top: -20px;
             right: -20px;
             opacity: 0.1;
-        }
-        
-        .floating-images {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .floating-img {
-            position: absolute;
-            width: 200px;
-            height: auto;
-            filter: grayscale(100%);
-            opacity: 0.1;
-            animation: float 20s infinite ease-in-out;
-        }
-        
-        .floating-img:hover {
-            filter: invert(100%);
-            opacity: 1;
-            pointer-events: all;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-50px) rotate(10deg); }
         }
         
         @media (max-width: 768px) {
@@ -322,6 +292,12 @@
                 <img src="web-images/crisis/64d.jpg" alt="Crisis 64d">
                 <img src="web-images/zombies/144.jpg" alt="Zombie 144">
                 <img src="web-images/rapture/144.jpg" alt="Rapture 144">
+                <img src="web-images/crisis/1.jpg" alt="Crisis 1">
+                <img src="web-images/zombies/110.jpg" alt="Zombie 110">
+                <img src="web-images/rapture/218-Rapture_1.jpg" alt="Rapture 218">
+                <img src="web-images/crisis/47b.jpg" alt="Crisis 47b">
+                <img src="web-images/zombies/63.jpg" alt="Zombie 63">
+                <img src="web-images/rapture/232-Rapture_1.jpg" alt="Rapture 232">
                 <!-- Duplicate for seamless loop -->
                 <img src="web-images/crisis/4.jpg" alt="Crisis 4">
                 <img src="web-images/zombies/1.jpg" alt="Zombie 1">
@@ -332,6 +308,12 @@
                 <img src="web-images/crisis/64d.jpg" alt="Crisis 64d">
                 <img src="web-images/zombies/144.jpg" alt="Zombie 144">
                 <img src="web-images/rapture/144.jpg" alt="Rapture 144">
+                <img src="web-images/crisis/1.jpg" alt="Crisis 1">
+                <img src="web-images/zombies/110.jpg" alt="Zombie 110">
+                <img src="web-images/rapture/218-Rapture_1.jpg" alt="Rapture 218">
+                <img src="web-images/crisis/47b.jpg" alt="Crisis 47b">
+                <img src="web-images/zombies/63.jpg" alt="Zombie 63">
+                <img src="web-images/rapture/232-Rapture_1.jpg" alt="Rapture 232">
             </div>
         </div>
         
@@ -433,39 +415,6 @@
             <p>THE RAPTURE WAS THE CURE 💊</p>
             <p>WUBBLETON IS THE REBIRTH 🦋</p>
         </section>
-    </div>
-    
-    <div class="floating-images">
-        <img src="web-images/crisis/4.jpg" class="floating-img" style="top: 10%; left: 5%; animation-delay: 0s;">
-        <img src="web-images/zombies/1.jpg" class="floating-img" style="top: 20%; right: 10%; animation-delay: 2s;">
-        <img src="web-images/rapture/9.jpg" class="floating-img" style="bottom: 15%; left: 15%; animation-delay: 4s;">
-        <img src="web-images/crisis/21.jpg" class="floating-img" style="top: 50%; right: 5%; animation-delay: 6s;">
-        <img src="web-images/zombies/9.jpg" class="floating-img" style="bottom: 30%; right: 20%; animation-delay: 8s;">
-        <img src="web-images/rapture/33.jpg" class="floating-img" style="top: 70%; left: 10%; animation-delay: 10s;">
-        <img src="web-images/crisis/64d.jpg" class="floating-img" style="top: 30%; left: 40%; animation-delay: 12s;">
-        <img src="web-images/zombies/144.jpg" class="floating-img" style="bottom: 10%; left: 50%; animation-delay: 14s;">
-        <img src="web-images/rapture/144.jpg" class="floating-img" style="top: 60%; right: 30%; animation-delay: 16s;">
-        <img src="web-images/crisis/100d.jpg" class="floating-img" style="top: 80%; left: 25%; animation-delay: 18s;">
-        <img src="web-images/zombies/8.jpg" class="floating-img" style="top: 15%; left: 60%; animation-delay: 1s;">
-        <img src="web-images/rapture/89.jpg" class="floating-img" style="bottom: 40%; right: 15%; animation-delay: 3s;">
-        <img src="web-images/crisis/5.jpg" class="floating-img" style="top: 40%; left: 30%; animation-delay: 5s;">
-        <img src="web-images/zombies/2.jpg" class="floating-img" style="bottom: 25%; left: 40%; animation-delay: 7s;">
-        <img src="web-images/rapture/4.jpg" class="floating-img" style="top: 25%; right: 25%; animation-delay: 9s;">
-        <img src="web-images/crisis/7.jpg" class="floating-img" style="bottom: 50%; left: 60%; animation-delay: 11s;">
-        <img src="web-images/zombies/3.jpg" class="floating-img" style="top: 45%; right: 40%; animation-delay: 13s;">
-        <img src="web-images/rapture/5.jpg" class="floating-img" style="bottom: 60%; right: 10%; animation-delay: 15s;">
-        <img src="web-images/crisis/15.jpg" class="floating-img" style="top: 65%; left: 45%; animation-delay: 17s;">
-        <img src="web-images/zombies/200.jpg" class="floating-img" style="bottom: 20%; right: 35%; animation-delay: 19s;">
-        <img src="web-images/rapture/8.jpg" class="floating-img" style="top: 35%; left: 20%; animation-delay: 2.5s;">
-        <img src="web-images/crisis/18.jpg" class="floating-img" style="bottom: 45%; left: 70%; animation-delay: 4.5s;">
-        <img src="web-images/zombies/193.jpg" class="floating-img" style="top: 55%; right: 50%; animation-delay: 6.5s;">
-        <img src="web-images/rapture/21.jpg" class="floating-img" style="bottom: 35%; right: 60%; animation-delay: 8.5s;">
-        <img src="web-images/crisis/28.jpg" class="floating-img" style="top: 75%; left: 55%; animation-delay: 10.5s;">
-        <img src="web-images/zombies/194.jpg" class="floating-img" style="bottom: 55%; left: 35%; animation-delay: 12.5s;">
-        <img src="web-images/rapture/42.jpg" class="floating-img" style="top: 85%; right: 20%; animation-delay: 14.5s;">
-        <img src="web-images/crisis/100d.jpg" class="floating-img" style="bottom: 70%; left: 80%; animation-delay: 16.5s;">
-        <img src="web-images/zombies/8.jpg" class="floating-img" style="top: 5%; right: 70%; animation-delay: 18.5s;">
-        <img src="web-images/rapture/89.jpg" class="floating-img" style="bottom: 5%; left: 25%; animation-delay: 20s;">
     </div>
     
     <div class="ticker">
