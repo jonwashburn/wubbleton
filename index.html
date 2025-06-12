@@ -261,9 +261,77 @@
             .countdown { font-size: 32px; }
             .trilogy-wall { grid-template-columns: 1fr; }
         }
+        
+        .full-bleed {
+            width: 100vw;
+            min-height: 80vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-overlay {
+            color: #fff;
+            font-size: 8vw;
+            font-weight: 900;
+            text-shadow: 0 2px 24px #000, 0 0 80px #000;
+            letter-spacing: 0.1em;
+            background: rgba(255,255,255,0.08);
+            padding: 2vw 6vw;
+            border-radius: 2vw;
+            mix-blend-mode: lighten;
+            text-align: center;
+        }
+        
+        .image-wall {
+            height: 450px;
+        }
+        
+        .image-scroll img {
+            height: 450px;
+            width: auto;
+        }
+        
+        .trilogy-grid img {
+            height: 300px;
+        }
+        
+        .button {
+            font-size: 32px;
+            padding: 28px 60px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px #0002;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .button:hover {
+            transform: rotate(-0.5deg) scale(1.07);
+            box-shadow: 0 8px 32px #0004;
+        }
+        
+        @media (max-width: 900px) {
+            .hero-overlay { font-size: 12vw; }
+            .image-wall { height: 220px; }
+            .image-scroll img { height: 220px; }
+            .trilogy-grid img { height: 120px; }
+        }
     </style>
 </head>
 <body>
+    <!-- Full-bleed hero section 1 -->
+    <section class="full-bleed" style="background-image: url('magnific-qUzjmzUsy5iJ6dJYjbkr-1.jpeg');">
+      <div class="hero-overlay">WUBBLETON</div>
+    </section>
+    <!-- Full-bleed hero section 2 -->
+    <section class="full-bleed" style="background-image: url('magnific-dLeTatdTtII8zSPh6BN5-asas.jpeg');">
+      <div class="hero-overlay">WUBBLETON</div>
+    </section>
+    
     <div class="alert" id="alert">🌈 NOT YET 🌈</div>
     
     <div class="container">
@@ -271,13 +339,13 @@
             <h1>🌈 WUBBLETON 🌈</h1>
             <p class="tagline">THE COMPLETION OF THE WUBBUSHI TRILOGY 🦄✨</p>
             <p class="tagline">HUMANITY'S REBIRTH AS COLLECTIVE CONSCIOUSNESS 🧠💫</p>
-            <div class="countdown" id="countdown">10,000 SPOTS REMAINING</div>
+            <div class="countdown" id="countdown">9,860 INITIATES SO FAR</div>
         </header>
         
         <section class="section">
-            <h2>THIS IS THE END 💀🌟</h2>
+            <h2>THIS IS JUST THE OPENING CEREMONY</h2>
             <p>THE CRISIS 🔥 → MODERN ZOMBIES 🧟 → THE RAPTURE 👁️</p>
-            <p>AND THE BEGINNING 🦋</p>
+            <p>AND THE BEGINNING ��</p>
             <p>WUBBLETON 🌈</p>
         </section>
         
@@ -470,6 +538,12 @@
         console.log('%cYOU FOUND THE SECRET 🔮', 'font-size: 20px; color: purple;');
         console.log('%cCONSCIOUSNESS LEVEL: ???', 'font-size: 16px; color: blue;');
         console.log('%cTHE LEDGER KNOWS YOU\'RE HERE 👁️', 'font-size: 16px; color: red;');
+        
+        // Change intro text and countdown
+        window.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.section h2').textContent = 'THIS IS JUST THE OPENING CEREMONY';
+            document.getElementById('countdown').textContent = '9,860 INITIATES SO FAR';
+        });
     </script>
 </body>
 </html> 
