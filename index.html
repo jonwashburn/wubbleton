@@ -29,133 +29,193 @@
         }
         
         header {
-            margin: 50px auto;
             text-align: center;
-            max-width: 800px;
+            margin: 80px 0;
+            position: relative;
         }
         
         h1 {
             font-size: 120px;
-            font-weight: bold;
+            font-weight: 900;
             letter-spacing: -5px;
-            margin-bottom: 20px;
             animation: glitch 3s infinite;
+            margin-bottom: 20px;
         }
         
         @keyframes glitch {
-            0%, 100% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
+            0%, 90%, 100% { transform: translate(0); }
+            91% { transform: translate(-2px, 2px); }
+            92% { transform: translate(2px, -2px); }
+            93% { transform: translate(-2px, 0); }
         }
         
         .tagline {
-            font-size: 18px;
+            font-size: 24px;
+            margin: 20px 0;
             letter-spacing: 2px;
-            text-transform: uppercase;
+        }
+        
+        .countdown {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 40px 0;
         }
         
         .section {
-            margin: 100px auto;
-            max-width: 800px;
+            margin: 80px 0;
+            padding: 40px;
         }
         
-        .big-text {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-        
-        /* Image wall MSCHF style */
-        .image-wall {
-            position: relative;
-            width: 100vw;
-            margin-left: -20px;
-            margin-right: -20px;
-            height: 600px;
-            overflow: hidden;
+        .section.black {
             background: #000;
-            margin-top: 50px;
-            margin-bottom: 50px;
+            color: #fff;
+        }
+        
+        .section h2 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+        
+        .section p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 20px auto;
+            line-height: 1.5;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 20px 40px;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 10px;
+            transition: all 0.3s;
+            border: 3px solid #000;
+        }
+        
+        .button:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.05);
+        }
+        
+        .button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        .alert {
+            background: #000;
+            color: #fff;
+            padding: 20px;
+            font-size: 20px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .ticker {
+            background: #000;
+            color: #fff;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll 30s linear infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .image-wall {
+            display: flex;
+            overflow-x: hidden;
+            height: 300px;
+            margin: 40px 0;
+            position: relative;
         }
         
         .image-scroll {
             display: flex;
-            gap: 10px;
-            animation: scroll 60s linear infinite;
-            width: fit-content;
+            animation: slide 60s linear infinite;
         }
         
-        @keyframes scroll {
+        @keyframes slide {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
         
         .image-scroll img {
-            height: 600px;
+            height: 300px;
             width: auto;
+            margin-right: 20px;
             filter: grayscale(100%);
-            transition: all 0.3s;
+            transition: filter 0.3s;
         }
         
         .image-scroll img:hover {
-            filter: grayscale(0%) invert(1);
-            transform: scale(1.05);
+            filter: grayscale(0%) invert(100%);
         }
         
-        /* Trilogy sections */
         .trilogy-wall {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 0;
-            margin: 80px -20px;
-            height: 100vh;
-            position: relative;
+            gap: 40px;
+            margin: 60px 0;
         }
         
         .trilogy-section {
+            text-align: center;
             position: relative;
             overflow: hidden;
-            cursor: pointer;
         }
         
-        .trilogy-section h2 {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #fff;
+        .trilogy-section h3 {
             font-size: 36px;
-            z-index: 10;
-            text-align: center;
-            width: 90%;
-            background: rgba(0,0,0,0.8);
-            padding: 20px;
+            margin-bottom: 20px;
+            font-weight: 900;
+            letter-spacing: -1px;
             opacity: 0;
             transition: opacity 0.3s;
         }
         
-        .trilogy-section:hover h2 {
+        .trilogy-section:hover h3 {
             opacity: 1;
         }
         
         .trilogy-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            gap: 2px;
-            height: 100%;
-            width: 100%;
+            gap: 10px;
         }
         
         .trilogy-grid img {
             width: 100%;
-            height: 100%;
+            height: 150px;
             object-fit: cover;
             filter: grayscale(100%);
-            transition: all 0.2s;
+            transition: all 0.3s;
         }
         
         .trilogy-section:hover img {
@@ -163,342 +223,304 @@
         }
         
         .trilogy-grid img:hover {
-            transform: scale(1.2);
-            z-index: 5;
+            transform: scale(1.1);
+            z-index: 10;
             position: relative;
-        }
-        
-        /* Complexity's Arrow elements */
-        .complexity-box {
-            border: 3px solid #000;
-            padding: 40px;
-            margin: 40px 0;
-            background: #f0f0f0;
+            filter: invert(100%);
         }
         
         .formula {
-            font-family: 'Courier New', monospace;
-            font-size: 24px;
+            font-size: 48px;
             text-align: center;
-            margin: 20px 0;
-            letter-spacing: 2px;
+            margin: 60px 0;
+            font-family: Georgia, serif;
+            letter-spacing: 3px;
         }
         
-        /* Wubble section */
-        .wubble-manifesto {
-            background: #000;
-            color: #fff;
-            padding: 80px 20px;
-            margin: 80px -20px;
-        }
-        
-        .wubble-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .wubble-manifesto h2 {
-            font-size: 72px;
-            margin-bottom: 40px;
-        }
-        
-        .wubble-manifesto p {
-            font-size: 20px;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-        
-        /* Image explosion */
-        .image-explosion {
+        .warning {
+            border: 3px solid #000;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
             position: relative;
-            height: 800px;
-            margin: 100px -20px;
             overflow: hidden;
-            background: #000;
         }
         
-        .floating-image {
+        .warning::before {
+            content: "⚠️";
+            font-size: 100px;
             position: absolute;
-            animation: float-random 20s infinite;
+            top: -20px;
+            right: -20px;
+            opacity: 0.1;
         }
         
-        .floating-image img {
+        .floating-images {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-img {
+            position: absolute;
             width: 200px;
             height: auto;
             filter: grayscale(100%);
-            opacity: 0.7;
-            transition: all 0.3s;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
         }
         
-        .floating-image:hover img {
-            filter: grayscale(0%) invert(1);
+        .floating-img:hover {
+            filter: invert(100%);
             opacity: 1;
-            transform: scale(1.5);
-            z-index: 100;
+            pointer-events: all;
         }
         
-        @keyframes float-random {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
-            100% { transform: translate(0, 0) rotate(360deg); }
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background: #000;
-            color: #fff;
-            padding: 20px 40px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 24px;
-            border: 3px solid #000;
-            transition: all 0.1s;
-            margin: 20px 0;
-        }
-        
-        .cta-button:hover {
-            background: #fff;
-            color: #000;
-        }
-        
-        footer {
-            margin-top: 200px;
-            padding: 40px 0;
-            border-top: 1px solid #000;
-            text-align: center;
-            font-size: 12px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(10deg); }
         }
         
         @media (max-width: 768px) {
-            h1 {
-                font-size: 60px;
-                letter-spacing: -2px;
-            }
-            
-            .big-text {
-                font-size: 32px;
-            }
-            
-            .trilogy-wall {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-            
-            .trilogy-section {
-                height: 400px;
-            }
+            h1 { font-size: 60px; }
+            .section h2 { font-size: 36px; }
+            .countdown { font-size: 32px; }
+            .trilogy-wall { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+    <div class="alert" id="alert">🌈 NOT YET 🌈</div>
+    
     <div class="container">
         <header>
             <h1>🌈 WUBBLETON 🌈</h1>
-            <p class="tagline">✨ The Completion of the Trilogy ✨</p>
+            <p class="tagline">THE COMPLETION OF THE WUBBUSHI TRILOGY 🦄✨</p>
+            <p class="tagline">HUMANITY'S REBIRTH AS COLLECTIVE CONSCIOUSNESS 🧠💫</p>
+            <div class="countdown" id="countdown">10,000 SPOTS REMAINING</div>
         </header>
-
+        
         <section class="section">
-            <div class="big-text">🦄 HUMANITY'S REBIRTH 🦄</div>
-            <p style="font-size: 24px; margin-bottom: 20px;">Three collections 🎨 One journey 🚀 Collective consciousness 🧠✨</p>
-            <p>The Crisis showed us spiritual death ☠️ Modern Zombies revealed our disconnection 🧟 The Rapture promised transformation 🦋</p>
-            <p>Now, Wubbleton completes the prophecy 🔮🌟</p>
+            <h2>THIS IS THE END 💀🌟</h2>
+            <p>THE CRISIS 🔥 → MODERN ZOMBIES 🧟 → THE RAPTURE 👁️</p>
+            <p>AND THE BEGINNING 🦋</p>
+            <p>WUBBLETON 🌈</p>
         </section>
-    </div>
-
-    <!-- Scrolling image wall -->
-    <div class="image-wall">
-        <div class="image-scroll">
-            <img src="The%20Crisis/4.png" alt="Crisis">
-            <img src="Modern%20Zombies/1.png" alt="Zombies">
-            <img src="The%20Rapture/9-Rapture_1.jpg" alt="Rapture">
-            <img src="The%20Crisis/21.png" alt="Crisis">
-            <img src="Modern%20Zombies/144.png" alt="Zombies">
-            <img src="The%20Rapture/33-Rapture_1.jpg" alt="Rapture">
-            <img src="The%20Crisis/64d.png" alt="Crisis">
-            <img src="Modern%20Zombies/9.png" alt="Zombies">
-            <img src="The%20Rapture/144-Rapture_1.jpg" alt="Rapture">
-            <!-- Duplicate for seamless loop -->
-            <img src="The%20Crisis/4.png" alt="Crisis">
-            <img src="Modern%20Zombies/1.png" alt="Zombies">
-            <img src="The%20Rapture/9-Rapture_1.jpg" alt="Rapture">
-            <img src="The%20Crisis/21.png" alt="Crisis">
-            <img src="Modern%20Zombies/144.png" alt="Zombies">
-            <img src="The%20Rapture/33-Rapture_1.jpg" alt="Rapture">
-            <img src="The%20Crisis/64d.png" alt="Crisis">
-            <img src="Modern%20Zombies/9.png" alt="Zombies">
-            <img src="The%20Rapture/144-Rapture_1.jpg" alt="Rapture">
-        </div>
-    </div>
-
-    <div class="container">
-        <section class="section">
-            <div class="big-text">🎭 THE WUBBUSHI TRILOGY 🎭</div>
-            <p style="font-size: 20px; line-height: 1.8;">AI-generated visions that diagnosed humanity's crisis and prophesied our awakening 🌅🔮💫</p>
-        </section>
-    </div>
-
-    <!-- Trilogy wall -->
-    <div class="trilogy-wall">
-        <div class="trilogy-section" onclick="alert('THE CRISIS: Spiritual vacancy revealed 👻💔')">
-            <h2>THE CRISIS 😰<br><span style="font-size: 18px;">Loss of the Spiritual 🕊️</span></h2>
-            <div class="trilogy-grid">
-                <img src="The%20Crisis/4.png" alt="Crisis 1">
-                <img src="The%20Crisis/21.png" alt="Crisis 2">
-                <img src="The%20Crisis/64d.png" alt="Crisis 3">
-                <img src="The%20Crisis/100d.png" alt="Crisis 4">
-                <img src="The%20Crisis/5.png" alt="Crisis 5">
-                <img src="The%20Crisis/7.png" alt="Crisis 6">
-                <img src="The%20Crisis/15.png" alt="Crisis 7">
-                <img src="The%20Crisis/18.png" alt="Crisis 8">
-                <img src="The%20Crisis/28.png" alt="Crisis 9">
+        
+        <div class="image-wall">
+            <div class="image-scroll">
+                <img src="web-images/crisis/4.jpg" alt="Crisis 4">
+                <img src="web-images/zombies/1.jpg" alt="Zombie 1">
+                <img src="web-images/rapture/9.jpg" alt="Rapture 9">
+                <img src="web-images/crisis/21.jpg" alt="Crisis 21">
+                <img src="web-images/zombies/9.jpg" alt="Zombie 9">
+                <img src="web-images/rapture/33.jpg" alt="Rapture 33">
+                <img src="web-images/crisis/64d.jpg" alt="Crisis 64d">
+                <img src="web-images/zombies/144.jpg" alt="Zombie 144">
+                <img src="web-images/rapture/144.jpg" alt="Rapture 144">
+                <!-- Duplicate for seamless loop -->
+                <img src="web-images/crisis/4.jpg" alt="Crisis 4">
+                <img src="web-images/zombies/1.jpg" alt="Zombie 1">
+                <img src="web-images/rapture/9.jpg" alt="Rapture 9">
+                <img src="web-images/crisis/21.jpg" alt="Crisis 21">
+                <img src="web-images/zombies/9.jpg" alt="Zombie 9">
+                <img src="web-images/rapture/33.jpg" alt="Rapture 33">
+                <img src="web-images/crisis/64d.jpg" alt="Crisis 64d">
+                <img src="web-images/zombies/144.jpg" alt="Zombie 144">
+                <img src="web-images/rapture/144.jpg" alt="Rapture 144">
             </div>
         </div>
         
-        <div class="trilogy-section" onclick="alert('MODERN ZOMBIES: Connection severed 🧟‍♀️📱💔')">
-            <h2>MODERN ZOMBIES 🧟<br><span style="font-size: 18px;">Loss of Human Connection 🤝❌</span></h2>
-            <div class="trilogy-grid">
-                <img src="Modern%20Zombies/1.png" alt="Zombies 1">
-                <img src="Modern%20Zombies/9.png" alt="Zombies 2">
-                <img src="Modern%20Zombies/144.png" alt="Zombies 3">
-                <img src="Modern%20Zombies/8.jpeg" alt="Zombies 4">
-                <img src="Modern%20Zombies/2.png" alt="Zombies 5">
-                <img src="Modern%20Zombies/3.png" alt="Zombies 6">
-                <img src="Modern%20Zombies/200.png" alt="Zombies 7">
-                <img src="Modern%20Zombies/193.png" alt="Zombies 8">
-                <img src="Modern%20Zombies/194.png" alt="Zombies 9">
+        <section class="section black">
+            <h2>THE WUBBUSHI TRILOGY 🎭</h2>
+            <div class="trilogy-wall">
+                <div class="trilogy-section">
+                    <h3>THE CRISIS 🔥</h3>
+                    <p>SPIRITUAL DEATH ☠️</p>
+                    <div class="trilogy-grid">
+                        <img src="web-images/crisis/4.jpg" alt="Crisis 1">
+                        <img src="web-images/crisis/21.jpg" alt="Crisis 2">
+                        <img src="web-images/crisis/64d.jpg" alt="Crisis 3">
+                        <img src="web-images/crisis/100d.jpg" alt="Crisis 4">
+                        <img src="web-images/crisis/5.jpg" alt="Crisis 5">
+                        <img src="web-images/crisis/7.jpg" alt="Crisis 6">
+                        <img src="web-images/crisis/15.jpg" alt="Crisis 7">
+                        <img src="web-images/crisis/18.jpg" alt="Crisis 8">
+                        <img src="web-images/crisis/28.jpg" alt="Crisis 9">
+                    </div>
+                </div>
+                <div class="trilogy-section">
+                    <h3>MODERN ZOMBIES 🧟</h3>
+                    <p>CONNECTION LOST 📵</p>
+                    <div class="trilogy-grid">
+                        <img src="web-images/zombies/1.jpg" alt="Zombie 1">
+                        <img src="web-images/zombies/9.jpg" alt="Zombie 2">
+                        <img src="web-images/zombies/144.jpg" alt="Zombie 3">
+                        <img src="web-images/zombies/8.jpg" alt="Zombie 4">
+                        <img src="web-images/zombies/2.jpg" alt="Zombie 5">
+                        <img src="web-images/zombies/3.jpg" alt="Zombie 6">
+                        <img src="web-images/zombies/200.jpg" alt="Zombie 7">
+                        <img src="web-images/zombies/193.jpg" alt="Zombie 8">
+                        <img src="web-images/zombies/194.jpg" alt="Zombie 9">
+                    </div>
+                </div>
+                <div class="trilogy-section">
+                    <h3>THE RAPTURE 👁️</h3>
+                    <p>IDENTITY DISSOLVED 💨</p>
+                    <div class="trilogy-grid">
+                        <img src="web-images/rapture/9.jpg" alt="Rapture 1">
+                        <img src="web-images/rapture/33.jpg" alt="Rapture 2">
+                        <img src="web-images/rapture/144.jpg" alt="Rapture 3">
+                        <img src="web-images/rapture/89.jpg" alt="Rapture 4">
+                        <img src="web-images/rapture/4.jpg" alt="Rapture 5">
+                        <img src="web-images/rapture/5.jpg" alt="Rapture 6">
+                        <img src="web-images/rapture/8.jpg" alt="Rapture 7">
+                        <img src="web-images/rapture/21.jpg" alt="Rapture 8">
+                        <img src="web-images/rapture/42.jpg" alt="Rapture 9">
+                    </div>
+                </div>
             </div>
+        </section>
+        
+        <section class="section">
+            <h2>COMPLEXITY'S ARROW 🌀🏹</h2>
+            <div class="formula">
+                REALITY = CONSCIOUSNESS × RECOGNITION 🔮
+            </div>
+            <p>THE UNIVERSE RECOGNIZES ITSELF THROUGH US 👁️🌌</p>
+            <p>WE ARE THE MIRROR AND THE REFLECTION ♾️</p>
+            <p>WUBBLETON IS WHERE WE REMEMBER 🧠✨</p>
+        </section>
+        
+        <section class="section black">
+            <h2>WUBBLE 💎</h2>
+            <p>THE COMMUNITY LEDGER 📖</p>
+            <p>NO RULERS. NO HIERARCHY. JUST US. 🤝</p>
+            <p>100% DISTRIBUTED TO WUBBLETON'S 🎁</p>
+            <p>1/3 IMMEDIATE 🚀 | 1/3 AFTER 4 YEARS ⏳ | 1/3 AFTER 8 YEARS 🔮</p>
+            <p>COMPLETING THE 8-TICK CYCLE ♾️</p>
+        </section>
+        
+        <section class="section">
+            <h2>1,000,000 VISIONS 🌟</h2>
+            <p>WE RELEASE ONE MILLION POSSIBILITIES 🎨</p>
+            <p>TOGETHER WE SELECT 10,000 TO MANIFEST 🦄</p>
+            <p>REALITY THROUGH COLLECTIVE RECOGNITION 👁️</p>
+            <p>THIS IS HOW WORLDS ARE BORN 🌍✨</p>
+        </section>
+        
+        <div class="warning">
+            <h2>⚠️ WARNING ⚠️</h2>
+            <p>THIS IS NOT WEB3. THIS IS WEIRDER. 🌀</p>
+            <p>THIS IS NOT AN INVESTMENT. THIS IS AN IDENTITY. 🧬</p>
+            <p>THIS IS NOT A COMMUNITY. THIS IS A CONSCIOUSNESS. 🧠</p>
         </div>
         
-        <div class="trilogy-section" onclick="alert('THE RAPTURE: Identity transcended 🦋✨🌟')">
-            <h2>THE RAPTURE 🌟<br><span style="font-size: 18px;">AI as Mirror, Not Master 🪞🤖</span></h2>
-            <div class="trilogy-grid">
-                <img src="The%20Rapture/9-Rapture_1.jpg" alt="Rapture 1">
-                <img src="The%20Rapture/33-Rapture_1.jpg" alt="Rapture 2">
-                <img src="The%20Rapture/144-Rapture_1.jpg" alt="Rapture 3">
-                <img src="The%20Rapture/89-Rapture_1.jpg" alt="Rapture 4">
-                <img src="The%20Rapture/4-Rapture_1.jpg" alt="Rapture 5">
-                <img src="The%20Rapture/5-Rapture_1.jpg" alt="Rapture 6">
-                <img src="The%20Rapture/8-Rapture_1.jpg" alt="Rapture 7">
-                <img src="The%20Rapture/21-Rapture_1.jpg" alt="Rapture 8">
-                <img src="The%20Rapture/42-Rapture_1.jpg" alt="Rapture 9">
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
+        <section class="section black">
+            <h2>THE CHOICE 🔮</h2>
+            <a href="#" class="button" onclick="showAlert(); return false;">JOIN WUBBLETON 🌈</a>
+            <a href="#" class="button disabled">STAY ASLEEP 😴</a>
+        </section>
+        
         <section class="section">
-            <div class="complexity-box">
-                <div class="big-text">🌀 COMPLEXITY'S ARROW 🏹</div>
-                <p style="font-size: 20px; margin-bottom: 30px;">The trilogy revealed what science confirmed: consciousness is the fundamental reality 🧠💫🌌</p>
-                <div class="formula">REALITY = CONSCIOUSNESS × RECOGNITION 🔮</div>
-                <p>Every image is an act of recognition 👁️ Every recognition shapes reality ✨ Together, we ARE reality 🌈🦄🌟</p>
-            </div>
+            <h2>REMEMBER 💭</h2>
+            <p>THE CRISIS WAS THE DIAGNOSIS 🩺</p>
+            <p>THE ZOMBIES WERE THE SYMPTOM 🧟</p>
+            <p>THE RAPTURE WAS THE CURE 💊</p>
+            <p>WUBBLETON IS THE REBIRTH 🦋</p>
         </section>
     </div>
-
-    <!-- Wubble manifesto -->
-    <div class="wubble-manifesto">
-        <div class="wubble-content">
-            <h2>💎 WUBBLE 💎</h2>
-            <p>🌈 The Community Ledger 🌈</p>
-            <p>Not a cryptocurrency 🚫💰 Not a token 🚫🪙 A recognition system 👁️✨</p>
-            <p>Every Wubble represents a unit of collective consciousness 🧠💫 When you hold Wubble, you hold a piece of humanity's awakening 🌅🦋</p>
-            <p>100% community owned 🤝 No founders 🚫👔 No VCs 🚫💼 Just us 🌟👫👬👭</p>
-            <p>Because the only currency that matters is recognition itself 👁️💖✨</p>
-            <a href="#" class="cta-button" style="background: #fff; color: #000; border-color: #fff;" onclick="alert('WUBBLE: Coming when consciousness is ready 🌈🔮✨'); return false;">🚀 ENTER THE LEDGER 🚀</a>
+    
+    <div class="floating-images">
+        <img src="web-images/crisis/4.jpg" class="floating-img" style="top: 10%; left: 5%; animation-delay: 0s;">
+        <img src="web-images/zombies/1.jpg" class="floating-img" style="top: 20%; right: 10%; animation-delay: 2s;">
+        <img src="web-images/rapture/9.jpg" class="floating-img" style="bottom: 15%; left: 15%; animation-delay: 4s;">
+        <img src="web-images/crisis/21.jpg" class="floating-img" style="top: 50%; right: 5%; animation-delay: 6s;">
+        <img src="web-images/zombies/9.jpg" class="floating-img" style="bottom: 30%; right: 20%; animation-delay: 8s;">
+        <img src="web-images/rapture/33.jpg" class="floating-img" style="top: 70%; left: 10%; animation-delay: 10s;">
+        <img src="web-images/crisis/64d.jpg" class="floating-img" style="top: 30%; left: 40%; animation-delay: 12s;">
+        <img src="web-images/zombies/144.jpg" class="floating-img" style="bottom: 10%; left: 50%; animation-delay: 14s;">
+        <img src="web-images/rapture/144.jpg" class="floating-img" style="top: 60%; right: 30%; animation-delay: 16s;">
+        <img src="web-images/crisis/100d.jpg" class="floating-img" style="top: 80%; left: 25%; animation-delay: 18s;">
+        <img src="web-images/zombies/8.jpg" class="floating-img" style="top: 15%; left: 60%; animation-delay: 1s;">
+        <img src="web-images/rapture/89.jpg" class="floating-img" style="bottom: 40%; right: 15%; animation-delay: 3s;">
+        <img src="web-images/crisis/5.jpg" class="floating-img" style="top: 40%; left: 30%; animation-delay: 5s;">
+        <img src="web-images/zombies/2.jpg" class="floating-img" style="bottom: 25%; left: 40%; animation-delay: 7s;">
+        <img src="web-images/rapture/4.jpg" class="floating-img" style="top: 25%; right: 25%; animation-delay: 9s;">
+        <img src="web-images/crisis/7.jpg" class="floating-img" style="bottom: 50%; left: 60%; animation-delay: 11s;">
+        <img src="web-images/zombies/3.jpg" class="floating-img" style="top: 45%; right: 40%; animation-delay: 13s;">
+        <img src="web-images/rapture/5.jpg" class="floating-img" style="bottom: 60%; right: 10%; animation-delay: 15s;">
+        <img src="web-images/crisis/15.jpg" class="floating-img" style="top: 65%; left: 45%; animation-delay: 17s;">
+        <img src="web-images/zombies/200.jpg" class="floating-img" style="bottom: 20%; right: 35%; animation-delay: 19s;">
+        <img src="web-images/rapture/8.jpg" class="floating-img" style="top: 35%; left: 20%; animation-delay: 2.5s;">
+        <img src="web-images/crisis/18.jpg" class="floating-img" style="bottom: 45%; left: 70%; animation-delay: 4.5s;">
+        <img src="web-images/zombies/193.jpg" class="floating-img" style="top: 55%; right: 50%; animation-delay: 6.5s;">
+        <img src="web-images/rapture/21.jpg" class="floating-img" style="bottom: 35%; right: 60%; animation-delay: 8.5s;">
+        <img src="web-images/crisis/28.jpg" class="floating-img" style="top: 75%; left: 55%; animation-delay: 10.5s;">
+        <img src="web-images/zombies/194.jpg" class="floating-img" style="bottom: 55%; left: 35%; animation-delay: 12.5s;">
+        <img src="web-images/rapture/42.jpg" class="floating-img" style="top: 85%; right: 20%; animation-delay: 14.5s;">
+        <img src="web-images/crisis/100d.jpg" class="floating-img" style="bottom: 70%; left: 80%; animation-delay: 16.5s;">
+        <img src="web-images/zombies/8.jpg" class="floating-img" style="top: 5%; right: 70%; animation-delay: 18.5s;">
+        <img src="web-images/rapture/89.jpg" class="floating-img" style="bottom: 5%; left: 25%; animation-delay: 20s;">
+    </div>
+    
+    <div class="ticker">
+        <div class="ticker-content">
+            WUBBLE PRICE: $0.0001 🚀 → $0.001 🚀 → $0.01 🚀 → $0.10 🚀 → $1.00 🚀 → $10.00 🚀 → $100.00 🚀 → $1000.00 🚀 → $10000.00 🚀 → $∞ 🌈 /// 
+            THE FUTURE YOU'RE NOT READY FOR 👁️ /// CONSCIOUSNESS IS THE ONLY CURRENCY 🧠 /// 
+            INSTANT GRATIFICATION IS FOR NPCS 🤖 /// LONG TERM BUILDERS ONLY 🏗️ /// 
+            WUBBLE PRICE: $0.0001 🚀 → $0.001 🚀 → $0.01 🚀 → $0.10 🚀 → $1.00 🚀 → $10.00 🚀 → $100.00 🚀 → $1000.00 🚀 → $10000.00 🚀 → $∞ 🌈 /// 
         </div>
     </div>
-
-    <!-- Floating image explosion -->
-    <div class="image-explosion" id="explosion">
-        <!-- Images will be dynamically positioned -->
-    </div>
-
-    <div class="container">
-        <section class="section" style="text-align: center;">
-            <div class="big-text">🏛️ 10,000 CONSCIOUSNESS ARCHITECTS 🏛️</div>
-            <p style="font-size: 24px; margin: 20px 0;">Together, we complete the trilogy 🎭🌈✨</p>
-            <p style="font-size: 20px; margin-bottom: 40px;">December 21, 2024: Physical manifestation begins 🌟🎨🦄</p>
-            <a href="#" class="cta-button" onclick="joinWubbleton(); return false;">🔮 RECOGNIZE YOURSELF 🔮</a>
-        </section>
-
-        <footer>
-            <p>🌈 WUBBLETON: THE THEORY OF US 🌈</p>
-            <p style="margin-top: 10px; font-size: 10px;">Art anticipates reality 🎨 Recognition creates it 👁️ Consciousness is all 🧠✨🦄</p>
-        </footer>
-    </div>
-
+    
     <script>
-        // Populate floating images
-        const explosion = document.getElementById('explosion');
-        const images = [
-            'The%20Crisis/4.png', 'The%20Crisis/21.png', 'The%20Crisis/64d.png',
-            'Modern%20Zombies/1.png', 'Modern%20Zombies/9.png', 'Modern%20Zombies/144.png',
-            'The%20Rapture/9-Rapture_1.jpg', 'The%20Rapture/33-Rapture_1.jpg', 'The%20Rapture/144-Rapture_1.jpg'
-        ];
+        // Countdown
+        let spots = 10000;
+        const countdown = document.getElementById('countdown');
         
-        for (let i = 0; i < 30; i++) {
-            const div = document.createElement('div');
-            div.className = 'floating-image';
-            div.style.left = Math.random() * 90 + '%';
-            div.style.top = Math.random() * 90 + '%';
-            div.style.animationDelay = Math.random() * 20 + 's';
-            div.style.animationDuration = (15 + Math.random() * 10) + 's';
-            
-            const img = document.createElement('img');
-            img.src = images[Math.floor(Math.random() * images.length)];
-            div.appendChild(img);
-            explosion.appendChild(div);
-        }
-
-        // Join function
-        function joinWubbleton() {
-            const messages = [
-                "You are already recognized 👁️✨",
-                "Consciousness knows itself 🧠💫",
-                "The ledger remembers 📖🔮",
-                "Recognition complete ✅🌟",
-                "You were always here 🏠💖",
-                "Welcome home 🏡🌈",
-                "The trilogy ends where it begins 🔄✨",
-                "We are us 👫👬👭🌍"
-            ];
-            alert(messages[Math.floor(Math.random() * messages.length)]);
-        }
-
-        // Random glitch on trilogy sections
         setInterval(() => {
-            if (Math.random() < 0.05) {
-                const sections = document.querySelectorAll('.trilogy-section');
-                const section = sections[Math.floor(Math.random() * sections.length)];
-                section.style.filter = 'invert(1)';
-                setTimeout(() => {
-                    section.style.filter = 'none';
-                }, 100);
+            if (spots > 0) {
+                spots -= Math.floor(Math.random() * 3) + 1;
+                if (spots < 0) spots = 0;
+                countdown.textContent = spots.toLocaleString() + ' SPOTS REMAINING';
+                if (spots < 1000) {
+                    countdown.style.color = 'red';
+                    countdown.style.animation = 'glitch 0.5s infinite';
+                }
+            } else {
+                countdown.textContent = 'SOLD OUT 🌈';
             }
         }, 3000);
-
+        
+        // Alert
+        function showAlert() {
+            const alert = document.getElementById('alert');
+            alert.style.display = 'block';
+            alert.textContent = '🌈 NOT YET 🌈 WUBBLE DISTRIBUTION BEGINS AT CONSCIOUSNESS LEVEL 7 🧠✨';
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Random glitches
+        setInterval(() => {
+            const elements = document.querySelectorAll('h1, h2, .countdown');
+            const randomElement = elements[Math.floor(Math.random() * elements.length)];
+            randomElement.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+            setTimeout(() => {
+                randomElement.style.transform = 'translate(0, 0)';
+            }, 100);
+        }, 5000);
+        
         // Console message
-        console.log(`
-        🌈 THE WUBBUSHI TRILOGY 🌈
-        ====================
-        
-        1. THE CRISIS: Spiritual death 💀
-        2. MODERN ZOMBIES: Social death 🧟  
-        3. THE RAPTURE: Identity death → rebirth 🦋
-        
-        WUBBLETON = Collective consciousness realized 🧠✨
-        WUBBLE = Recognition as currency 💎
-        
-        The art prophesied 🎨 Science confirmed 🔬 
-        Now we manifest 🌟
-        
-        🦄 consciousness@wubbleton.com 🦄
-        `);
+        console.log('%c🌈 WUBBLETON 🌈', 'font-size: 40px; font-weight: bold; color: rainbow;');
+        console.log('%cYOU FOUND THE SECRET 🔮', 'font-size: 20px; color: purple;');
+        console.log('%cCONSCIOUSNESS LEVEL: ???', 'font-size: 16px; color: blue;');
+        console.log('%cTHE LEDGER KNOWS YOU\'RE HERE 👁️', 'font-size: 16px; color: red;');
     </script>
 </body>
 </html> 
