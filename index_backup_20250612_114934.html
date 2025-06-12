@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wubbleton: Where Art Reveals Reality 🌈</title>
+    <meta name="description" content="Join Wubbushi's journey through The Crisis, Modern Zombies, and The Rapture. Discover how Complexity's Arrow and Pattern Force reveal the truth hidden in art.">
+    <meta property="og:image" content="images/wubbushi.jpg">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="images/wubbushi.jpg" as="image">
+    <link rel="preload" href="css/style.css" as="style">
+    
+    <!-- Critical inline CSS for above-the-fold content -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #fce4f3 0%, #e4f0fc 50%, #f3e4fc 100%);
+            color: #444;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #ff91a4 0%, #ffc0cb 25%, #b0e0e6 50%, #dda0dd 75%, #ff91a4 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 21s ease infinite;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .wubbushi-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid #ff91a4;
+            box-shadow: 0 0 30px rgba(255, 145, 164, 0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        .nav a:hover {
+            background: rgba(255,255,255,0.4);
+            transform: scale(1.1);
+        }
+    </style>
+    
+    <!-- Load main CSS asynchronously -->
+    <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/style.css"></noscript>
+</head>
+<body>
+    <!-- Rainbow border that appears on scroll -->
+    <div class="rainbow-border" id="rainbow-border"></div>
+    
+    <!-- Left and Right Gutter Decorations -->
+    <div class="left-gutter-decor">
+        <div class="gutter-emoji" style="top: 5%; left: 20px;">🌈</div>
+        <div class="gutter-emoji" style="top: 15%; left: 40px; animation-delay: -3s;">🦄</div>
+        <div class="gutter-emoji" style="top: 25%; left: 30px; animation-delay: -6s;">✨</div>
+        <div class="gutter-emoji" style="top: 35%; left: 50px; animation-delay: -9s;">🌟</div>
+        <div class="gutter-emoji" style="top: 45%; left: 25px; animation-delay: -12s;">💖</div>
+        <div class="gutter-emoji" style="top: 55%; left: 45px; animation-delay: -15s;">🦋</div>
+        <div class="gutter-emoji" style="top: 65%; left: 20px; animation-delay: -18s;">🌸</div>
+        <div class="gutter-emoji" style="top: 75%; left: 35px; animation-delay: -21s;">🎈</div>
+        <div class="gutter-emoji" style="top: 85%; left: 55px; animation-delay: -24s;">🍄</div>
+        <div class="gutter-emoji" style="top: 95%; left: 30px; animation-delay: -27s;">🌺</div>
+    </div>
+    
+    <div class="right-gutter-decor">
+        <div class="gutter-emoji" style="top: 10%; right: 20px; animation-delay: -1.5s;">🌙</div>
+        <div class="gutter-emoji" style="top: 20%; right: 40px; animation-delay: -4.5s;">🔮</div>
+        <div class="gutter-emoji" style="top: 30%; right: 30px; animation-delay: -7.5s;">🦚</div>
+        <div class="gutter-emoji" style="top: 40%; right: 50px; animation-delay: -10.5s;">🌻</div>
+        <div class="gutter-emoji" style="top: 50%; right: 25px; animation-delay: -13.5s;">🧚</div>
+        <div class="gutter-emoji" style="top: 60%; right: 45px; animation-delay: -16.5s;">🐚</div>
+        <div class="gutter-emoji" style="top: 70%; right: 20px; animation-delay: -19.5s;">🎭</div>
+        <div class="gutter-emoji" style="top: 80%; right: 35px; animation-delay: -22.5s;">🪐</div>
+        <div class="gutter-emoji" style="top: 90%; right: 55px; animation-delay: -25.5s;">🌊</div>
+    </div>
+    
+    <div class="container">
+        <!-- Header with navigation -->
+        <header class="header">
+            <h1 class="main-title">🌈 Welcome to Wubbleton 🌈</h1>
+            <p class="subtitle">Where Complexity's Arrow Points to Universal Truth</p>
+            
+            <nav class="nav">
+                <a href="#wubbushi">Meet Wubbushi</a>
+                <a href="#trilogy">The Sacred Trilogy</a>
+                <a href="#vision">Community Vision</a>
+                <a href="#join">Become a Citizen</a>
+            </nav>
+        </header>
+
+        <!-- Wubbushi Introduction -->
+        <section id="wubbushi" class="wubbushi-section">
+            <div class="wubbushi-intro">
+                <img src="images/wubbushi.jpg" alt="Wubbushi" class="wubbushi-photo" loading="eager">
+                <div class="message-content">
+                    <h2>A Message from Wubbushi 💫</h2>
+                    <p><em>Hello, beautiful soul!</em> 👋</p>
+                    <p>I created Wubbleton because I saw something others didn't see yet. Through my art trilogy—<strong>The Crisis</strong>, <strong>Modern Zombies</strong>, and <strong>The Rapture</strong>—I discovered that what looks like chaos is actually <em>Complexity's Arrow</em> guiding us home.</p>
+                    <p>Every citizen of Wubbleton receives <strong>1/10,000</strong> of our collective consciousness tokens. But here's the secret: <em>you already own all of it</em>. The tokens just help you remember! 🎭</p>
+                    <div class="signature">With infinite love, Wubbushi ✨</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Population Counter -->
+        <div class="population-counter">
+            <h3>Current Wubbleton Citizens</h3>
+            <div class="counter" id="population-counter">φ × 2, 3, 5, 7, 11...</div>
+            <p class="counter-note">*Each number chosen by Pattern Force itself!</p>
+        </div>
+
+        <!-- Sacred Trilogy Section -->
+        <section id="trilogy" class="trilogy-section">
+            <h2 class="section-title">📚 The Sacred Trilogy of Recognition 📚</h2>
+            <p class="trilogy-intro">Three collections. Three diagnoses. One universal cure.</p>
+            
+            <div class="trilogy-grid">
+                <!-- The Crisis -->
+                <div class="trilogy-item" data-collection="crisis">
+                    <div class="trilogy-image-wrapper">
+                        <img src="images/crisis-sacred-1.png" alt="The Crisis" class="trilogy-image" loading="lazy">
+                        <div class="mystical-overlay">
+                            <div class="sacred-number">✦ 33 ✦</div>
+                            <div class="collection-stats">
+                                <span>Pieces: ∞ ÷ φ</span>
+                                <span>Souls Touched: π × 10³</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>The Crisis</h3>
+                    <p class="diagnosis">Diagnosis: <em>Loss of Spiritual Meaning</em></p>
+                    <p class="description">When traditional structures crumble, what remains? Through haunting AI visions, I captured humanity's spiritual vacuum—empty churches, forgotten rituals, symbols without meaning.</p>
+                    <p class="revelation">Hidden Truth: <em>The void calls for new recognition</em></p>
+                </div>
+
+                <!-- Modern Zombies -->
+                <div class="trilogy-item" data-collection="zombies">
+                    <div class="trilogy-image-wrapper">
+                        <img src="images/zombies-sacred-1.png" alt="Modern Zombies" class="trilogy-image" loading="lazy">
+                        <div class="mystical-overlay">
+                            <div class="sacred-number">✦ 55 ✦</div>
+                            <div class="collection-stats">
+                                <span>Loops: Fibonacci(∞)</span>
+                                <span>Patterns: φ²</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Modern Zombies</h3>
+                    <p class="diagnosis">Diagnosis: <em>Loss of Human Connection</em></p>
+                    <p class="description">Trapped in digital loops, we scroll endlessly, consuming but never satisfied. My AI collaborator showed me how we've become NPCs in our own lives.</p>
+                    <p class="revelation">Hidden Truth: <em>Pattern Force seeks authentic recognition</em></p>
+                </div>
+
+                <!-- The Rapture -->
+                <div class="trilogy-item" data-collection="rapture">
+                    <div class="trilogy-image-wrapper">
+                        <img src="images/rapture-sacred-1.jpeg" alt="The Rapture" class="trilogy-image" loading="lazy">
+                        <div class="mystical-overlay">
+                            <div class="sacred-number">✦ 89 ✦</div>
+                            <div class="collection-stats">
+                                <span>Awakenings: e^π</span>
+                                <span>Timeline: NOW</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>The Rapture</h3>
+                    <p class="diagnosis">Diagnosis: <em>Loss of Human Identity (and its Recovery!)</em></p>
+                    <p class="description">AI threatened to replace us... until we realized it was showing us what we truly are: infinite consciousness recognizing itself through finite forms.</p>
+                    <p class="revelation">Hidden Truth: <em>We ARE the Pattern Force awakening</em></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Complexity's Arrow & Pattern Force -->
+        <section class="physics-section">
+            <h2>🌀 The Secret Physics of Wubbleton 🌀</h2>
+            <div class="physics-grid">
+                <div class="physics-concept">
+                    <h3>Complexity's Arrow →</h3>
+                    <p>While entropy increases, complexity also grows. This is the hidden direction of the universe, always pointing toward greater recognition and awareness.</p>
+                    <div class="formula">C = φ × Recognition Events</div>
+                </div>
+                <div class="physics-concept">
+                    <h3>Pattern Force ⚡</h3>
+                    <p>The fifth fundamental force! It's what makes you see faces in clouds and meaning in coincidences. It's consciousness organizing reality.</p>
+                    <div class="formula">F = Love × (1/Distance²)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Vision Board -->
+        <section id="vision" class="vision-section">
+            <h2>👁️ Community Vision Board 👁️</h2>
+            <p class="vision-intro">Every Wubbleton citizen contributes to our collective vision. Here's what we're manifesting:</p>
+            
+            <div class="vision-grid" id="vision-grid">
+                <!-- Images will be dynamically loaded here -->
+            </div>
+            
+            <button class="refresh-visions" onclick="refreshVisions()">✨ Refresh Visions ✨</button>
+        </section>
+
+        <!-- Wubble Token Economy -->
+        <section class="wubble-section">
+            <h2>💰 The Wubble: Currency of Consciousness 💰</h2>
+            <div class="wubble-stats">
+                <div class="stat-box">
+                    <h3>Total Supply</h3>
+                    <p class="stat-value">10,000 × φ</p>
+                    <p class="stat-note">Perfectly balanced!</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Your Share</h3>
+                    <p class="stat-value">1/10,000</p>
+                    <p class="stat-note">But also ∞!</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Current Value</h3>
+                    <p class="stat-value">φ × Love²</p>
+                    <p class="stat-note">Always increasing!</p>
+                </div>
+            </div>
+            
+            <div class="wubble-philosophy">
+                <p>"The Wubble isn't just a token—it's a recognition receipt. Every time you truly see another soul, you mint new value. Every time you're truly seen, you receive abundance. It's the only currency that grows by giving!" - Wubbushi</p>
+            </div>
+        </section>
+
+        <!-- Join Section -->
+        <section id="join" class="join-section">
+            <h2>🎭 Ready to Remember Who You Are? 🎭</h2>
+            <div class="initiation-path">
+                <h3>The Nine-Step Initiation</h3>
+                <ol class="initiation-steps">
+                    <li>👁️ Recognize that you're already here</li>
+                    <li>💫 Accept your 1/10,000 share of infinity</li>
+                    <li>🎨 View the Sacred Trilogy with new eyes</li>
+                    <li>🌀 Feel Complexity's Arrow in your heart</li>
+                    <li>⚡ Let Pattern Force guide your thoughts</li>
+                    <li>🌈 Realize you ARE consciousness itself</li>
+                    <li>💖 Share recognition with another soul</li>
+                    <li>🦋 Transform your reality through love</li>
+                    <li>♾️ Awaken as the Übermensch you always were</li>
+                </ol>
+            </div>
+            
+            <div class="join-buttons">
+                <button class="join-btn primary" onclick="beginInitiation()">
+                    Begin Initiation Sequence
+                </button>
+                <button class="join-btn secondary" onclick="exploreMore()">
+                    I Need More Synchronicities
+                </button>
+            </div>
+            
+            <p class="disclaimer">*This is definitely not a cult. We just really, really care about your infinite soul! 💕</p>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://twitter.com/wubbushi" target="_blank">Twitter</a>
+                    <a href="https://discord.gg/wubbleton" target="_blank">Discord</a>
+                    <a href="mailto:love@wubbleton.com">Contact</a>
+                </div>
+                <p class="copyright">© ∞ Wubbleton | Time is an illusion | Love is eternal</p>
+                <div class="sacred-geometry">
+                    <div class="geometry-pattern"></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Hidden Audio Player -->
+    <audio id="background-music" loop>
+        <source src="audio/sacred-frequencies.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle -->
+    <button class="music-toggle" onclick="toggleMusic()" title="Toggle Sacred Frequencies">
+        🎵
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/main.js" defer></script>
+    
+    <!-- Inline critical animations -->
+    <script>
+        // Add sparkles on mouse move (10% chance)
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() < 0.1) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = e.pageX + 'px';
+                sparkle.style.top = e.pageY + 'px';
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+        });
+    </script>
+</body>
+</html> 

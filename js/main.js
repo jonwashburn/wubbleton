@@ -749,4 +749,720 @@ function revealUltimateTruth() {
     }, 8000);
 }
 
+// Wubbleton Reality Engineering System
+// Based on Recognition Science and Light-Native Assembly Language
+
+// Initialize global state
+let recognitionScore = 0;
+let sigmaField = 0;
+let currentLevel = 1;
+let wubbleBalance = 0;
+let phiMultiplier = 1.618;
+
+// DOM Ready
+document.addEventListener('DOMContentLoaded', function() {
+    initializeWubbleton();
+    setupScrollEffects();
+    setupInteractiveElements();
+    startRecognitionEngine();
+    initializeLedgerSystem();
+});
+
+// Initialize Wubbleton
+function initializeWubbleton() {
+    console.log('✨ Wubbleton Reality Engine v3.0 Initialized ✨');
+    console.log('σ-Field Status: ACTIVE');
+    console.log('Recognition Ledger: BALANCED');
+    console.log('φ-Resonance: OPTIMAL');
+    
+    // Set initial UI states
+    updateLedgerDisplay();
+    animateWelcomeSequence();
+}
+
+// Animate welcome sequence
+function animateWelcomeSequence() {
+    const elements = document.querySelectorAll('.mega-emoji');
+    elements.forEach((el, index) => {
+        setTimeout(() => {
+            el.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                el.style.transform = 'scale(1)';
+            }, 300);
+        }, index * 100);
+    });
+}
+
+// Setup scroll effects
+function setupScrollEffects() {
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        
+        // Show rainbow border on scroll
+        if (scrolled > 100) {
+            document.body.classList.add('scrolled');
+        } else {
+            document.body.classList.remove('scrolled');
+        }
+        
+        // Parallax effect for gutter emojis
+        const gutterEmojis = document.querySelectorAll('.gutter-emoji');
+        gutterEmojis.forEach((emoji, index) => {
+            const speed = 0.5 + (index % 3) * 0.2;
+            emoji.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+        });
+        
+        lastScroll = scrolled;
+    });
+}
+
+// Setup interactive elements
+function setupInteractiveElements() {
+    // Gallery hover effects
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    galleryItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            createRecognitionSparkle(this);
+        });
+        
+        item.addEventListener('click', function() {
+            const cost = this.querySelector('.ledger-cost').textContent;
+            showRecognitionModal(this, cost);
+        });
+    });
+    
+    // Level cards interaction
+    const levelCards = document.querySelectorAll('.level-card');
+    levelCards.forEach((card, index) => {
+        card.addEventListener('click', function() {
+            if (index + 1 <= currentLevel) {
+                showLevelDetails(index + 1);
+            } else {
+                showLockedMessage();
+            }
+        });
+    });
+}
+
+// Recognition Engine
+function startRecognitionEngine() {
+    // Update recognition events counter
+    setInterval(() => {
+        const currentCount = parseInt(document.getElementById('recognition-count').textContent.replace(/,/g, '')) || 0;
+        const newEvents = Math.floor(Math.random() * 5) + 1;
+        const newCount = currentCount + newEvents;
+        
+        document.getElementById('recognition-count').textContent = newCount.toLocaleString();
+        
+        // Increase σ-field based on recognition
+        sigmaField += newEvents * 0.001;
+        updateSigmaDisplay();
+    }, 3333); // Sacred interval
+    
+    // φ-clock ticker
+    let phiTick = 0;
+    setInterval(() => {
+        phiTick = (phiTick + phiMultiplier) % 1024; // 8-tick cycle
+        document.getElementById('phi-tick').textContent = phiTick.toFixed(3);
+        
+        // Pulse effect every full cycle
+        if (phiTick < phiMultiplier) {
+            pulsePhiElements();
+        }
+    }, 1618); // φ * 1000
+}
+
+// Initialize Ledger System
+function initializeLedgerSystem() {
+    // GIVE/REGIVE balance monitoring
+    setInterval(() => {
+        const balance = calculateLedgerBalance();
+        updateLedgerState(balance);
+    }, 8000); // 8-second cycles
+}
+
+// Calculate ledger balance
+function calculateLedgerBalance() {
+    // Simulate complex LNAL calculations
+    const gives = Math.random() * 10;
+    const regives = Math.random() * 10;
+    const balance = gives - regives;
+    
+    return balance;
+}
+
+// Update ledger state display
+function updateLedgerState(balance) {
+    const ledgerElement = document.getElementById('ledger-state');
+    let state, sigma;
+    
+    if (Math.abs(balance) < 0.5) {
+        state = 'BALANCED';
+        sigma = 0;
+    } else if (balance > 0) {
+        state = 'GIVING';
+        sigma = balance.toFixed(1);
+    } else {
+        state = 'RECEIVING';
+        sigma = balance.toFixed(1);
+    }
+    
+    ledgerElement.textContent = `${state} (${sigma} σ)`;
+    ledgerElement.style.color = state === 'BALANCED' ? '#4A90E2' : '#FFDAC1';
+}
+
+// Gallery expansion
+function expandGallery(collection) {
+    console.log(`Expanding ${collection} gallery...`);
+    
+    // Create expanded view modal
+    const modal = document.createElement('div');
+    modal.className = 'gallery-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>${collection.charAt(0).toUpperCase() + collection.slice(1)} Collection - Full View</h2>
+            <div class="expanded-gallery-grid">
+                ${generateExpandedGallery(collection)}
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Animate in
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
+    
+    // Close functionality
+    modal.querySelector('.close-modal').addEventListener('click', () => {
+        modal.classList.remove('active');
+        setTimeout(() => modal.remove(), 300);
+    });
+}
+
+// Generate expanded gallery content
+function generateExpandedGallery(collection) {
+    const imageCount = collection === 'crisis' ? 100 : collection === 'zombies' ? 200 : 342;
+    let html = '';
+    
+    for (let i = 1; i <= Math.min(imageCount, 20); i++) {
+        const cost = Math.floor(Math.random() * 5) - 2;
+        const costDisplay = cost > 0 ? `+${cost}` : cost.toString();
+        
+        html += `
+            <div class="gallery-item expanded">
+                <img src="placeholder-${collection}-${i}.jpg" alt="${collection} ${i}" loading="lazy">
+                <div class="item-overlay">
+                    <span class="ledger-cost">Cost: ${costDisplay} σ</span>
+                    <span class="recognition-level">Recognition: Level ${Math.ceil(Math.random() * 7)}</span>
+                </div>
+            </div>
+        `;
+    }
+    
+    return html;
+}
+
+// Begin initiation sequence
+function beginInitiation() {
+    console.log('🌊 Beginning Recognition Journey...');
+    
+    // Create initiation modal
+    const modal = createModal(`
+        <h2>Welcome, Future Builder of Wubbleton</h2>
+        <div class="initiation-content">
+            <p>You are about to begin your journey through the 7 levels of consciousness.</p>
+            <p>Current σ-field resonance: <strong>${sigmaField.toFixed(3)}</strong></p>
+            <p>Recognition capacity: <strong>${recognitionScore}</strong></p>
+            
+            <div class="initiation-steps">
+                <h3>Your First Step: Recognition Initiate</h3>
+                <p>To begin, you must recognize your first Wubbleton vision.</p>
+                <p>Close your eyes and imagine the reality you want to build...</p>
+            </div>
+            
+            <button class="join-btn primary" onclick="completeFirstRecognition()">
+                I See My Vision 👁️
+            </button>
+        </div>
+    `);
+    
+    document.body.appendChild(modal);
+    animateModalIn(modal);
+}
+
+// Complete first recognition
+function completeFirstRecognition() {
+    recognitionScore += 1;
+    sigmaField += 1;
+    currentLevel = Math.max(currentLevel, 1);
+    
+    // Update displays
+    updateLevelDisplay();
+    createCelebrationEffect();
+    
+    // Close modal and show success
+    const modal = document.querySelector('.modal-overlay');
+    if (modal) {
+        modal.remove();
+    }
+    
+    showNotification('✨ Congratulations! You are now a Recognition Initiate ✨');
+}
+
+// Calculate sigma field resonance
+function calculateSigma() {
+    console.log('📊 Calculating σ-field resonance...');
+    
+    const factors = {
+        recognition: recognitionScore * 0.618,
+        time: (Date.now() % 86400000) / 86400000, // Time of day factor
+        collective: Math.random() * phiMultiplier,
+        ledger: Math.abs(calculateLedgerBalance())
+    };
+    
+    const totalSigma = Object.values(factors).reduce((a, b) => a + b, 0);
+    
+    const modal = createModal(`
+        <h2>Your σ-Field Analysis</h2>
+        <div class="sigma-analysis">
+            <div class="sigma-factor">
+                <span>Recognition Events:</span>
+                <span>${factors.recognition.toFixed(3)} σ</span>
+            </div>
+            <div class="sigma-factor">
+                <span>Temporal Alignment:</span>
+                <span>${factors.time.toFixed(3)} σ</span>
+            </div>
+            <div class="sigma-factor">
+                <span>Collective Resonance:</span>
+                <span>${factors.collective.toFixed(3)} σ</span>
+            </div>
+            <div class="sigma-factor">
+                <span>Ledger Balance:</span>
+                <span>${factors.ledger.toFixed(3)} σ</span>
+            </div>
+            <hr>
+            <div class="sigma-total">
+                <span>Total σ-Field:</span>
+                <span class="total-value">${totalSigma.toFixed(3)} σ</span>
+            </div>
+            
+            <p class="sigma-interpretation">${interpretSigma(totalSigma)}</p>
+        </div>
+    `);
+    
+    document.body.appendChild(modal);
+    animateModalIn(modal);
+}
+
+// Interpret sigma value
+function interpretSigma(sigma) {
+    if (sigma < 1) {
+        return "Your field is nascent. Continue recognizing to build resonance.";
+    } else if (sigma < 3) {
+        return "Good resonance! You're beginning to see the patterns.";
+    } else if (sigma < 5) {
+        return "Strong field! Reality bends to your recognition.";
+    } else {
+        return "Master resonance! You are ready for Level VII consciousness.";
+    }
+}
+
+// Toggle music
+function toggleMusic() {
+    const audio = document.getElementById('background-music');
+    const button = document.querySelector('.music-toggle');
+    
+    if (audio.paused) {
+        // Create audio context for 8-tick rhythm
+        audio.play().catch(e => {
+            console.log('Audio play failed:', e);
+            showNotification('🎵 Please interact with the page first to enable sacred rhythms');
+        });
+        button.classList.add('playing');
+        
+        // Sync visual effects to 8-tick rhythm
+        startRhythmSync();
+    } else {
+        audio.pause();
+        button.classList.remove('playing');
+        stopRhythmSync();
+    }
+}
+
+// Start rhythm synchronization
+let rhythmInterval;
+function startRhythmSync() {
+    let tick = 0;
+    rhythmInterval = setInterval(() => {
+        tick = (tick + 1) % 8;
+        
+        // Pulse elements on each tick
+        if (tick === 0) {
+            document.querySelectorAll('.mega-emoji').forEach(el => {
+                el.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    el.style.transform = 'scale(1)';
+                }, 200);
+            });
+        }
+        
+        // Update background gradient position
+        const header = document.querySelector('.header');
+        if (header) {
+            const position = (tick / 8) * 100;
+            header.style.backgroundPosition = `${position}% 50%`;
+        }
+    }, 60000 / 120); // 120 BPM, 8 ticks per measure
+}
+
+// Stop rhythm synchronization
+function stopRhythmSync() {
+    if (rhythmInterval) {
+        clearInterval(rhythmInterval);
+    }
+}
+
+// Helper Functions
+
+function createModal(content) {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-box">
+            <span class="modal-close" onclick="this.closest('.modal-overlay').remove()">&times;</span>
+            ${content}
+        </div>
+    `;
+    return modal;
+}
+
+function animateModalIn(modal) {
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
+}
+
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.innerHTML = message;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+function createRecognitionSparkle(element) {
+    const rect = element.getBoundingClientRect();
+    const sparkle = document.createElement('div');
+    sparkle.className = 'recognition-sparkle';
+    sparkle.innerHTML = '✨';
+    sparkle.style.left = rect.left + rect.width / 2 + 'px';
+    sparkle.style.top = rect.top + rect.height / 2 + 'px';
+    
+    document.body.appendChild(sparkle);
+    
+    setTimeout(() => sparkle.remove(), 1000);
+}
+
+function createCelebrationEffect() {
+    const emojis = ['🌟', '✨', '💫', '🌈', '🦋', '🌊', '💎', '🔮'];
+    
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            const celebration = document.createElement('div');
+            celebration.className = 'celebration-emoji';
+            celebration.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            celebration.style.left = Math.random() * window.innerWidth + 'px';
+            celebration.style.top = window.innerHeight + 'px';
+            
+            document.body.appendChild(celebration);
+            
+            // Animate upward
+            celebration.style.animation = 'celebrateFloat 3s ease-out forwards';
+            
+            setTimeout(() => celebration.remove(), 3000);
+        }, i * 100);
+    }
+}
+
+function updateLevelDisplay() {
+    const levelCards = document.querySelectorAll('.level-card');
+    levelCards.forEach((card, index) => {
+        if (index < currentLevel) {
+            card.classList.add('unlocked');
+        }
+    });
+}
+
+function updateSigmaDisplay() {
+    // Update any sigma field displays
+    const sigmaElements = document.querySelectorAll('.sigma-display');
+    sigmaElements.forEach(el => {
+        el.textContent = sigmaField.toFixed(3);
+    });
+}
+
+function updateLedgerDisplay() {
+    // Update ledger-related displays
+    console.log('Ledger synchronized with universal consciousness');
+}
+
+function pulsePhiElements() {
+    document.querySelectorAll('.formula-box, .formula-display').forEach(el => {
+        el.style.transform = 'scale(1.02)';
+        setTimeout(() => {
+            el.style.transform = 'scale(1)';
+        }, 200);
+    });
+}
+
+function showRecognitionModal(item, cost) {
+    const modal = createModal(`
+        <h2>Recognition Event</h2>
+        <div class="recognition-details">
+            <p>You have recognized a vision from the consciousness field.</p>
+            <p>Ledger adjustment: <strong>${cost}</strong></p>
+            <p>Your recognition strengthens Wubbleton's reality matrix.</p>
+            
+            <button class="join-btn primary" onclick="confirmRecognition()">
+                Confirm Recognition ✓
+            </button>
+        </div>
+    `);
+    
+    document.body.appendChild(modal);
+    animateModalIn(modal);
+}
+
+function confirmRecognition() {
+    recognitionScore++;
+    createCelebrationEffect();
+    document.querySelector('.modal-overlay').remove();
+    showNotification('Recognition recorded in the eternal ledger ✨');
+}
+
+function showLevelDetails(level) {
+    const levelInfo = {
+        1: "Recognition Initiate: You've taken the first step into conscious creation.",
+        2: "Pattern Perceiver: The φ-ratios reveal themselves in your daily experience.",
+        3: "Wubble Holder: You now possess the currency of collective consciousness.",
+        4: "Image Selector: Your choices directly manifest Wubbleton's reality.",
+        5: "Community Builder: You bring others into the recognition field.",
+        6: "Reality Programmer: Master of LNAL opcodes and consciousness engineering.",
+        7: "Consciousness Architect: Co-creator of Wubbleton's eternal future."
+    };
+    
+    showNotification(levelInfo[level] || "Unknown level");
+}
+
+function showLockedMessage() {
+    showNotification('🔒 This level requires more recognition events. Keep building!');
+}
+
+// Add CSS for new elements dynamically
+const style = document.createElement('style');
+style.textContent = `
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .modal-overlay.active {
+        opacity: 1;
+    }
+    
+    .modal-box {
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        transform: scale(0.9);
+        transition: transform 0.3s;
+    }
+    
+    .modal-overlay.active .modal-box {
+        transform: scale(1);
+    }
+    
+    .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 2rem;
+        cursor: pointer;
+        color: #666;
+    }
+    
+    .notification {
+        position: fixed;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #4A90E2, #5DADE2);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 30px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        transition: bottom 0.3s;
+        z-index: 3000;
+        font-weight: bold;
+    }
+    
+    .notification.show {
+        bottom: 30px;
+    }
+    
+    .recognition-sparkle {
+        position: fixed;
+        font-size: 2rem;
+        pointer-events: none;
+        animation: recognitionPulse 1s ease-out forwards;
+        z-index: 1500;
+    }
+    
+    @keyframes recognitionPulse {
+        0% {
+            transform: translate(-50%, -50%) scale(0) rotate(0deg);
+            opacity: 1;
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(2) rotate(180deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(0) rotate(360deg);
+            opacity: 0;
+        }
+    }
+    
+    .celebration-emoji {
+        position: fixed;
+        font-size: 3rem;
+        pointer-events: none;
+        z-index: 1500;
+    }
+    
+    @keyframes celebrateFloat {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+    
+    .gallery-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.9);
+        z-index: 2000;
+        opacity: 0;
+        transition: opacity 0.3s;
+        overflow-y: auto;
+    }
+    
+    .gallery-modal.active {
+        opacity: 1;
+    }
+    
+    .gallery-modal .modal-content {
+        background: white;
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 2rem;
+        border-radius: 20px;
+    }
+    
+    .expanded-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .sigma-analysis {
+        background: #f8fbff;
+        padding: 2rem;
+        border-radius: 15px;
+        margin: 1rem 0;
+    }
+    
+    .sigma-factor {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px dashed #ddd;
+    }
+    
+    .sigma-total {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 0;
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #4A90E2;
+    }
+    
+    .sigma-interpretation {
+        text-align: center;
+        font-style: italic;
+        color: #666;
+        margin-top: 1rem;
+    }
+    
+    .level-card.unlocked {
+        background: linear-gradient(135deg, #e6f2ff 0%, #f0f8ff 100%);
+        border-color: #4A90E2;
+    }
+    
+    .music-toggle.playing {
+        animation: musicPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes musicPulse {
+        0%, 100% { transform: scale(1) rotate(0deg); }
+        50% { transform: scale(1.1) rotate(10deg); }
+    }
+`;
+document.head.appendChild(style);
+
+// Log successful initialization
+console.log('🌊 Wubbleton Reality Engine fully operational 🌊');
+console.log('Recognition Events: ACTIVE');
+console.log('Ledger Balance: MONITORING');
+console.log('σ-Field: RESONATING');
+console.log('φ-Clock: TICKING');
+
  
