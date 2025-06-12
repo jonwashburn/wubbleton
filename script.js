@@ -201,6 +201,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Parallax scrolling effect
 function initParallax() {
+    // Check if mobile device
+    const isMobile = window.innerWidth <= 768;
+    
+    // Don't initialize parallax on mobile
+    if (isMobile) {
+        return;
+    }
+    
     const bigImages = document.querySelectorAll('.big-image');
     const overlayTexts = document.querySelectorAll('.overlay-text');
     

@@ -470,4 +470,17 @@ blockquote footer {
     .big-text {
         font-size: 28px;
     }
+    
+    .big-image {
+        background-attachment: scroll;
+        background-size: cover;
+        background-position: center center;
+        min-height: 100vh;
+        height: auto;
+    }
+    
+    /* Disable parallax on mobile for better performance */
+    .overlay-text {
+        transform: none !important;
+    }
 } 
