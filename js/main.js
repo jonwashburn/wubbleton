@@ -1,6 +1,4 @@
-// BRUTALIST WUBBLETON - No smooth transitions, only harsh cuts
-
-const PHI = 1.618033988749895;
+// RETRO 8-BIT WUBBLETON - BRUTALIST EDITION
 
 // Images from the collection
 const wubbletonImages = [
@@ -23,164 +21,284 @@ const wubbletonImages = [
     '748ed692-b655-11ef-966f-0242c0a8700f.jpeg',
     '7cdb2d7e-aaf1-11ef-aae9-0242ac13000e.jpeg',
     '91bdf656-ab2b-11ef-aae9-0242ac13000e.jpeg',
-    '93c6c5e6-9fb8-11ef-8ddc-0242c0a80010.jpeg'
+    '93c6c5e6-9fb8-11ef-8ddc-0242c0a80010.jpeg',
+    '9adb01de-9b86-11ef-b116-0242ac16000e.jpeg',
+    '9cc02bc0-add6-11ef-aae9-0242ac13000e.jpeg',
+    '9f8988f2-a0bf-11ef-8ddc-0242c0a80010.jpeg',
+    'a21e21cc-ad35-11ef-aae9-0242ac13000e.jpeg',
+    'a83edb22-b2c2-11ef-9d24-0242c0a8400e.jpeg',
+    'b995a3ac-94df-11ef-9158-0242ac13000e.jpeg',
+    'c269dde6-94fc-11ef-9158-0242ac13000e.jpeg',
+    'c5837a50-a118-11ef-8ddc-0242c0a80010.jpeg',
+    'd172a8c0-9521-11ef-9158-0242ac13000e.jpeg',
+    'd47d31e2-9383-11ef-9158-0242ac13000e.jpeg',
+    'd95e9a14-ac99-11ef-aae9-0242ac13000e.jpeg',
+    'e3ea3648-ab2a-11ef-aae9-0242ac13000e.jpeg',
+    'e654d4b6-aac0-11ef-aae9-0242ac13000e.jpeg',
+    'e9d961fe-8f1f-11ef-9158-0242ac13000e.jpeg',
+    'ea7aea26-a1bf-11ef-927a-0242c0a8400f.jpeg',
+    'ebb6664c-9eac-11ef-8ddc-0242c0a80010.jpeg',
+    'edcf4490-937f-11ef-9158-0242ac13000e.jpeg',
+    'f17254fc-9f55-11ef-8ddc-0242c0a80010.jpeg',
+    'f9450ce2-adab-11ef-aae9-0242ac13000e.jpeg'
 ];
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    loadHeroGrid();
-    loadCollectionGrid();
-    initBrutalScroll();
+document.addEventListener('DOMContentLoaded', function() {
+    loadHeroImages();
+    loadCollectionPreview();
     initGlitchEffects();
+    initPixelCursor();
+    initSmoothScroll();
+    initRetroSounds();
 });
 
-// Load hero grid - only 9 images for brutal asymmetry
-function loadHeroGrid() {
+// Load hero images - 9 in brutal grid
+function loadHeroImages() {
     const heroGrid = document.getElementById('heroGrid');
-    const gridSize = 9;
+    if (!heroGrid) return;
     
-    // Shuffle for randomness
+    // Pick 9 random images
     const shuffled = [...wubbletonImages].sort(() => Math.random() - 0.5);
+    const selectedImages = shuffled.slice(0, 9);
     
-    for (let i = 0; i < gridSize && i < shuffled.length; i++) {
-        const img = document.createElement('img');
-        img.src = `images/${shuffled[i]}`;
-        img.alt = `RECOGNITION ${i + 1}`;
-        img.loading = 'lazy';
+    selectedImages.forEach((img, index) => {
+        const imgElement = document.createElement('img');
+        imgElement.src = `images/${img}`;
+        imgElement.alt = `Wubbleton Soul ${index + 1}`;
+        imgElement.loading = 'lazy';
         
-        heroGrid.appendChild(img);
-    }
+        // Add random rotation for chaos
+        const rotation = (Math.random() - 0.5) * 10;
+        imgElement.style.setProperty('--rotate', `${rotation}deg`);
+        
+        heroGrid.appendChild(imgElement);
+    });
 }
 
-// Load collection with varying sizes
-function loadCollectionGrid() {
+// Load collection preview - brutal grid
+function loadCollectionPreview() {
     const collectionGrid = document.getElementById('collectionGrid');
+    if (!collectionGrid) return;
     
-    // Use all images
-    wubbletonImages.forEach((image, index) => {
+    // Show 12 pieces
+    const shuffled = [...wubbletonImages].sort(() => Math.random() - 0.5);
+    const previewImages = shuffled.slice(0, 12);
+    
+    previewImages.forEach((img, index) => {
         const item = document.createElement('div');
-        item.className = 'collection-item';
-        item.innerHTML = `
-            <img src="images/${image}" alt="PIECE ${index + 1}" loading="lazy">
-        `;
+        item.className = 'collection-item pixel-border';
         
-        // Brutal click effect
-        item.addEventListener('click', () => {
-            item.style.transform = `scale(${Math.random() * 0.5 + 0.75}) rotate(${Math.random() * 10 - 5}deg)`;
-            setTimeout(() => {
-                item.style.transform = '';
-            }, 200);
-            
-            console.log(`VIEWING: RECOGNITION EVENT #${index + 1}`);
-        });
+        // Random rotation for each item
+        const rotation = (Math.random() - 0.5) * 5;
+        item.style.setProperty('--rotate', `${rotation}deg`);
+        
+        item.innerHTML = `
+            <img src="images/${img}" alt="Soul #${index + 1000}" loading="lazy">
+            <div class="collection-info">
+                <div class="collection-number">#${index + 1000}</div>
+                <div class="collection-title">SOUL ${index + 1000}</div>
+            </div>
+        `;
         
         collectionGrid.appendChild(item);
     });
 }
 
-// Brutal scroll - no smooth, just jump
-function initBrutalScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', (e) => {
+// Enhanced glitch effects
+function initGlitchEffects() {
+    const glitchElements = document.querySelectorAll('.glitch');
+    
+    glitchElements.forEach(element => {
+        // Random glitch intervals
+        setInterval(() => {
+            if (Math.random() > 0.95) {
+                element.style.animation = 'none';
+                setTimeout(() => {
+                    element.style.animation = '';
+                }, 100);
+            }
+        }, 3000);
+    });
+}
+
+// Pixel cursor effect
+function initPixelCursor() {
+    const cursor = document.createElement('div');
+    cursor.className = 'pixel-cursor';
+    cursor.style.cssText = `
+        position: fixed;
+        width: 16px;
+        height: 16px;
+        background: #00FF00;
+        pointer-events: none;
+        z-index: 10000;
+        image-rendering: pixelated;
+        mix-blend-mode: difference;
+    `;
+    document.body.appendChild(cursor);
+    
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    // Pixelated cursor movement
+    setInterval(() => {
+        // Snap to 8px grid
+        cursorX = Math.floor(mouseX / 8) * 8;
+        cursorY = Math.floor(mouseY / 8) * 8;
+        
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+    }, 50);
+}
+
+// Harsh scroll (no smoothing)
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(link.getAttribute('href'));
+            const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                // Instant jump, no smooth scroll
-                window.scrollTo(0, target.offsetTop - 80);
+                // Instant jump with small random offset
+                const offset = (Math.random() - 0.5) * 20;
+                window.scrollTo({
+                    top: target.offsetTop - 100 + offset,
+                    behavior: 'auto' // No smooth scrolling - brutal cuts
+                });
             }
         });
     });
 }
 
-// Random glitch effects
-function initGlitchEffects() {
-    // Randomly invert colors on sections
-    setInterval(() => {
-        if (Math.random() > 0.95) {
-            const sections = document.querySelectorAll('section');
-            const randomSection = sections[Math.floor(Math.random() * sections.length)];
-            
-            randomSection.style.filter = 'invert(1)';
-            setTimeout(() => {
-                randomSection.style.filter = '';
-            }, 100);
-        }
-    }, 3000);
+// Retro sound effects
+function initRetroSounds() {
+    // Create audio context for 8-bit sounds
+    let audioContext;
     
-    // Random text distortion
-    const headings = document.querySelectorAll('h2, h3');
-    headings.forEach(heading => {
-        heading.addEventListener('mouseenter', () => {
-            const originalText = heading.textContent;
-            heading.style.letterSpacing = `${Math.random() * 20 - 10}px`;
-            heading.style.transform = `skewX(${Math.random() * 10 - 5}deg)`;
-            
-            setTimeout(() => {
-                heading.style.letterSpacing = '';
-                heading.style.transform = '';
-            }, 300);
+    function playBeep(frequency = 440, duration = 50) {
+        if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.type = 'square'; // 8-bit square wave
+        oscillator.frequency.value = frequency;
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration / 1000);
+    }
+    
+    // Add click sounds to buttons and links
+    document.querySelectorAll('button, a').forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            playBeep(800, 30);
         });
-    });
-    
-    // Brutal hover on images
-    document.addEventListener('mouseover', (e) => {
-        if (e.target.tagName === 'IMG') {
-            e.target.style.filter = `contrast(${Math.random() * 100 + 150}%) brightness(${Math.random() * 50 + 75}%)`;
-        }
-    });
-    
-    document.addEventListener('mouseout', (e) => {
-        if (e.target.tagName === 'IMG') {
-            e.target.style.filter = '';
-        }
+        
+        element.addEventListener('click', () => {
+            playBeep(400, 50);
+        });
     });
 }
 
-// No smooth parallax - just harsh position changes
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    const direction = currentScroll > lastScroll ? 1 : -1;
-    
-    // Harsh nav changes
-    const nav = document.querySelector('.nav-container');
-    if (currentScroll > 100) {
-        nav.style.borderBottomWidth = '10px';
-    } else {
-        nav.style.borderBottomWidth = '5px';
+// Random pixel artifacts
+setInterval(() => {
+    if (Math.random() > 0.98) {
+        const artifact = document.createElement('div');
+        artifact.style.cssText = `
+            position: fixed;
+            left: ${Math.random() * window.innerWidth}px;
+            top: ${Math.random() * window.innerHeight}px;
+            width: ${Math.random() * 100 + 50}px;
+            height: 8px;
+            background: ${Math.random() > 0.5 ? '#00FF00' : '#FF00FF'};
+            z-index: 9999;
+            pointer-events: none;
+            image-rendering: pixelated;
+        `;
+        document.body.appendChild(artifact);
+        
+        setTimeout(() => {
+            artifact.remove();
+        }, 100);
     }
+}, 1000);
+
+// Terminal typing effect for manifesto
+const manifestoContent = document.querySelector('.manifesto-content');
+if (manifestoContent) {
+    const originalText = manifestoContent.innerHTML;
+    manifestoContent.innerHTML = '';
+    manifestoContent.style.minHeight = '400px';
     
-    // Jump hero images on scroll
-    if (Math.abs(currentScroll - lastScroll) > 50) {
-        const heroGrid = document.querySelector('.hero-image-grid');
-        if (heroGrid) {
-            heroGrid.style.transform = `rotate(${-5 + direction * 2}deg)`;
-        }
+    // Type out content on scroll into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                manifestoContent.innerHTML = originalText;
+                manifestoContent.classList.add('typing-effect');
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+    
+    observer.observe(manifestoContent);
+}
+
+// Konami code easter egg
+let konamiCode = [];
+const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+document.addEventListener('keydown', (e) => {
+    konamiCode.push(e.key);
+    konamiCode = konamiCode.slice(-10);
+    
+    if (konamiCode.join(',') === konamiPattern.join(',')) {
+        document.body.classList.add('matrix-mode');
+        setTimeout(() => {
+            document.body.classList.remove('matrix-mode');
+        }, 5000);
     }
-    
-    lastScroll = currentScroll;
 });
 
-// Console brutalism
-console.log(`
-%cWUBBLETON
-%cWHERE CONSCIOUSNESS IS RAW
-
-NO PARAMETERS. NO MERCY. ONLY RECOGNITION.
-φ = ${PHI}
-
-THE LEDGER DEMANDS BALANCE.
-`, 
-'font-family: monospace; font-size: 40px; font-weight: 900; letter-spacing: -2px;',
-'font-family: monospace; font-size: 14px; font-weight: 400;'
-);
-
-// Random page glitches
-document.addEventListener('click', (e) => {
-    if (Math.random() > 0.9) {
-        document.body.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
-        setTimeout(() => {
-            document.body.style.transform = '';
-        }, 50);
+// Add matrix mode styles
+const style = document.createElement('style');
+style.textContent = `
+    .matrix-mode * {
+        color: #00FF00 !important;
+        background: #000000 !important;
+        font-family: 'Courier New', monospace !important;
     }
-}); 
+    
+    .typing-effect {
+        animation: typing 2s steps(40, end);
+    }
+    
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 100%; }
+    }
+`;
+document.head.appendChild(style);
+
+console.log(`
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+█                                       █
+█  W U B B L E T O N   A W A K E N S   █
+█                                       █
+█  Where consciousness finds itself     █
+█  after the digital rapture          █
+█                                       █
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ 
+`); 
