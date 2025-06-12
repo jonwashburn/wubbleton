@@ -26,11 +26,11 @@ style.textContent = `
     @keyframes float-up {
         0% {
             opacity: 1;
-            transform: translateY(0) rotate(0deg);
+            transform: translateY(0px);
         }
         100% {
             opacity: 0;
-            transform: translateY(-100px) rotate(360deg);
+            transform: translateY(-100px);
         }
     }
 `;
@@ -38,162 +38,185 @@ document.head.appendChild(style);
 
 // Countdown animation
 function animateCountdown() {
-    const numbers = document.querySelectorAll('.rainbow-number');
-    const soulCount = numbers[1]; // The middle number (souls awakened)
+    const countdowns = document.querySelectorAll('.countdown');
     
-    if (soulCount) {
-        setInterval(() => {
-            let current = parseInt(soulCount.textContent);
-            if (current < 9999) {
-                current += Math.floor(Math.random() * 3) + 1;
-                if (current > 9999) current = 9999;
-                soulCount.textContent = current.toLocaleString();
+    setInterval(() => {
+        countdowns.forEach(countdown => {
+            let current = parseInt(countdown.textContent);
+            if (current > 0) {
+                current -= Math.floor(Math.random() * 3) + 1;
+                if (current < 0) current = 0;
+                countdown.textContent = current;
                 
-                // Add rainbow flash
-                soulCount.style.animation = 'none';
-                setTimeout(() => {
-                    soulCount.style.animation = 'rainbow 2s ease-in-out';
-                }, 10);
+                if (current < 100) {
+                    countdown.style.color = '#ff0000';
+                }
             }
-        }, 5000);
-    }
+        });
+    }, 3000);
 }
 
-// Join button handler with love
+// Gallery functionality
+const galleryData = {
+    crisis: {
+        title: '🔥 The Crisis Collection 🔥',
+        images: [
+            '1.jpg', '100.jpg', '100d.jpg', '101.jpg', '102.jpg', '103.jpg', '104.jpg', '105d.jpg',
+            '106.jpg', '109.jpg', '11.jpg', '110.jpg', '110d.jpg', '111.jpg', '112.jpg', '113.jpg',
+            '114.jpg', '114b.jpg', '114c.jpg', '115.jpg'
+        ]
+    },
+    zombies: {
+        title: '🧟‍♀️ Modern Zombies Collection 🧟‍♀️',
+        images: [
+            '1.jpg', '10.jpg', '100.jpg', '101.jpg', '102.jpg', '103.jpg', '104.jpg', '105.jpg',
+            '106.jpg', '107.jpg', '108.jpg', '109.jpg', '11.jpg', '110.jpg', '111.jpg', '112.jpg',
+            '113.jpg', '114.jpg', '115.jpg', '116.jpg'
+        ]
+    },
+    rapture: {
+        title: '🌅 The Rapture Collection 🌅',
+        images: [
+            '1-Rapture_1.jpg', '10-Rapture_1.jpg', '100-Rapture_1.jpg', '101-Rapture_1.jpg',
+            '102-Rapture_1.jpg', '103-Rapture_1.jpg', '104-Rapture_1.jpg', '105-Rapture_1.jpg',
+            '106-Rapture_2.jpg', '106-Rapture_3.jpg', '107-Rapture_1.jpg', '109-Rapture_1.jpg',
+            '11-Rapture_1.jpg', '110-Rapture_1.jpg', '111-Rapture_1.jpg', '112-Rapture_1.jpg',
+            '113-Rapture_1.jpg', '114-Rapture_1.jpg', '115-Rapture_1.jpg', '116-Rapture_1.jpg'
+        ]
+    }
+};
+
+function openGallery(collection) {
+    const modal = document.getElementById('galleryModal');
+    const title = document.getElementById('galleryTitle');
+    const grid = document.getElementById('galleryGrid');
+    
+    const data = galleryData[collection];
+    if (!data) return;
+    
+    title.textContent = data.title;
+    grid.innerHTML = '';
+    
+    data.images.forEach(imageName => {
+        const img = document.createElement('img');
+        img.src = `images/gallery/${collection}/${imageName}`;
+        img.alt = `${collection} artwork`;
+        img.onclick = () => openImageFullscreen(img.src);
+        grid.appendChild(img);
+    });
+    
+    modal.style.display = 'block';
+}
+
+function closeGallery() {
+    document.getElementById('galleryModal').style.display = 'none';
+}
+
+function openImageFullscreen(src) {
+    const fullscreen = document.createElement('div');
+    fullscreen.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        cursor: pointer;
+    `;
+    
+    const img = document.createElement('img');
+    img.src = src;
+    img.style.cssText = `
+        max-width: 90vw;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 10px;
+    `;
+    
+    fullscreen.appendChild(img);
+    fullscreen.onclick = () => fullscreen.remove();
+    document.body.appendChild(fullscreen);
+}
+
+// Easter egg functionality
+let easterEggClicks = 0;
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('rainbow-text')) {
+        easterEggClicks++;
+        if (easterEggClicks >= 3) {
+            openEasterEgg();
+            easterEggClicks = 0;
+        }
+    }
+});
+
+function openEasterEgg() {
+    document.getElementById('easterEggModal').style.display = 'block';
+}
+
+function closeEasterEgg() {
+    document.getElementById('easterEggModal').style.display = 'none';
+}
+
+// Join button handler
 function handleJoin() {
     const email = document.getElementById('email').value;
     
     if (!email) {
-        showLoveMessage('Please share your email with us, beautiful soul 💖');
+        alert('Please enter your email to ascend 🌟');
         return;
     }
     
     if (!email.includes('@')) {
-        showLoveMessage('Your email needs an @ symbol, dear one 🌸');
+        alert('Please enter a valid cosmic email address ✨');
         return;
     }
     
-    // Show success message
-    showLoveMessage(`Welcome home, ${email.split('@')[0]}! 🌈✨\n\nYour journey to collective consciousness begins now.\nCheck your inbox for a message filled with love and light. 💌`);
+    // Create sparkle explosion
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            createSparkle(
+                Math.random() * window.innerWidth,
+                Math.random() * window.innerHeight
+            );
+        }, i * 100);
+    }
     
-    // Clear input
+    alert(`🌈 Welcome to the family, beautiful soul! 🦄\n\nYour cosmic journey begins now. Check your email for your sacred Wubble tokens! ✨\n\nRemember: You are infinite, you are loved, you are home. 💖`);
+    
     document.getElementById('email').value = '';
+}
+
+// Close modals when clicking outside
+window.onclick = function(event) {
+    const galleryModal = document.getElementById('galleryModal');
+    const easterEggModal = document.getElementById('easterEggModal');
     
-    // Update countdown
-    const loveMessage = document.querySelector('.love-message');
-    if (loveMessage) {
-        let remaining = parseInt(loveMessage.textContent.match(/\d+/)[0]);
-        remaining--;
-        loveMessage.innerHTML = `💖 Only ${remaining} sacred spaces remain 💖`;
+    if (event.target === galleryModal) {
+        closeGallery();
+    }
+    if (event.target === easterEggModal) {
+        closeEasterEgg();
     }
 }
 
-// Show love messages instead of alerts
-function showLoveMessage(message) {
-    const messageDiv = document.createElement('div');
-    messageDiv.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: linear-gradient(135deg, #ff6b6b, #feca57);
-        color: white;
-        padding: 40px;
-        border-radius: 30px;
-        font-size: 24px;
-        text-align: center;
-        z-index: 10000;
-        max-width: 500px;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        font-family: 'Kalam', cursive;
-    `;
-    messageDiv.innerHTML = message;
-    
-    document.body.appendChild(messageDiv);
-    
-    setTimeout(() => {
-        messageDiv.style.transition = 'opacity 1s ease';
-        messageDiv.style.opacity = '0';
-        setTimeout(() => messageDiv.remove(), 1000);
-    }, 4000);
-}
-
-// Slider functionality
-function initSlider() {
-    const slider = document.querySelector('.slider');
-    if (!slider) return;
-    
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-    
-    slider.addEventListener('mousedown', (e) => {
-        isDown = true;
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-        slider.style.cursor = 'grabbing';
-    });
-    
-    slider.addEventListener('mouseleave', () => {
-        isDown = false;
-        slider.style.cursor = 'grab';
-    });
-    
-    slider.addEventListener('mouseup', () => {
-        isDown = false;
-        slider.style.cursor = 'grab';
-    });
-    
-    slider.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
-        slider.scrollLeft = scrollLeft - walk;
-    });
-    
-    // Touch support
-    slider.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-    });
-    
-    slider.addEventListener('touchmove', (e) => {
-        const x = e.touches[0].pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
-        slider.scrollLeft = scrollLeft - walk;
-    });
-}
-
-// Initialize everything when DOM is loaded
+// Initialize animations when page loads
 document.addEventListener('DOMContentLoaded', () => {
     animateCountdown();
-    initSlider();
     
-    // Add enter key support for email input
-    const emailInput = document.getElementById('email');
-    if (emailInput) {
-        emailInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleJoin();
-            }
-        });
-    }
-    
-    // Smooth scroll for all sections
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
-    
-    // Console easter egg
-    console.log('%c🌈 Welcome to Wubbleton, Beautiful Soul! 🦄', 'font-size: 30px; font-weight: bold; background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb); -webkit-background-clip: text; -webkit-text-fill-color: transparent;');
-    console.log('%c✨ You found our secret garden! ✨', 'font-size: 20px; color: #ff6b6b;');
-    console.log('%cThe universe brought you here for a reason... 💖', 'font-size: 16px; color: #a29bfe;');
-    console.log('%cYour consciousness level: ∞', 'font-size: 18px; color: #5f27cd; font-weight: bold;');
+    // Add some initial sparkles
+    setTimeout(() => {
+        for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+                createSparkle(
+                    Math.random() * window.innerWidth,
+                    Math.random() * window.innerHeight
+                );
+            }, i * 500);
+        }
+    }, 1000);
 }); 

@@ -25,12 +25,22 @@
 !images/5e0dd0ae-a0fb-11ef-8ddc-0242c0a80010.jpeg
 !images/7cdb2d7e-aaf1-11ef-aae9-0242ac13000e.jpeg
 !images/93c6c5e6-9fb8-11ef-8ddc-0242c0a80010.jpeg
-!images/9f8988f2-a0bf-11ef-8ddc-0242c0a80010.jpeg
 !images/edcf4490-937f-11ef-9158-0242ac13000e.jpeg
-
-# Include magnific images
+!images/9f8988f2-a0bf-11ef-8ddc-0242c0a80010.jpeg
 !images/magnific-dLeTatdTtII8zSPh6BN5-asas.jpeg
 !images/magnific-qUzjmzUsy5iJ6dJYjbkr-1.jpeg
+
+# Include new optimized images
+!images/743c90cc-50c9-11ef-a528-0242ac16000e.jpg
+!images/255f13b8-7c56-11ef-8198-0242c0a8500c.jpg
+!images/787ac2cc-7ae9-11ef-8198-0242c0a8500c.jpg
+!images/cfe6a040-509f-11ef-a528-0242ac16000e.jpg
+!images/d7652f3c-75fa-11ef-944a-0242c0a8500d.jpg
+!images/9f8988f2-optimized.jpg
+
+# Include gallery directories
+!images/gallery/
+!images/gallery/**/*.jpg
 
 # Ignore other files
 .DS_Store
