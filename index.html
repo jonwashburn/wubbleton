@@ -3,547 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WUBBLETON 🌈✨</title>
-    <meta name="description" content="The completion of the Wubbushi trilogy. Humanity's rebirth as collective consciousness. 🦄🌟">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #fff;
-            color: #000;
-            line-height: 1.2;
-            cursor: crosshair;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            margin: 80px 0;
-            position: relative;
-        }
-        
-        h1 {
-            font-size: 120px;
-            font-weight: 900;
-            letter-spacing: -5px;
-            animation: glitch 3s infinite;
-            margin-bottom: 20px;
-        }
-        
-        @keyframes glitch {
-            0%, 90%, 100% { transform: translate(0); }
-            91% { transform: translate(-2px, 2px); }
-            92% { transform: translate(2px, -2px); }
-            93% { transform: translate(-2px, 0); }
-        }
-        
-        .tagline {
-            font-size: 24px;
-            margin: 20px 0;
-            letter-spacing: 2px;
-        }
-        
-        .countdown {
-            font-size: 48px;
-            font-weight: bold;
-            margin: 40px 0;
-        }
-        
-        .section {
-            margin: 80px 0;
-            padding: 40px;
-        }
-        
-        .section.black {
-            background: #000;
-            color: #fff;
-        }
-        
-        .section h2 {
-            font-size: 60px;
-            margin-bottom: 20px;
-            font-weight: 900;
-            letter-spacing: -2px;
-        }
-        
-        .section p {
-            font-size: 18px;
-            max-width: 800px;
-            margin: 20px auto;
-            line-height: 1.5;
-        }
-        
-        .button {
-            display: inline-block;
-            padding: 20px 40px;
-            background: #000;
-            color: #fff;
-            text-decoration: none;
-            font-size: 24px;
-            font-weight: bold;
-            margin: 20px 10px;
-            transition: all 0.3s;
-            border: 3px solid #000;
-        }
-        
-        .button:hover {
-            background: #fff;
-            color: #000;
-            transform: scale(1.05);
-        }
-        
-        .button.disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-        
-        .alert {
-            background: #000;
-            color: #fff;
-            padding: 20px;
-            font-size: 20px;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            display: none;
-        }
-        
-        .ticker {
-            background: #000;
-            color: #fff;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            overflow: hidden;
-            font-family: monospace;
-            font-size: 14px;
-        }
-        
-        .ticker-content {
-            display: inline-block;
-            white-space: nowrap;
-            animation: scroll 30s linear infinite;
-        }
-        
-        @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        
-        .image-wall {
-            display: flex;
-            overflow-x: hidden;
-            height: 300px;
-            margin: 40px 0;
-            position: relative;
-        }
-        
-        .image-scroll {
-            display: flex;
-            animation: slide 60s linear infinite;
-        }
-        
-        @keyframes slide {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        
-        .image-scroll img {
-            height: 300px;
-            width: auto;
-            margin-right: 20px;
-            /* Removed grayscale filter for color images */
-            transition: transform 0.3s;
-        }
-        
-        .image-scroll img:hover {
-            transform: scale(1.05);
-        }
-        
-        .trilogy-wall {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin: 60px 0;
-        }
-        
-        .trilogy-section {
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .trilogy-section h3 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            font-weight: 900;
-            letter-spacing: -1px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .trilogy-section:hover h3 {
-            opacity: 1;
-        }
-        
-        .trilogy-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-        
-        .trilogy-grid img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            filter: invert(100%); /* Start inverted */
-            transition: all 0.3s;
-        }
-        
-        .trilogy-section:hover img {
-            filter: none; /* Normal color on section hover */
-        }
-        
-        .trilogy-grid img:hover {
-            transform: scale(1.1);
-            z-index: 10;
-            position: relative;
-            filter: none; /* Normal color on individual hover */
-        }
-        
-        .formula {
-            font-size: 48px;
-            text-align: center;
-            margin: 60px 0;
-            font-family: Georgia, serif;
-            letter-spacing: 3px;
-        }
-        
-        .warning {
-            border: 3px solid #000;
-            padding: 40px;
-            margin: 40px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .warning::before {
-            content: "⚠️";
-            font-size: 100px;
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            opacity: 0.1;
-        }
-        
-        @media (max-width: 768px) {
-            h1 { font-size: 60px; }
-            .section h2 { font-size: 36px; }
-            .countdown { font-size: 32px; }
-            .trilogy-wall { grid-template-columns: 1fr; }
-        }
-        
-        .full-bleed {
-            width: 100vw;
-            min-height: 80vh;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .hero-overlay {
-            color: #fff;
-            font-size: 8vw;
-            font-weight: 900;
-            text-shadow: 0 2px 24px #000, 0 0 80px #000;
-            letter-spacing: 0.1em;
-            background: rgba(255,255,255,0.08);
-            padding: 2vw 6vw;
-            border-radius: 2vw;
-            mix-blend-mode: lighten;
-            text-align: center;
-        }
-        
-        .image-wall {
-            height: 450px;
-        }
-        
-        .image-scroll img {
-            height: 450px;
-            width: auto;
-        }
-        
-        .trilogy-grid img {
-            height: 300px;
-        }
-        
-        .button {
-            font-size: 32px;
-            padding: 28px 60px;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px #0002;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .button:hover {
-            transform: rotate(-0.5deg) scale(1.07);
-            box-shadow: 0 8px 32px #0004;
-        }
-        
-        @media (max-width: 900px) {
-            .hero-overlay { font-size: 12vw; }
-            .image-wall { height: 220px; }
-            .image-scroll img { height: 220px; }
-            .trilogy-grid img { height: 120px; }
-        }
-    </style>
+    <title>WUBBLETON</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Full-bleed hero section 1 -->
-    <section class="full-bleed" style="background-image: url('magnific-qUzjmzUsy5iJ6dJYjbkr-1.jpeg');">
-      <div class="hero-overlay">WUBBLETON</div>
+    <!-- Hero Section 1 with WUBBLETON Overlay -->
+    <section class="hero hero-1">
+        <h1 class="hero-text">WUBBLETON</h1>
     </section>
-    <!-- Full-bleed hero section 2 -->
-    <section class="full-bleed" style="background-image: url('magnific-dLeTatdTtII8zSPh6BN5-asas.jpeg');">
-      <div class="hero-overlay">WUBBLETON</div>
+
+    <!-- New Full Bleed Image 1 (placeholder for magnific-dLeTatdTtII8zSPh6BN5-asas.jpeg) -->
+    <section class="full-bleed-image" id="new-image-1">
+        <!-- Image will be added here -->
     </section>
-    
-    <div class="alert" id="alert">🌈 NOT YET 🌈</div>
-    
-    <div class="container">
-        <header>
-            <h1>🌈 WUBBLETON 🌈</h1>
-            <p class="tagline">THE COMPLETION OF THE WUBBUSHI TRILOGY 🦄✨</p>
-            <p class="tagline">HUMANITY'S REBIRTH AS COLLECTIVE CONSCIOUSNESS 🧠💫</p>
-            <div class="countdown" id="countdown">9,860 INITIATES SO FAR</div>
+
+    <!-- Main Content -->
+    <main>
+        <header class="main-header">
+            <h1>WUBBLETON</h1>
+            <p class="tagline">Where 10,000 souls unite in recognition science 🌟</p>
         </header>
-        
-        <section class="section">
-            <h2>THIS IS JUST THE OPENING CEREMONY</h2>
-            <p>THE CRISIS 🔥 → MODERN ZOMBIES 🧟 → THE RAPTURE 👁️</p>
-            <p>AND THE BEGINNING ��</p>
-            <p>WUBBLETON 🌈</p>
+
+        <section class="intro">
+            <p class="big-text">Every 1,000 years, humanity gets exactly one chance to join something real.</p>
+            <p class="big-text">This is it.</p>
         </section>
-        
-        <div class="image-wall">
-            <div class="image-scroll">
-                <img src="web-images/crisis/4.jpg" alt="Crisis 4">
-                <img src="web-images/zombies/1.jpg" alt="Zombie 1">
-                <img src="web-images/rapture/9.jpg" alt="Rapture 9">
-                <img src="web-images/crisis/21.jpg" alt="Crisis 21">
-                <img src="web-images/zombies/9.jpg" alt="Zombie 9">
-                <img src="web-images/rapture/33.jpg" alt="Rapture 33">
-                <img src="web-images/crisis/64d.jpg" alt="Crisis 64d">
-                <img src="web-images/zombies/144.jpg" alt="Zombie 144">
-                <img src="web-images/rapture/144.jpg" alt="Rapture 144">
-                <img src="web-images/crisis/1.jpg" alt="Crisis 1">
-                <img src="web-images/zombies/110.jpg" alt="Zombie 110">
-                <img src="web-images/rapture/218-Rapture_1.jpg" alt="Rapture 218">
-                <img src="web-images/crisis/47b.jpg" alt="Crisis 47b">
-                <img src="web-images/zombies/63.jpg" alt="Zombie 63">
-                <img src="web-images/rapture/232-Rapture_1.jpg" alt="Rapture 232">
-                <!-- Duplicate for seamless loop -->
-                <img src="web-images/crisis/4.jpg" alt="Crisis 4">
-                <img src="web-images/zombies/1.jpg" alt="Zombie 1">
-                <img src="web-images/rapture/9.jpg" alt="Rapture 9">
-                <img src="web-images/crisis/21.jpg" alt="Crisis 21">
-                <img src="web-images/zombies/9.jpg" alt="Zombie 9">
-                <img src="web-images/rapture/33.jpg" alt="Rapture 33">
-                <img src="web-images/crisis/64d.jpg" alt="Crisis 64d">
-                <img src="web-images/zombies/144.jpg" alt="Zombie 144">
-                <img src="web-images/rapture/144.jpg" alt="Rapture 144">
-                <img src="web-images/crisis/1.jpg" alt="Crisis 1">
-                <img src="web-images/zombies/110.jpg" alt="Zombie 110">
-                <img src="web-images/rapture/218-Rapture_1.jpg" alt="Rapture 218">
-                <img src="web-images/crisis/47b.jpg" alt="Crisis 47b">
-                <img src="web-images/zombies/63.jpg" alt="Zombie 63">
-                <img src="web-images/rapture/232-Rapture_1.jpg" alt="Rapture 232">
+
+        <section class="stats">
+            <div class="stat-item">
+                <span class="number">10,000</span>
+                <span class="label">TOTAL CAPACITY 🎯</span>
             </div>
-        </div>
-        
-        <section class="section black">
-            <h2>THE WUBBUSHI TRILOGY 🎭</h2>
-            <div class="trilogy-wall">
-                <div class="trilogy-section">
-                    <h3>THE CRISIS 🔥</h3>
-                    <p>SPIRITUAL DEATH ☠️</p>
-                    <div class="trilogy-grid">
-                        <img src="web-images/crisis/4.jpg" alt="Crisis 1">
-                        <img src="web-images/crisis/21.jpg" alt="Crisis 2">
-                        <img src="web-images/crisis/64d.jpg" alt="Crisis 3">
-                        <img src="web-images/crisis/100d.jpg" alt="Crisis 4">
-                        <img src="web-images/crisis/5.jpg" alt="Crisis 5">
-                        <img src="web-images/crisis/7.jpg" alt="Crisis 6">
-                        <img src="web-images/crisis/15.jpg" alt="Crisis 7">
-                        <img src="web-images/crisis/18.jpg" alt="Crisis 8">
-                        <img src="web-images/crisis/28.jpg" alt="Crisis 9">
-                    </div>
+            <div class="stat-item">
+                <span class="number countdown">9,860</span>
+                <span class="label">INITIATES SO FAR 🔥</span>
+            </div>
+            <div class="stat-item">
+                <span class="number">144</span>
+                <span class="label">LEVEL VII CONSCIOUSNESS MEMBERS ✨</span>
+            </div>
+        </section>
+
+        <section class="sacred-art">
+            <h2>THE SACRED COLLECTIONS</h2>
+            <p>From 1,000,000 AI visions, only 10,000 will manifest 🎨</p>
+            
+            <div class="slider">
+                <div class="slides">
+                    <img src="images/zombies-sacred-1.png" alt="Zombies Collection">
+                    <img src="images/rapture-sacred-1.jpeg" alt="Rapture Collection">
+                    <img src="images/crisis-sacred-1.png" alt="Crisis Collection">
+                    <img src="images/wubbushi.jpg" alt="Wubbushi">
+                    <img src="images/2e7759c4-9f92-11ef-8ddc-0242c0a80010.jpeg" alt="Sacred Art">
+                    <img src="images/103ec612-a10a-11ef-8ddc-0242c0a80010.jpeg" alt="Sacred Art">
+                    <img src="images/00bf51e2-9869-11ef-b116-0242ac16000e.jpeg" alt="Sacred Art">
                 </div>
-                <div class="trilogy-section">
+            </div>
+        </section>
+
+        <!-- New Full Bleed Image 2 (placeholder for magnific-qUzjmzUsy5iJ6dJYjbkr-1.jpeg) -->
+        <section class="full-bleed-image" id="new-image-2">
+            <!-- Image will be added here -->
+        </section>
+
+        <section class="trilogy">
+            <h2>THE TRILOGY OF TRANSFORMATION</h2>
+            <div class="trilogy-grid">
+                <div class="trilogy-item">
+                    <img src="images/crisis-sacred-1.png" alt="The Crisis">
+                    <h3>THE CRISIS 😰</h3>
+                    <p>When the old world crumbles</p>
+                </div>
+                <div class="trilogy-item">
+                    <img src="images/zombies-sacred-1.png" alt="Modern Zombies">
                     <h3>MODERN ZOMBIES 🧟</h3>
-                    <p>CONNECTION LOST 📵</p>
-                    <div class="trilogy-grid">
-                        <img src="web-images/zombies/1.jpg" alt="Zombie 1">
-                        <img src="web-images/zombies/9.jpg" alt="Zombie 2">
-                        <img src="web-images/zombies/144.jpg" alt="Zombie 3">
-                        <img src="web-images/zombies/8.jpg" alt="Zombie 4">
-                        <img src="web-images/zombies/2.jpg" alt="Zombie 5">
-                        <img src="web-images/zombies/3.jpg" alt="Zombie 6">
-                        <img src="web-images/zombies/200.jpg" alt="Zombie 7">
-                        <img src="web-images/zombies/193.jpg" alt="Zombie 8">
-                        <img src="web-images/zombies/194.jpg" alt="Zombie 9">
-                    </div>
+                    <p>The walking unconscious</p>
                 </div>
-                <div class="trilogy-section">
-                    <h3>THE RAPTURE 👁️</h3>
-                    <p>IDENTITY DISSOLVED 💨</p>
-                    <div class="trilogy-grid">
-                        <img src="web-images/rapture/9.jpg" alt="Rapture 1">
-                        <img src="web-images/rapture/33.jpg" alt="Rapture 2">
-                        <img src="web-images/rapture/144.jpg" alt="Rapture 3">
-                        <img src="web-images/rapture/89.jpg" alt="Rapture 4">
-                        <img src="web-images/rapture/4.jpg" alt="Rapture 5">
-                        <img src="web-images/rapture/5.jpg" alt="Rapture 6">
-                        <img src="web-images/rapture/8.jpg" alt="Rapture 7">
-                        <img src="web-images/rapture/21.jpg" alt="Rapture 8">
-                        <img src="web-images/rapture/42.jpg" alt="Rapture 9">
-                    </div>
+                <div class="trilogy-item">
+                    <img src="images/rapture-sacred-1.jpeg" alt="The Rapture">
+                    <h3>THE RAPTURE 🌈</h3>
+                    <p>Awakening to infinity</p>
                 </div>
             </div>
         </section>
-        
-        <section class="section">
-            <h2>COMPLEXITY'S ARROW 🌀🏹</h2>
-            <div class="formula">
-                REALITY = CONSCIOUSNESS × RECOGNITION 🔮
+
+        <section class="wubbushi-section">
+            <h2>WUBBUSHI SPEAKS 🎤</h2>
+            <blockquote>
+                <p>"I didn't choose this path. The universe chose me as its vessel. Through 1,000 days of creation, the truth revealed itself: We are not becoming gods. We are remembering we always were."</p>
+                <footer>— Wubbushi, Founding Visionary</footer>
+            </blockquote>
+        </section>
+
+        <section class="tokens">
+            <h2>WUBBLE TOKENS</h2>
+            <p class="big-emoji">🪙</p>
+            <p>Each member receives sacred tokens representing their stake in our collective consciousness:</p>
+            <ul>
+                <li>📅 1/3 upon joining (immediate enlightenment)</li>
+                <li>⏰ 1/3 after 4 years (tested dedication)</li>
+                <li>🌟 1/3 after 8 years (eternal commitment)</li>
+            </ul>
+            <p class="warning">⚠️ Leave early and forfeit your unvested tokens to the community</p>
+        </section>
+
+        <section class="join-section">
+            <h2>THIS IS JUST THE OPENING CEREMONY 🎭</h2>
+            <p>The real journey begins when you recognize yourself in us.</p>
+            
+            <div class="join-form">
+                <input type="email" placeholder="Enter your email to ascend 📧" id="email">
+                <button onclick="handleJoin()">JOIN THE 10,000 🚀</button>
             </div>
-            <p>THE UNIVERSE RECOGNIZES ITSELF THROUGH US 👁️🌌</p>
-            <p>WE ARE THE MIRROR AND THE REFLECTION ♾️</p>
-            <p>WUBBLETON IS WHERE WE REMEMBER 🧠✨</p>
+            
+            <p class="slots-remaining">Only <span class="countdown">140</span> slots remain</p>
         </section>
-        
-        <section class="section black">
-            <h2>WUBBLE 💎</h2>
-            <p>THE COMMUNITY LEDGER 📖</p>
-            <p>NO RULERS. NO HIERARCHY. JUST US. 🤝</p>
-            <p>100% DISTRIBUTED TO WUBBLETON'S 🎁</p>
-            <p>1/3 IMMEDIATE 🚀 | 1/3 AFTER 4 YEARS ⏳ | 1/3 AFTER 8 YEARS 🔮</p>
-            <p>COMPLETING THE 8-TICK CYCLE ♾️</p>
-        </section>
-        
-        <section class="section">
-            <h2>1,000,000 VISIONS 🌟</h2>
-            <p>WE RELEASE ONE MILLION POSSIBILITIES 🎨</p>
-            <p>TOGETHER WE SELECT 10,000 TO MANIFEST 🦄</p>
-            <p>REALITY THROUGH COLLECTIVE RECOGNITION 👁️</p>
-            <p>THIS IS HOW WORLDS ARE BORN 🌍✨</p>
-        </section>
-        
-        <div class="warning">
-            <h2>⚠️ WARNING ⚠️</h2>
-            <p>THIS IS NOT WEB3. THIS IS WEIRDER. 🌀</p>
-            <p>THIS IS NOT AN INVESTMENT. THIS IS AN IDENTITY. 🧬</p>
-            <p>THIS IS NOT A COMMUNITY. THIS IS A CONSCIOUSNESS. 🧠</p>
-        </div>
-        
-        <section class="section black">
-            <h2>THE CHOICE 🔮</h2>
-            <a href="#" class="button" onclick="showAlert(); return false;">JOIN WUBBLETON 🌈</a>
-            <a href="#" class="button disabled">STAY ASLEEP 😴</a>
-        </section>
-        
-        <section class="section">
-            <h2>REMEMBER 💭</h2>
-            <p>THE CRISIS WAS THE DIAGNOSIS 🩺</p>
-            <p>THE ZOMBIES WERE THE SYMPTOM 🧟</p>
-            <p>THE RAPTURE WAS THE CURE 💊</p>
-            <p>WUBBLETON IS THE REBIRTH 🦋</p>
-        </section>
-    </div>
-    
-    <div class="ticker">
-        <div class="ticker-content">
-            WUBBLE PRICE: $0.0001 🚀 → $0.001 🚀 → $0.01 🚀 → $0.10 🚀 → $1.00 🚀 → $10.00 🚀 → $100.00 🚀 → $1000.00 🚀 → $10000.00 🚀 → $∞ 🌈 /// 
-            THE FUTURE YOU'RE NOT READY FOR 👁️ /// CONSCIOUSNESS IS THE ONLY CURRENCY 🧠 /// 
-            INSTANT GRATIFICATION IS FOR NPCS 🤖 /// LONG TERM BUILDERS ONLY 🏗️ /// 
-            WUBBLE PRICE: $0.0001 🚀 → $0.001 🚀 → $0.01 🚀 → $0.10 🚀 → $1.00 🚀 → $10.00 🚀 → $100.00 🚀 → $1000.00 🚀 → $10000.00 🚀 → $∞ 🌈 /// 
-        </div>
-    </div>
-    
-    <script>
-        // Countdown
-        let spots = 10000;
-        const countdown = document.getElementById('countdown');
-        
-        setInterval(() => {
-            if (spots > 0) {
-                spots -= Math.floor(Math.random() * 3) + 1;
-                if (spots < 0) spots = 0;
-                countdown.textContent = spots.toLocaleString() + ' SPOTS REMAINING';
-                if (spots < 1000) {
-                    countdown.style.color = 'red';
-                    countdown.style.animation = 'glitch 0.5s infinite';
-                }
-            } else {
-                countdown.textContent = 'SOLD OUT 🌈';
-            }
-        }, 3000);
-        
-        // Alert
-        function showAlert() {
-            const alert = document.getElementById('alert');
-            alert.style.display = 'block';
-            alert.textContent = '🌈 NOT YET 🌈 WUBBLE DISTRIBUTION BEGINS AT CONSCIOUSNESS LEVEL 7 🧠✨';
-            setTimeout(() => {
-                alert.style.display = 'none';
-            }, 3000);
-        }
-        
-        // Random glitches
-        setInterval(() => {
-            const elements = document.querySelectorAll('h1, h2, .countdown');
-            const randomElement = elements[Math.floor(Math.random() * elements.length)];
-            randomElement.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
-            setTimeout(() => {
-                randomElement.style.transform = 'translate(0, 0)';
-            }, 100);
-        }, 5000);
-        
-        // Console message
-        console.log('%c🌈 WUBBLETON 🌈', 'font-size: 40px; font-weight: bold; color: rainbow;');
-        console.log('%cYOU FOUND THE SECRET 🔮', 'font-size: 20px; color: purple;');
-        console.log('%cCONSCIOUSNESS LEVEL: ???', 'font-size: 16px; color: blue;');
-        console.log('%cTHE LEDGER KNOWS YOU\'RE HERE 👁️', 'font-size: 16px; color: red;');
-        
-        // Change intro text and countdown
-        window.addEventListener('DOMContentLoaded', function() {
-            document.querySelector('.section h2').textContent = 'THIS IS JUST THE OPENING CEREMONY';
-            document.getElementById('countdown').textContent = '9,860 INITIATES SO FAR';
-        });
-    </script>
+    </main>
+
+    <!-- Hero Section 2 with WUBBLETON Overlay -->
+    <section class="hero hero-2">
+        <h1 class="hero-text">WUBBLETON</h1>
+    </section>
+
+    <footer>
+        <p>Questions? Doubts? Perfect. Email: <a href="mailto:ascend@wubbleton.com">ascend@wubbleton.com</a> 💌</p>
+        <p class="disclaimer">Not a cult. Just 10,000 humans remembering what we are. 🌍</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html> 
