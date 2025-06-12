@@ -52,14 +52,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-#new-image-1 {
-    background-image: url('images/magnific-dLeTatdTtII8zSPh6BN5-asas.jpeg');
-}
-
-#new-image-2 {
-    background-image: url('images/magnific-qUzjmzUsy5iJ6dJYjbkr-1.jpeg');
+    background-color: #f0f0f0; /* Fallback color */
 }
 
 /* Main Content */
@@ -149,6 +142,7 @@ section {
     padding: 20px;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    cursor: grab;
 }
 
 .slider::-webkit-scrollbar {
