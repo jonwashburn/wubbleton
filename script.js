@@ -169,6 +169,7 @@ function initSlider() {
 document.addEventListener('DOMContentLoaded', () => {
     animateCountdown();
     initSlider();
+    initParallax();
     
     // Add enter key support for email input
     const emailInput = document.getElementById('email');
@@ -196,4 +197,50 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('%c✨ You found our secret garden! ✨', 'font-size: 20px; color: #ff6b6b;');
     console.log('%cThe universe brought you here for a reason... 💖', 'font-size: 16px; color: #a29bfe;');
     console.log('%cYour consciousness level: ∞', 'font-size: 18px; color: #5f27cd; font-weight: bold;');
-}); 
+});
+
+// Parallax scrolling effect
+function initParallax() {
+    const bigImages = document.querySelectorAll('.big-image');
+    const overlayTexts = document.querySelectorAll('.overlay-text');
+    
+    // Create a more performant scroll handler
+    let ticking = false;
+    
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        
+        bigImages.forEach((image, index) => {
+            const rect = image.getBoundingClientRect();
+            const speed = 0.5; // Adjust for more/less parallax
+            
+            // Only update if image is in viewport
+            if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+                const yPos = -(scrolled - image.offsetTop) * speed;
+                image.style.backgroundPosition = `center ${yPos}px`;
+                
+                // Parallax for text overlay
+                if (overlayTexts[index]) {
+                    const textSpeed = 0.3;
+                    const textY = (scrolled - image.offsetTop) * textSpeed;
+                    overlayTexts[index].style.transform = `translateY(${textY}px) translateZ(0)`;
+                }
+            }
+        });
+        
+        ticking = false;
+    }
+    
+    function requestTick() {
+        if (!ticking) {
+            window.requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+    
+    // Listen for scroll events
+    window.addEventListener('scroll', requestTick);
+    
+    // Initial call
+    updateParallax();
+} 

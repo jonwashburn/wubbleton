@@ -12,6 +12,10 @@ body {
     overflow-x: hidden;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* Rainbow Text Animation */
 @keyframes rainbow {
     0% { color: #ff6b6b; }
@@ -70,6 +74,7 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
+    overflow: hidden;
 }
 
 .big-image::before {
@@ -87,6 +92,8 @@ body {
     z-index: 1;
     text-align: center;
     padding: 40px;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .overlay-text h2 {
@@ -129,6 +136,8 @@ body {
 
 /* Flower Power Section */
 .flower-power {
+    position: relative;
+    z-index: 1;
     background: rgba(255,255,255,0.9);
     backdrop-filter: blur(10px);
 }
@@ -165,6 +174,7 @@ body {
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     transition: transform 0.3s ease;
+    will-change: transform;
 }
 
 .stat-bubble:hover {
@@ -194,6 +204,8 @@ body {
 
 /* Gallery */
 .sacred-gallery {
+    position: relative;
+    z-index: 1;
     background: rgba(255,255,255,0.9);
     backdrop-filter: blur(10px);
 }
@@ -270,6 +282,8 @@ blockquote footer {
 
 /* Community Life */
 .community-life {
+    position: relative;
+    z-index: 1;
     background: rgba(255,255,255,0.9);
     backdrop-filter: blur(10px);
 }
@@ -313,6 +327,8 @@ blockquote footer {
 
 /* Join Section */
 .join-family {
+    position: relative;
+    z-index: 1;
     background: linear-gradient(135deg, #a29bfe, #fd79a8);
     color: white;
 }
