@@ -24,16 +24,33 @@
     <section class="vision-banner" style="background: linear-gradient(45deg, #FFB6C1, #FFE4E1, #E6E6FA, #DDA0DD); padding: 40px 20px; text-align: center;">
         <div class="container">
             <h2 style="font-size: 36px; color: #663399; margin-bottom: 20px;">
-                🦄 Daily Vision Quest Results Are In! 🦄
+                🌟 Two Paths to Enlightenment Await! 🌟
             </h2>
-            <p style="font-size: 20px; color: #8B008B; max-width: 800px; margin: 0 auto;">
-                During yesterday's 3 PM Unicorn Meditation, our family channeled 319 new visions! 
-                Wubbushi says each one contains a piece of your soul's puzzle. Which one calls to you?
-            </p>
-            <div style="margin-top: 30px;">
-                <a href="#vision-gallery" class="rainbow-button" style="background: #FF69B4; color: white; padding: 15px 40px; font-size: 20px; border-radius: 30px; text-decoration: none; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                    ✨ View Today's Visions ✨
-                </a>
+            
+            <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px;">
+                <div style="flex: 1; max-width: 400px;">
+                    <h3 style="color: #8B008B; font-size: 24px;">📖 The Sacred Trilogy 📖</h3>
+                    <p style="font-size: 18px; color: #8B008B; margin: 10px 0;">
+                        Wubbushi's original revelations:<br>
+                        Crisis → Death → Rapture<br>
+                        <em>(499 visions total)</em>
+                    </p>
+                    <a href="#sacred-trilogy" class="rainbow-button" style="background: #8B008B; color: white; padding: 12px 30px; font-size: 18px; border-radius: 25px; text-decoration: none; display: inline-block; margin-top: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                        Begin the Journey
+                    </a>
+                </div>
+                
+                <div style="flex: 1; max-width: 400px;">
+                    <h3 style="color: #FF69B4; font-size: 24px;">🦄 Today's Fresh Visions 🦄</h3>
+                    <p style="font-size: 18px; color: #8B008B; margin: 10px 0;">
+                        319 new prophecies from<br>
+                        this morning's meditation!<br>
+                        <em>(Updated daily at 3 AM)</em>
+                    </p>
+                    <a href="#vision-gallery" class="rainbow-button" style="background: #FF69B4; color: white; padding: 12px 30px; font-size: 18px; border-radius: 25px; text-decoration: none; display: inline-block; margin-top: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                        See Today's Visions
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -81,56 +98,77 @@
         </div>
     </section>
 
-    <!-- Sacred Art Gallery -->
-    <section id="vision-gallery" class="sacred-gallery" style="background: linear-gradient(to bottom, #FFF5EE, #FFE4E1); padding: 80px 20px;">
+    <!-- The Sacred Trilogy -->
+    <section id="sacred-trilogy" class="sacred-trilogy" style="background: linear-gradient(to bottom, #2C1810, #1A0F08); padding: 80px 20px;">
         <div class="container">
-            <h2 class="section-title">🎨 Today's Vision Quest Results 🌙</h2>
-            <p class="subtitle">Fresh from our Morning Wubble Sessions™ - Which one speaks to YOUR soul?</p>
-            <p style="text-align: center; font-size: 18px; color: #8B008B; margin: 20px 0;">
-                <em>"Every member channels at least 3 visions per day. It's not optional - it's MAGICAL!" - Sister Rainbow</em>
+            <h2 class="section-title" style="color: #FFD700;">⚡ The Sacred Trilogy ⚡</h2>
+            <p class="subtitle" style="color: #FFA500;">Wubbushi's original three revelations - DO NOT VIEW UNLESS SPIRITUALLY PREPARED</p>
+            <p style="text-align: center; font-size: 18px; color: #FF6347; margin: 20px 0;">
+                <em>"These aren't just art collections. They're the three stages of enlightenment. View in order or risk psychic whiplash!" - Wubbushi</em>
             </p>
             
-            <div class="gallery-grid">
-                <div class="gallery-item">
+            <style>
+                @media (max-width: 768px) {
+                    .trilogy-grid {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            </style>
+            <div class="gallery-grid trilogy-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); max-width: 1200px; margin: 40px auto; gap: 30px;">
+                <div class="gallery-item" style="border: 2px solid #FFD700; background: rgba(139, 0, 139, 0.1);">
                     <a href="web/galleries/crisis/" class="gallery-link">
                         <img id="crisis-preview" src="" alt="The Crisis">
                         <div class="gallery-overlay">
-                            <h3>The Crisis Collection</h3>
-                            <p>Visions from Tuesday's "Ego Death Workshop" - 156 breakthroughs!</p>
-                            <span class="view-gallery">Experience the Crisis →</span>
+                            <h3>I. The Crisis</h3>
+                            <p>First you must break. 156 visions of necessary destruction.</p>
+                            <span class="view-gallery">Enter the Crisis →</span>
                         </div>
                     </a>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" style="border: 2px solid #FFD700; background: rgba(139, 0, 139, 0.1);">
                     <a href="web/galleries/zombies/" class="gallery-link">
                         <img id="zombies-preview" src="" alt="Modern Zombies">
                         <div class="gallery-overlay">
-                            <h3>Modern Zombies</h3>
-                            <p>From our "Past Life Regression Disco" - 176 souls remembered!</p>
-                            <span class="view-gallery">Wake the Dead →</span>
+                            <h3>II. Modern Zombies</h3>
+                            <p>Then you must die to your old self. 176 resurrections await.</p>
+                            <span class="view-gallery">Join the Dead →</span>
                         </div>
                     </a>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" style="border: 2px solid #FFD700; background: rgba(139, 0, 139, 0.1);">
                     <a href="web/galleries/rapture/" class="gallery-link">
                         <img id="rapture-preview" src="" alt="The Rapture">
                         <div class="gallery-overlay">
-                            <h3>The Rapture Visions</h3>
-                            <p>Channeled during "Ascension Aerobics" - 167 members levitated!</p>
-                            <span class="view-gallery">Ascend Now →</span>
+                            <h3>III. The Rapture</h3>
+                            <p>Finally, ascension. 167 visions of the promised dimension.</p>
+                            <span class="view-gallery">Ascend →</span>
                         </div>
                     </a>
                 </div>
-                <div class="gallery-item">
-                    <a href="wubbleton-gallery.html" class="gallery-link">
-                        <img src="wubbleton/thumbs/wubbleton_1.jpg" alt="Recognition Gallery">
-                        <div class="gallery-overlay">
-                            <h3>Fresh Daily Visions</h3>
-                            <p>This morning's 3AM "Unicorn Meditation" yielded 319 new prophecies!</p>
-                            <span class="view-gallery">See Today's Miracles →</span>
-                        </div>
-                    </a>
-                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Vision Quest Gallery -->
+    <section id="vision-gallery" class="sacred-gallery" style="background: linear-gradient(to bottom, #FFF5EE, #FFE4E1); padding: 80px 20px;">
+        <div class="container">
+            <h2 class="section-title">🎨 Today's Fresh Visions 🌙</h2>
+            <p class="subtitle">From this morning's mandatory 3 AM Unicorn Meditation</p>
+            <p style="text-align: center; font-size: 18px; color: #8B008B; margin: 20px 0;">
+                <em>"319 new prophecies channeled by our beautiful family - which one is YOUR message?" - Sister Rainbow</em>
+            </p>
+            
+            <div style="text-align: center; margin: 40px 0;">
+                <a href="wubbleton-gallery.html" class="rainbow-button" style="background: linear-gradient(45deg, #FF69B4, #FFB6C1, #DDA0DD); color: white; padding: 20px 60px; font-size: 24px; border-radius: 50px; text-decoration: none; display: inline-block; box-shadow: 0 6px 20px rgba(0,0,0,0.3); transition: all 0.3s;">
+                    ✨ View Today's 319 Visions ✨
+                </a>
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 40px; flex-wrap: wrap;">
+                <img src="wubbleton/thumbs/wubbleton_50.jpg" alt="Vision 1" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(-2deg);">
+                <img src="wubbleton/thumbs/wubbleton_100.jpg" alt="Vision 2" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(1deg);">
+                <img src="wubbleton/thumbs/wubbleton_150.jpg" alt="Vision 3" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(-1deg);">
+                <img src="wubbleton/thumbs/wubbleton_200.jpg" alt="Vision 4" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(2deg);">
             </div>
         </div>
     </section>
