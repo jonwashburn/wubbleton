@@ -1,8 +1,69 @@
 # Wubbleton Server Setup 🌈
 
-## Running the Servers
+## 🌟 NEW: Supabase Storage (Recommended)
 
-The Wubbleton website requires two servers:
+Instead of running a local image server, you can now use Supabase Storage for free hosting:
+
+### Quick Setup
+
+1. **Create a Supabase account** (free)
+   - Go to https://app.supabase.com
+   - Create a new project
+   - Go to Settings → API
+   - Copy your project URL and anon key
+
+2. **Set up credentials**
+   Create a `.env` file:
+   ```
+   SUPABASE_URL=https://YOUR_PROJECT_ID.supabase.co
+   SUPABASE_ANON_KEY=YOUR_ANON_KEY_HERE
+   ```
+
+3. **Choose your method:**
+
+   **Python** (if you prefer Python):
+   ```bash
+   pip install -r requirements.txt
+   python gallery_manager.py upload
+   ```
+
+   **Node.js** (if you prefer JavaScript):
+   ```bash
+   npm install
+   npm run upload-galleries
+   ```
+
+4. **Update gallery_config.js**
+   The script will show you the exact URL to use
+
+### Gallery Management Commands
+
+**Python:**
+```bash
+# List images in a gallery
+python gallery_manager.py list crisis
+
+# Add a new image
+python gallery_manager.py add crisis /path/to/new-image.jpg
+
+# Remove an image
+python gallery_manager.py remove crisis old-image.jpg
+```
+
+**Node.js:**
+```bash
+# List images
+node setup_supabase.js list crisis
+
+# Add a new image
+node setup_supabase.js add crisis /path/to/new-image.jpg
+```
+
+---
+
+## Local Development (Alternative)
+
+If you prefer to run servers locally:
 
 ### 1. Main Website Server (Port 8003)
 ```bash

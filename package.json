@@ -1,0 +1,21 @@
+{
+  "name": "wubbleton",
+  "version": "1.0.0",
+  "description": "Wubbleton Consciousness Collective Website",
+  "scripts": {
+    "setup": "npm install",
+    "upload-galleries": "node setup_supabase.js upload",
+    "list-images": "node setup_supabase.js list",
+    "add-image": "node setup_supabase.js add",
+    "serve": "python3 -m http.server 8003",
+    "serve-images": "python3 image_server.py"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "glob-promise": "^6.0.5",
+    "glob": "^10.3.10"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  }
+} 

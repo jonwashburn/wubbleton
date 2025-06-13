@@ -49,4 +49,11 @@ wubbleton-website/
 
 # Ignore gallery images (served separately)
 web/galleries/*/full/
-web/galleries/*/thumbs/ 
+web/galleries/*/thumbs/
+
+# Node modules
+node_modules/
+
+# Environment files
+.env
+.env.local 
