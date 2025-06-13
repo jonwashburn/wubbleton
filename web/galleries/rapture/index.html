@@ -294,78 +294,69 @@
         // List of images (generated from the resized images)
         const images = [];
         
+        // Rapture gallery images
+        const raptureImages = [
+            '143-Rapture_1.jpg', '150-Rapture_2.jpg', '157-Rapture_3.jpg', '1-Rapture_4.jpg',
+            '164-Rapture_5.jpg', '171-Rapture_6.jpg', '178-Rapture_7.jpg', '185-Rapture_8.jpg',
+            '192-Rapture_9.jpg', '199-Rapture_10.jpg', '206-Rapture_11.jpg', '213-Rapture_12.jpg',
+            '220-Rapture_13.jpg', '227-Rapture_14.jpg', '234-Rapture_15.jpg', '241-Rapture_16.jpg',
+            '248-Rapture_17.jpg', '255-Rapture_18.jpg', '262-Rapture_19.jpg', '269-Rapture_20.jpg',
+            '276-Rapture_21.jpg', '283-Rapture_22.jpg', '290-Rapture_23.jpg', '297-Rapture_24.jpg',
+            '304-Rapture_25.jpg', '311-Rapture_26.jpg', '318-Rapture_27.jpg', '325-Rapture_28.jpg',
+            '332-Rapture_29.jpg', '339-Rapture_30.jpg', '346-Rapture_31.jpg', '353-Rapture_32.jpg',
+            '360-Rapture_33.jpg', '367-Rapture_34.jpg', '374-Rapture_35.jpg', '381-Rapture_36.jpg',
+            '388-Rapture_37.jpg', '395-Rapture_38.jpg', '402-Rapture_39.jpg', '409-Rapture_40.jpg',
+            '416-Rapture_41.jpg', '423-Rapture_42.jpg', '430-Rapture_43.jpg', '437-Rapture_44.jpg',
+            '444-Rapture_45.jpg', '451-Rapture_46.jpg', '458-Rapture_47.jpg', '465-Rapture_48.jpg',
+            '472-Rapture_49.jpg', '479-Rapture_50.jpg', '486-Rapture_51.jpg', '493-Rapture_52.jpg',
+            '500-Rapture_53.jpg', '507-Rapture_54.jpg', '514-Rapture_55.jpg', '521-Rapture_56.jpg',
+            '528-Rapture_57.jpg', '535-Rapture_58.jpg', '542-Rapture_59.jpg', '549-Rapture_60.jpg',
+            '556-Rapture_61.jpg', '563-Rapture_62.jpg', '570-Rapture_63.jpg', '577-Rapture_64.jpg',
+            '584-Rapture_65.jpg', '591-Rapture_66.jpg', '598-Rapture_67.jpg', '605-Rapture_68.jpg',
+            '612-Rapture_69.jpg', '619-Rapture_70.jpg', '626-Rapture_71.jpg', '633-Rapture_72.jpg',
+            '640-Rapture_73.jpg', '647-Rapture_74.jpg', '654-Rapture_75.jpg', '661-Rapture_76.jpg',
+            '668-Rapture_77.jpg', '675-Rapture_78.jpg', '682-Rapture_79.jpg', '689-Rapture_80.jpg',
+            '696-Rapture_81.jpg', '703-Rapture_82.jpg', '710-Rapture_83.jpg', '717-Rapture_84.jpg',
+            '724-Rapture_85.jpg', '731-Rapture_86.jpg', '738-Rapture_87.jpg', '745-Rapture_88.jpg',
+            '752-Rapture_89.jpg', '759-Rapture_90.jpg', '766-Rapture_91.jpg', '773-Rapture_92.jpg',
+            '780-Rapture_93.jpg', '787-Rapture_94.jpg', '794-Rapture_95.jpg', '801-Rapture_96.jpg',
+            '808-Rapture_97.jpg', '815-Rapture_98.jpg', '822-Rapture_99.jpg', '829-Rapture_100.jpg',
+            '836-Rapture_101.jpg', '843-Rapture_102.jpg', '850-Rapture_103.jpg', '857-Rapture_104.jpg',
+            '864-Rapture_105.jpg', '871-Rapture_106.jpg', '878-Rapture_107.jpg', '885-Rapture_108.jpg',
+            '892-Rapture_109.jpg', '899-Rapture_110.jpg', '906-Rapture_111.jpg', '913-Rapture_112.jpg',
+            '920-Rapture_113.jpg', '927-Rapture_114.jpg', '934-Rapture_115.jpg', '941-Rapture_116.jpg',
+            '948-Rapture_117.jpg', '955-Rapture_118.jpg', '962-Rapture_119.jpg', '969-Rapture_120.jpg',
+            '976-Rapture_121.jpg', '983-Rapture_122.jpg', '990-Rapture_123.jpg', '997-Rapture_124.jpg',
+            '1004-Rapture_125.jpg', '1011-Rapture_126.jpg', '1018-Rapture_127.jpg', '1025-Rapture_128.jpg',
+            '1032-Rapture_129.jpg', '1039-Rapture_130.jpg', '1046-Rapture_131.jpg', '1053-Rapture_132.jpg',
+            '1060-Rapture_133.jpg', '1067-Rapture_134.jpg', '1074-Rapture_135.jpg', '1081-Rapture_136.jpg',
+            '1088-Rapture_137.jpg', '1095-Rapture_138.jpg', '1102-Rapture_139.jpg', '1109-Rapture_140.jpg',
+            '1116-Rapture_141.jpg', '1123-Rapture_142.jpg', '1130-Rapture_143.jpg', '1137-Rapture_144.jpg',
+            '1144-Rapture_145.jpg', '1151-Rapture_146.jpg', '1158-Rapture_147.jpg', '1165-Rapture_148.jpg',
+            '1172-Rapture_149.jpg', '1179-Rapture_150.jpg', '1186-Rapture_151.jpg', '1193-Rapture_152.jpg',
+            '1200-Rapture_153.jpg', '1207-Rapture_154.jpg', '1214-Rapture_155.jpg', '1221-Rapture_156.jpg',
+            '1228-Rapture_157.jpg', '1235-Rapture_158.jpg', '1242-Rapture_159.jpg', '1249-Rapture_160.jpg',
+            '1256-Rapture_161.jpg', '1263-Rapture_162.jpg', '1270-Rapture_163.jpg', '1277-Rapture_164.jpg',
+            '1284-Rapture_165.jpg', '1291-Rapture_166.jpg', '1298-Rapture_167.jpg'
+        ];
+        
         // Function to load gallery
         function loadGallery() {
             const gallery = document.getElementById('gallery');
             const loading = document.getElementById('loading');
             
-            // Get list of images from thumbs directory
-            fetch(`${GALLERY_CONFIG.IMAGE_SERVER_URL}/rapture/thumbs/`)
-                .then(response => response.text())
-                .then(html => {
-                    // Parse the directory listing
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const links = doc.querySelectorAll('a');
-                    
-                    links.forEach(link => {
-                        const href = link.getAttribute('href');
-                        if (href && href.match(/\.(jpg|jpeg|png)$/i)) {
-                            images.push(href);
-                        }
-                    });
-                    
-                    // If parsing fails, use a predefined list
-                    if (images.length === 0) {
-                        // Add first batch of images
-                        for (let i = 1; i <= 50; i++) {
-                            images.push(`${i}-Rapture_1.jpg`);
-                        }
-                    }
-                    
-                    // Create gallery items
-                    images.forEach((img, index) => {
-                        const item = document.createElement('div');
-                        item.className = 'gallery-item';
-                        const thumbUrl = getImageUrl('rapture', 'thumbs', img);
-                        const fullUrl = getImageUrl('rapture', 'full', img);
-                        item.innerHTML = `<img src="${thumbUrl}" alt="Rapture Art ${index + 1}" loading="lazy">`;
-                        item.onclick = () => openLightbox(fullUrl);
-                        gallery.appendChild(item);
-                    });
-                    
-                    loading.style.display = 'none';
-                })
-                .catch(error => {
-                    // Fallback: manually add some images
-                    const fallbackImages = [
-                        '143-Rapture_1.jpg', '154-Rapture_1.jpg', '308-Rapture_1.jpg', '258-Rapture_1.jpg',
-                        '326-Rapture_1.jpg', '276-Rapture_1.jpg', '31-Rapture_1.jpg', '331-Rapture_1.jpg',
-                        '261-Rapture_1.jpg', '26-Rapture_1.jpg', '150-Rapture_1.jpg', '147-Rapture_1.jpg',
-                        '169-Rapture_1.jpg', '265-Rapture_1.jpg', '335-Rapture_1.jpg', '22-Rapture_1.jpg',
-                        '272-Rapture_1.jpg', '322-Rapture_1.jpg', '35-Rapture_1.jpg', '88-Rapture_1.jpg',
-                        '199-Rapture_1.jpg', '228-Rapture_1.jpg', '124-Rapture_1.jpg', '295-Rapture_1.jpg',
-                        '133-Rapture_1.jpg', '282-Rapture_1.jpg', '78-Rapture_1.jpg', '9-Rapture_1.jpg',
-                        '56-Rapture_1.jpg', '211-Rapture_1.jpg', '341-Rapture_1.jpg', '41-Rapture_1.jpg',
-                        '206-Rapture_1.jpg', '137-Rapture_1.jpg', '286-Rapture_1.jpg', '120-Rapture_1.jpg',
-                        '291-Rapture_1.jpg', '45-Rapture_1.jpg', '202-Rapture_1.jpg', '52-Rapture_1.jpg',
-                        '215-Rapture_1.jpg', '119-Rapture_1.jpg', '130-Rapture_1.jpg', '281-Rapture_1.jpg',
-                        '127-Rapture_1.jpg', '296-Rapture_1.jpg', '109-Rapture_1.jpg', '205-Rapture_1.jpg',
-                        '42-Rapture_1.jpg', '212-Rapture_1.jpg'
-                    ];
-                    
-                    fallbackImages.forEach((img, index) => {
-                        const item = document.createElement('div');
-                        item.className = 'gallery-item';
-                        const thumbUrl = getImageUrl('rapture', 'thumbs', img);
-                        const fullUrl = getImageUrl('rapture', 'full', img);
-                        item.innerHTML = `<img src="${thumbUrl}" alt="Rapture Art ${index + 1}" loading="lazy">`;
-                        item.onclick = () => openLightbox(fullUrl);
-                        gallery.appendChild(item);
-                    });
-                    
-                    loading.style.display = 'none';
-                });
+            // Create gallery items
+            raptureImages.forEach((img, index) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                const thumbUrl = getImageUrl('rapture', 'thumbs', img);
+                const fullUrl = getImageUrl('rapture', 'full', img);
+                item.innerHTML = `<img src="${thumbUrl}" alt="Rapture Art ${index + 1}" loading="lazy">`;
+                item.onclick = () => openLightbox(fullUrl);
+                gallery.appendChild(item);
+            });
+            
+            loading.style.display = 'none';
         }
 
         // Lightbox functions
