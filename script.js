@@ -348,6 +348,13 @@ document.addEventListener('DOMContentLoaded', () => {
     updateWisdomDisplay();
     displayQuestion();
     
+    // Load gallery preview images
+    if (typeof GALLERY_CONFIG !== 'undefined') {
+        document.getElementById('crisis-preview').src = getImageUrl('crisis', 'thumbs', '114c.jpg');
+        document.getElementById('zombies-preview').src = getImageUrl('zombies', 'thumbs', '176.jpg');
+        document.getElementById('rapture-preview').src = getImageUrl('rapture', 'thumbs', '143-Rapture_1.jpg');
+    }
+    
     // Add enter key support for email input
     const emailInput = document.getElementById('email');
     if (emailInput) {

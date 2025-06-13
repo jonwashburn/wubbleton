@@ -186,6 +186,7 @@
             .gallery-item img { height: 200px; }
         }
     </style>
+    <script src="../../../gallery_config.js"></script>
 </head>
 <body>
     <!-- Floating decorations -->
@@ -224,7 +225,7 @@
             const loading = document.getElementById('loading');
             
             // Get list of images from thumbs directory
-            fetch('thumbs/')
+            fetch(`${GALLERY_CONFIG.IMAGE_SERVER_URL}/crisis/thumbs/`)
                 .then(response => response.text())
                 .then(html => {
                     // Parse the directory listing
@@ -251,8 +252,10 @@
                     images.forEach((img, index) => {
                         const item = document.createElement('div');
                         item.className = 'gallery-item';
-                        item.innerHTML = `<img src="thumbs/${img}" alt="Crisis Art ${index + 1}" loading="lazy">`;
-                        item.onclick = () => openLightbox(`full/${img}`);
+                        const thumbUrl = getImageUrl('crisis', 'thumbs', img);
+                        const fullUrl = getImageUrl('crisis', 'full', img);
+                        item.innerHTML = `<img src="${thumbUrl}" alt="Crisis Art ${index + 1}" loading="lazy">`;
+                        item.onclick = () => openLightbox(fullUrl);
                         gallery.appendChild(item);
                     });
                     
@@ -274,8 +277,10 @@
                     fallbackImages.forEach((img, index) => {
                         const item = document.createElement('div');
                         item.className = 'gallery-item';
-                        item.innerHTML = `<img src="thumbs/${img}" alt="Crisis Art ${index + 1}" loading="lazy">`;
-                        item.onclick = () => openLightbox(`full/${img}`);
+                        const thumbUrl = getImageUrl('crisis', 'thumbs', img);
+                        const fullUrl = getImageUrl('crisis', 'full', img);
+                        item.innerHTML = `<img src="${thumbUrl}" alt="Crisis Art ${index + 1}" loading="lazy">`;
+                        item.onclick = () => openLightbox(fullUrl);
                         gallery.appendChild(item);
                     });
                     

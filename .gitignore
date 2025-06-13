@@ -45,4 +45,8 @@ Modern Zombies/
 The Crisis/
 The Rapture/
 images_*/
-wubbleton-website/ 
+wubbleton-website/
+
+# Ignore gallery images (served separately)
+web/galleries/*/full/
+web/galleries/*/thumbs/ 

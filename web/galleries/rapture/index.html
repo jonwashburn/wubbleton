@@ -228,6 +228,7 @@
             .gallery-item img { height: 200px; }
         }
     </style>
+    <script src="../../../gallery_config.js"></script>
 </head>
 <body>
     <!-- Floating decorations -->
@@ -271,7 +272,7 @@
             const loading = document.getElementById('loading');
             
             // Get list of images from thumbs directory
-            fetch('thumbs/')
+            fetch(`${GALLERY_CONFIG.IMAGE_SERVER_URL}/rapture/thumbs/`)
                 .then(response => response.text())
                 .then(html => {
                     // Parse the directory listing
@@ -298,8 +299,10 @@
                     images.forEach((img, index) => {
                         const item = document.createElement('div');
                         item.className = 'gallery-item';
-                        item.innerHTML = `<img src="thumbs/${img}" alt="Rapture Vision ${index + 1}" loading="lazy">`;
-                        item.onclick = () => openLightbox(`full/${img}`);
+                        const thumbUrl = getImageUrl('rapture', 'thumbs', img);
+                        const fullUrl = getImageUrl('rapture', 'full', img);
+                        item.innerHTML = `<img src="${thumbUrl}" alt="Rapture Art ${index + 1}" loading="lazy">`;
+                        item.onclick = () => openLightbox(fullUrl);
                         gallery.appendChild(item);
                     });
                     
@@ -326,8 +329,10 @@
                     fallbackImages.forEach((img, index) => {
                         const item = document.createElement('div');
                         item.className = 'gallery-item';
-                        item.innerHTML = `<img src="thumbs/${img}" alt="Rapture Vision ${index + 1}" loading="lazy">`;
-                        item.onclick = () => openLightbox(`full/${img}`);
+                        const thumbUrl = getImageUrl('rapture', 'thumbs', img);
+                        const fullUrl = getImageUrl('rapture', 'full', img);
+                        item.innerHTML = `<img src="${thumbUrl}" alt="Rapture Art ${index + 1}" loading="lazy">`;
+                        item.onclick = () => openLightbox(fullUrl);
                         gallery.appendChild(item);
                     });
                     
