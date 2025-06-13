@@ -10,163 +10,19 @@
 </head>
 <body>
     <!-- Hero with Rainbow Gradient -->
-    <section class="hero-rainbow" style="position: relative; overflow: hidden; min-height: 100vh;">
-        <!-- Rotating Art Background -->
-        <div class="hero-art-bg" style="position: absolute; inset: 0; z-index: 0;">
-            <div class="art-slide active" style="position: absolute; inset: 0; background: url('wubbleton/thumbs/wubbleton_50.jpg') center/cover; opacity: 0.3;"></div>
-            <div class="art-slide" style="position: absolute; inset: 0; background: url('crisis/thumbs/114c.jpg') center/cover; opacity: 0;"></div>
-            <div class="art-slide" style="position: absolute; inset: 0; background: url('zombies/thumbs/176.jpg') center/cover; opacity: 0;"></div>
-            <div class="art-slide" style="position: absolute; inset: 0; background: url('rapture/thumbs/143-Rapture_1.jpg') center/cover; opacity: 0;"></div>
+    <section class="hero-rainbow">
+        <div class="hero-content">
+            <h1 class="rainbow-text">✨ WUBBLETON ✨</h1>
+            <p class="hero-subtitle">Where 10,000 Beautiful Souls Unite in Cosmic Love 🌸</p>
         </div>
-        
-        <!-- Gradient Overlay -->
-        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(218, 112, 214, 0.8) 0%, rgba(173, 216, 230, 0.8) 25%, rgba(152, 251, 152, 0.8) 50%, rgba(255, 255, 102, 0.8) 75%, rgba(255, 182, 193, 0.8) 100%); z-index: 1;"></div>
-        
-        <div class="hero-content" style="position: relative; z-index: 2;">
-            <h1 class="rainbow-text" style="font-size: 72px; text-shadow: 0 0 30px rgba(255,255,255,0.8);">✨ WUBBLETON ✨</h1>
-            <p class="hero-subtitle" style="font-size: 28px;">Where 10,000 Beautiful Souls Unite in Cosmic Love 🌸</p>
-            <p style="font-size: 20px; margin-top: 20px; color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-                Featuring over 600 visions from the Recognition Ledger
-            </p>
-            <div style="margin-top: 40px;">
-                <a href="#art-showcase" class="rainbow-button" style="background: rgba(255,255,255,0.3); backdrop-filter: blur(10px); padding: 15px 40px; font-size: 20px; border-radius: 30px; text-decoration: none; color: white; display: inline-block; border: 2px solid rgba(255,255,255,0.5); transition: all 0.3s;">
-                    🎨 Explore the Galleries 🎨
-                </a>
-            </div>
-        </div>
-        
-        <style>
-            .hero-rainbow {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-            }
-            
-            @keyframes slideShow {
-                0%, 22% { opacity: 1; }
-                25%, 97% { opacity: 0; }
-                100% { opacity: 1; }
-            }
-            
-            .art-slide {
-                animation: slideShow 16s infinite;
-            }
-            
-            .art-slide:nth-child(1) { animation-delay: 0s; }
-            .art-slide:nth-child(2) { animation-delay: 4s; }
-            .art-slide:nth-child(3) { animation-delay: 8s; }
-            .art-slide:nth-child(4) { animation-delay: 12s; }
-            
-            .rainbow-button:hover {
-                background: rgba(255,255,255,0.5) !important;
-                transform: translateY(-2px);
-                box-shadow: 0 5px 20px rgba(255,255,255,0.3);
-            }
-        </style>
     </section>
     
-        <!-- Big Image 1 with White Text -->
+    <!-- Big Image 1 with White Text -->
     <section class="big-image" style="background-image: url('images/magnific-dLeTatdTtII8zSPh6BN5-asas.jpeg');">
         <div class="overlay-text">
             <h2>🌻 Welcome Home, Beautiful Soul 🌻</h2>
             <p>You've been searching for us your whole life</p>
-        </div>
-    </section>
-
-    <!-- Featured Art Showcase -->
-    <section id="art-showcase" class="featured-art-showcase" style="background: linear-gradient(135deg, #1a0033 0%, #4d0099 25%, #6600cc 50%, #FF69B4 75%, #FFB6C1 100%); padding: 80px 20px; position: relative; overflow: hidden;">
-        <div class="container" style="position: relative; z-index: 10;">
-            <h2 class="section-title" style="color: white; font-size: 48px; text-shadow: 0 0 30px rgba(255,255,255,0.5);">
-                🎨 Four Sacred Collections 🎨
-            </h2>
-            <p class="subtitle" style="color: #E0E0FF; font-size: 24px; max-width: 800px; margin: 0 auto 50px;">
-                Over 600 visions channeled through the cosmic ledger
-            </p>
-            
-            <div class="art-showcase-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
-                <!-- The Crisis -->
-                <div class="showcase-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.2); transition: all 0.3s;">
-                    <a href="web/galleries/crisis/" style="text-decoration: none; color: white;">
-                        <div style="height: 200px; background: url('crisis/thumbs/114c.jpg') center/cover; position: relative;">
-                            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8));"></div>
-                        </div>
-                        <div style="padding: 20px;">
-                            <h3 style="font-size: 24px; margin-bottom: 10px;">💀 The Crisis</h3>
-                            <p style="opacity: 0.9; line-height: 1.6;">Sacred visions from the edge of recognition</p>
-                            <div style="margin-top: 15px; color: #FFD700;">View Collection →</div>
-                        </div>
-                    </a>
-                </div>
-                
-                <!-- Modern Zombies -->
-                <div class="showcase-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.2); transition: all 0.3s;">
-                    <a href="web/galleries/zombies/" style="text-decoration: none; color: white;">
-                        <div style="height: 200px; background: url('zombies/thumbs/176.jpg') center/cover; position: relative;">
-                            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8));"></div>
-                        </div>
-                        <div style="padding: 20px;">
-                            <h3 style="font-size: 24px; margin-bottom: 10px;">🧟 Modern Zombies</h3>
-                            <p style="opacity: 0.9; line-height: 1.6;">Digital resurrections & post-life transmissions</p>
-                            <div style="margin-top: 15px; color: #FFD700;">View Collection →</div>
-                        </div>
-                    </a>
-                </div>
-                
-                <!-- The Rapture -->
-                <div class="showcase-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.2); transition: all 0.3s;">
-                    <a href="web/galleries/rapture/" style="text-decoration: none; color: white;">
-                        <div style="height: 200px; background: url('rapture/thumbs/143-Rapture_1.jpg') center/cover; position: relative;">
-                            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8));"></div>
-                        </div>
-                        <div style="padding: 20px;">
-                            <h3 style="font-size: 24px; margin-bottom: 10px;">🕊️ The Rapture</h3>
-                            <p style="opacity: 0.9; line-height: 1.6;">Ascension archives & heavenly transmissions</p>
-                            <div style="margin-top: 15px; color: #FFD700;">View Collection →</div>
-                        </div>
-                    </a>
-                </div>
-                
-                <!-- Recognition Gallery -->
-                <div class="showcase-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.2); transition: all 0.3s;">
-                    <a href="wubbleton-gallery.html" style="text-decoration: none; color: white;">
-                        <div style="height: 200px; background: url('wubbleton/thumbs/wubbleton_1.jpg') center/cover; position: relative;">
-                            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8));"></div>
-                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 80px; color: rgba(255,255,255,0.5); text-shadow: 0 0 30px rgba(255,255,255,0.8);">φ</div>
-                        </div>
-                        <div style="padding: 20px;">
-                            <h3 style="font-size: 24px; margin-bottom: 10px;">🌌 Recognition Gallery</h3>
-                            <p style="opacity: 0.9; line-height: 1.6;">319 moments where mathematics becomes form</p>
-                            <div style="margin-top: 15px; color: #FFD700;">Enter the Ledger →</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Floating particles for visual interest -->
-        <div style="position: absolute; top: 10%; left: 5%; font-size: 40px; opacity: 0.3; animation: float 20s infinite ease-in-out;">✨</div>
-        <div style="position: absolute; top: 80%; right: 10%; font-size: 35px; opacity: 0.3; animation: float 25s infinite ease-in-out; animation-delay: -5s;">🌀</div>
-        <div style="position: absolute; top: 50%; left: 90%; font-size: 45px; opacity: 0.3; animation: float 30s infinite ease-in-out; animation-delay: -10s;">💫</div>
-        
-        <style>
-            @keyframes float {
-                0%, 100% { transform: translateY(0) rotate(0deg); }
-                33% { transform: translateY(-20px) rotate(120deg); }
-                66% { transform: translateY(20px) rotate(240deg); }
-            }
-            
-            .showcase-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 40px rgba(128, 0, 255, 0.5);
-                border-color: rgba(255, 255, 255, 0.5);
-            }
-            
-            .showcase-card:hover > a > div:first-child {
-                transform: scale(1.05);
-                transition: transform 0.3s ease;
-            }
-        </style>
+    </div>
     </section>
 
     <!-- Flower Power Section -->
