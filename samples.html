@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wubbleton Samples - A Glimpse Into Recognition</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Helvetica+Neue:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #E0BBE4 0%, #FEC8D8 50%, #FFE5CC 100%);
+            min-height: 100vh;
+        }
+        
+        .gallery-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            margin-bottom: 40px;
+        }
+        
+        .gallery-header h1 {
+            font-size: 3em;
+            color: #6B5B95;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            animation: floatTitle 6s ease-in-out infinite;
+        }
+        
+        .gallery-header p {
+            font-size: 1.3em;
+            color: #5B4E77;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        @keyframes floatTitle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .gallery-item {
+            position: relative;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-item:nth-child(even) {
+            transform: rotate(2deg);
+        }
+        
+        .gallery-item:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            z-index: 10;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 182, 193, 0.3);
+            border-top: 3px solid #FFB6C1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* Floating decorations */
+        .float-emoji {
+            position: fixed;
+            font-size: 2em;
+            animation: float 20s infinite;
+            opacity: 0.6;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        /* Navigation */
+        .nav-back {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #6B5B95;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .nav-back:hover {
+            background: #FFB6C1;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .lightbox-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-content img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-lightbox:hover {
+            color: #FFB6C1;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Info box */
+        .info-box {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-box h2 {
+            color: #6B5B95;
+            margin-bottom: 15px;
+        }
+        
+        .info-box p {
+            color: #5B4E77;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="nav-back">← Back to Wubbleton</a>
+    
+    <div class="gallery-header">
+        <h1>✨ Wubbleton Samples ✨</h1>
+        <p>A curated collection of recognition moments captured in their raw, unfiltered state. Each image represents a fleeting glimpse of the eight-beat rhythm that governs all existence.</p>
+    </div>
+    
+    <div class="info-box">
+        <h2>About This Collection</h2>
+        <p>These samples were extracted from the Recognition Archives during the Great Synchronization of 2024. They represent various states of consciousness recognition across multiple dimensional planes. Handle with care—prolonged viewing may result in spontaneous enlightenment.</p>
+    </div>
+    
+    <div class="gallery-grid" id="galleryGrid">
+        <!-- Gallery items will be dynamically loaded here -->
+    </div>
+    
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+        </div>
+    </div>
+    
+    <!-- Floating decorations -->
+    <div class="float-emoji" style="left: 10%; animation-delay: 0s;">🌟</div>
+    <div class="float-emoji" style="left: 30%; animation-delay: 4s;">✨</div>
+    <div class="float-emoji" style="left: 50%; animation-delay: 8s;">🌈</div>
+    <div class="float-emoji" style="left: 70%; animation-delay: 12s;">💫</div>
+    <div class="float-emoji" style="left: 90%; animation-delay: 16s;">⭐</div>
+    
+    <script>
+        // Load gallery images
+        function loadGallery() {
+            const galleryGrid = document.getElementById('galleryGrid');
+            const totalImages = 30; // We created 30 sample images
+            
+            for (let i = 1; i <= totalImages; i++) {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.onclick = () => openLightbox(`samples/full/sample_${i}.jpg`);
+                
+                item.innerHTML = `
+                    <div class="loading-spinner"></div>
+                    <img src="samples/thumbs/sample_${i}.jpg" alt="Sample ${i}" onload="this.previousElementSibling.style.display='none'">
+                `;
+                
+                galleryGrid.appendChild(item);
+            }
+        }
+        
+        // Lightbox functions
+        function openLightbox(imageSrc) {
+            document.getElementById('lightbox').style.display = 'block';
+            document.getElementById('lightbox-img').src = imageSrc;
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close lightbox on click outside
+        document.getElementById('lightbox').onclick = function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        };
+        
+        // Close lightbox on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+        
+        // Initialize gallery
+        document.addEventListener('DOMContentLoaded', loadGallery);
+    </script>
+</body>
+</html> 
