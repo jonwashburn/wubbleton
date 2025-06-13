@@ -165,11 +165,188 @@ function initSlider() {
     });
 }
 
+// Wisdom carousel functionality
+let currentWisdom = 0;
+const wisdomCards = [
+    {
+        text: "If a tree falls in the forest and no one posts about it on social media, did you even experience nature?",
+        author: "Wubbushi, during Morning Meditation"
+    },
+    {
+        text: "The only thing standing between you and enlightenment is probably your student loans. But mostly your ego. But definitely also the loans.",
+        author: "Wubbushi, Financial Consciousness Workshop"
+    },
+    {
+        text: "We are all one consciousness experiencing itself subjectively. Except Dave. Dave's just here for the tax benefits.",
+        author: "Wubbushi, Community Meeting"
+    },
+    {
+        text: "Your third eye is like a smartphone camera - it works better when you clean the lens with organic kale juice.",
+        author: "Wubbushi, Nutrition Seminar"
+    },
+    {
+        text: "Manifestation is just Amazon Prime for the universe, but with worse delivery times and no tracking number.",
+        author: "Wubbushi, Abundance Workshop"
+    },
+    {
+        text: "The difference between a cult and a consciousness collective is mostly just better graphic design and kombucha on tap.",
+        author: "Wubbushi, Marketing Meeting"
+    }
+];
+
+function updateWisdomDisplay() {
+    const card = document.querySelector('.wisdom-card');
+    if (card) {
+        const wisdom = wisdomCards[currentWisdom];
+        card.querySelector('.wisdom-text').textContent = wisdom.text;
+        card.querySelector('footer').textContent = `- ${wisdom.author}`;
+        
+        // Add fade animation
+        card.style.opacity = '0';
+        setTimeout(() => {
+            card.style.opacity = '1';
+        }, 100);
+    }
+}
+
+function nextWisdom() {
+    currentWisdom = (currentWisdom + 1) % wisdomCards.length;
+    updateWisdomDisplay();
+}
+
+function previousWisdom() {
+    currentWisdom = (currentWisdom - 1 + wisdomCards.length) % wisdomCards.length;
+    updateWisdomDisplay();
+}
+
+// Quiz functionality
+let currentQuestion = 0;
+let quizScore = 0;
+const quizQuestions = [
+    {
+        question: "You wake up at 3 AM. Your first thought is:",
+        options: {
+            A: "Time for shadow work!",
+            B: "The universe is calling me",
+            C: "I need to pee",
+            D: "Is this the simulation glitching?"
+        }
+    },
+    {
+        question: "Your ideal breakfast consists of:",
+        options: {
+            A: "Activated charcoal smoothie with intentions",
+            B: "Whatever the earth provides",
+            C: "Coffee. Just coffee.",
+            D: "The tears of my enemies (kidding! ...mostly)"
+        }
+    },
+    {
+        question: "When someone says 'good vibes only', you:",
+        options: {
+            A: "Immediately sage the area",
+            B: "Check their aura for authenticity",
+            C: "Slowly back away",
+            D: "Ask if bad vibes get a participation trophy"
+        }
+    },
+    {
+        question: "Your spirit animal is:",
+        options: {
+            A: "A phoenix rising from organic ashes",
+            B: "All animals are my spirit animal",
+            C: "My cat, who judges me daily",
+            D: "A WiFi router with full bars"
+        }
+    },
+    {
+        question: "The meaning of life is:",
+        options: {
+            A: "To transcend the illusion of separation",
+            B: "42, obviously",
+            C: "To find good parking",
+            D: "Whatever Wubbushi says it is"
+        }
+    }
+];
+
+function displayQuestion() {
+    const questionDiv = document.getElementById('quiz-question');
+    const optionsDiv = document.getElementById('quiz-options');
+    
+    if (currentQuestion < quizQuestions.length) {
+        const q = quizQuestions[currentQuestion];
+        questionDiv.innerHTML = `
+            <h3>Question ${currentQuestion + 1} of ${quizQuestions.length}:</h3>
+            <p>${q.question}</p>
+        `;
+        
+        optionsDiv.innerHTML = Object.entries(q.options).map(([key, value]) => 
+            `<button onclick="answerQuiz('${key}')" class="quiz-button">${key}) ${value}</button>`
+        ).join('');
+    }
+}
+
+function answerQuiz(answer) {
+    // Award points based on answer
+    const points = {
+        A: 4,  // Maximum enlightenment
+        B: 3,  // Pretty woke
+        C: 1,  // Still asleep but honest
+        D: 2   // Self-aware skeptic
+    };
+    
+    quizScore += points[answer];
+    currentQuestion++;
+    
+    if (currentQuestion < quizQuestions.length) {
+        displayQuestion();
+    } else {
+        showQuizResult();
+    }
+}
+
+function showQuizResult() {
+    const resultDiv = document.getElementById('quiz-result');
+    const scoreSpan = document.getElementById('wubble-score');
+    const messageP = document.getElementById('wubble-message');
+    
+    document.getElementById('quiz-options').style.display = 'none';
+    document.getElementById('quiz-question').style.display = 'none';
+    resultDiv.style.display = 'block';
+    
+    const maxScore = quizQuestions.length * 4;
+    const percentage = (quizScore / maxScore) * 100;
+    
+    scoreSpan.textContent = `${quizScore}/${maxScore}`;
+    
+    if (percentage >= 80) {
+        messageP.textContent = "OMG! You're basically already enlightened! Your chakras are so aligned they have their own WiFi network. Welcome home, cosmic warrior!";
+    } else if (percentage >= 60) {
+        messageP.textContent = "You're vibrating at a beautiful frequency! With just a little more kombucha and crystal healing, you'll be ready for full consciousness merger.";
+    } else if (percentage >= 40) {
+        messageP.textContent = "Your potential is showing! You might still eat gluten and believe in 'time', but we can work with that. Baby steps to enlightenment!";
+    } else {
+        messageP.textContent = "You're perfectly imperfect! Your skepticism is just your ego protecting you from infinite joy. Come for a weekend retreat and we'll fix that right up!";
+    }
+}
+
+function retakeQuiz() {
+    currentQuestion = 0;
+    quizScore = 0;
+    document.getElementById('quiz-result').style.display = 'none';
+    document.getElementById('quiz-question').style.display = 'block';
+    document.getElementById('quiz-options').style.display = 'block';
+    displayQuestion();
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     animateCountdown();
     initSlider();
     initParallax();
+    updateWisdomDisplay();
+    displayQuestion();
     
     // Add enter key support for email input
     const emailInput = document.getElementById('email');
