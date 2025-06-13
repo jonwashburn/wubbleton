@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦄 404 - Lost in the Cosmic Void 🌌</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Helvetica+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+        
+        .error-container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin: 20px;
+        }
+        
+        .error-404 {
+            font-size: 120px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .error-title {
+            font-size: 28px;
+            color: #5f27cd;
+            margin: 20px 0;
+        }
+        
+        .error-message {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+        
+        .error-options {
+            margin-top: 30px;
+        }
+        
+        .rainbow-button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        
+        .rainbow-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .cosmic-emoji {
+            font-size: 60px;
+            margin: 20px 0;
+            animation: spin 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .helpful-suggestions {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 182, 193, 0.2);
+            border-radius: 15px;
+        }
+        
+        .helpful-suggestions h3 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+        
+        .helpful-suggestions ul {
+            text-align: left;
+            display: inline-block;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="cosmic-emoji">🌌</div>
+        <h1 class="error-404">404</h1>
+        <h2 class="error-title">You've Transcended Our Website!</h2>
+        
+        <p class="error-message">
+            Congratulations! You've achieved such a high level of consciousness that you've vibrated 
+            right through our digital reality and into the void between web pages.
+        </p>
+        
+        <p class="error-message">
+            This is either a sign of your spiritual advancement, or you just clicked a broken link. 
+            We prefer to believe it's the former.
+        </p>
+        
+        <div class="helpful-suggestions">
+            <h3>What This Could Mean:</h3>
+            <ul>
+                <li>Your third eye is so open it's seeing pages that don't exist yet</li>
+                <li>The universe is testing your attachment to specific URLs</li>
+                <li>You've discovered a secret portal (it's not working though)</li>
+                <li>Mercury is in retrograde and it's affecting our server</li>
+                <li>Dave from IT forgot to upload this page (Classic Dave)</li>
+            </ul>
+        </div>
+        
+        <div class="error-options">
+            <a href="/" class="rainbow-button">🏠 Return to Wubbleton</a>
+            <a href="/web/galleries/crisis/" class="rainbow-button">🎨 Visit the Galleries</a>
+        </div>
+        
+        <p style="margin-top: 30px; color: #999; font-size: 14px;">
+            Error ID: ENLIGHTENMENT_OVERFLOW_420<br>
+            If this persists, try clearing your chakras and browser cache.
+        </p>
+    </div>
+    
+    <script>
+        // Add floating emojis
+        setInterval(() => {
+            const emojis = ['✨', '🦄', '🌈', '💫', '🔮', '🌸'];
+            const emoji = document.createElement('div');
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.position = 'absolute';
+            emoji.style.left = Math.random() * window.innerWidth + 'px';
+            emoji.style.top = window.innerHeight + 'px';
+            emoji.style.fontSize = '30px';
+            emoji.style.animation = 'float-up 5s ease-out forwards';
+            document.body.appendChild(emoji);
+            setTimeout(() => emoji.remove(), 5000);
+        }, 500);
+        
+        // Add CSS for floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float-up {
+                to {
+                    transform: translateY(-${window.innerHeight + 100}px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html> 

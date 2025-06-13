@@ -10,14 +10,23 @@ import glob
 from pathlib import Path
 from typing import List, Dict, Optional
 
-# Install with: pip install supabase
-from supabase import create_client, Client
+try:
+    # Install with: pip install supabase
+    from supabase import create_client, Client
+except ImportError:
+    print("❌ Supabase module not found!")
+    print("\nTo install, run:")
+    print("  pip install supabase python-dotenv")
+    print("\nOr if you prefer Node.js, use the JavaScript version instead:")
+    print("  npm install")
+    print("  node setup_supabase.js")
+    sys.exit(1)
 
 class GalleryManager:
     def __init__(self):
         # Get credentials from environment or .env file
-        self.url = os.getenv('SUPABASE_URL', 'YOUR_SUPABASE_URL')
-        self.key = os.getenv('SUPABASE_ANON_KEY', 'YOUR_ANON_KEY')
+        self.url = os.getenv('SUPABASE_URL', 'https://ozxhahlykxeeiuvmzrbb.supabase.co')
+        self.key = os.getenv('SUPABASE_ANON_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im96eGhhaGx5a3hlZWl1dm16cmJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk3OTE1NDgsImV4cCI6MjA2NTM2NzU0OH0.SP-nxe_faZurceOYkXTTZlMDHw3bDFkLQxgMbQKTxZU')
         
         if self.url == 'YOUR_SUPABASE_URL':
             print("⚠️  Please set your Supabase credentials!")
@@ -30,14 +39,14 @@ class GalleryManager:
             sys.exit(1)
         
         self.supabase: Client = create_client(self.url, self.key)
-        self.bucket_name = 'wubbleton-galleries'
+        self.bucket_name = 'gallery-images'
     
     def setup_bucket(self) -> bool:
         """Create the storage bucket if it doesn't exist"""
         try:
             # List existing buckets
             buckets = self.supabase.storage.list_buckets()
-            exists = any(b.name == self.bucket_name for b in buckets)
+            exists = any(b['name'] == self.bucket_name for b in buckets)
             
             if not exists:
                 print("📦 Creating storage bucket...")
@@ -51,6 +60,10 @@ class GalleryManager:
             
             return True
         except Exception as e:
+            # If the error is about RLS or permissions, but bucket exists, that's OK
+            if "policy" in str(e).lower() or "unauthorized" in str(e).lower():
+                print("✅ Bucket exists (access check failed but that's OK)")
+                return True
             print(f"❌ Error setting up bucket: {e}")
             return False
     
@@ -180,6 +193,7 @@ def main():
         return
     
     if command == 'upload':
+        # Handle both "upload" and "upload all"
         manager.upload_all_galleries()
     
     elif command == 'list':

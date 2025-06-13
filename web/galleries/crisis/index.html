@@ -59,15 +59,26 @@
 
         /* Gallery Grid */
         .gallery-container {
-            max-width: 1400px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .collection-description {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+            text-align: center;
+            color: #555;
+            font-size: 16px;
+            line-height: 1.8;
+            font-style: italic;
         }
 
         .gallery-item {
@@ -182,8 +193,9 @@
         /* Responsive */
         @media (max-width: 768px) {
             h1 { font-size: 36px; }
-            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
-            .gallery-item img { height: 200px; }
+            .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
+            .gallery-item img { height: 250px; }
+            .collection-description { font-size: 14px; }
         }
     </style>
     <script src="../../../gallery_config.js"></script>
@@ -199,6 +211,10 @@
         <a href="../../" class="back-link">← Back to Wubbleton</a>
         <h1>The Crisis</h1>
         <p class="subtitle">Sacred Visions from the Edge of Recognition</p>
+    </div>
+
+    <div class="collection-description">
+        <p>The Crisis Collection captures the exact moment when the veil between dimensions becomes tissue-thin. Each piece was channeled during our mandatory 3 AM "Recognition Sessions," when initiates report seeing the mathematical scaffolding behind reality. These are not mere artworks—they are emergency broadcasts from the threshold where consciousness discovers it's been looking in a mirror all along. Prolonged viewing may cause spontaneous enlightenment, existential vertigo, or an uncontrollable urge to reorganize your bookshelf by vibrational frequency.</p>
     </div>
 
     <div class="loading" id="loading">Loading sacred art...</div>
@@ -219,73 +235,55 @@
         // List of images (generated from the resized images)
         const images = [];
         
+        // Crisis gallery images - complete list
+        const crisisImages = [
+            '114c.jpg', '60b.jpg', '88.jpg', '77.jpg', '63.jpg', 'k.jpg', '76b.jpg',
+            '215.jpg', '201.jpg', 'j.jpg', '188.jpg', '76.jpg', '163.jpg', '89.jpg',
+            '114b.jpg', '115d.jpg', '161.jpg', '175.jpg', 'h.jpg', '48.jpg',
+            '217.jpg', '203.jpg', '202.jpg', '216.jpg', '75.jpg', 'i.jpg', '61.jpg',
+            '148.jpg', '139d.jpg', '40b.jpg', '35b1.jpg', '164.jpg', '170.jpg',
+            '16b.jpg', '59.jpg', '65.jpg', 'm.jpg', '212.jpg', '206.jpg', '207.jpg',
+            '213.jpg', '70.jpg', '64.jpg', '135b.jpg', 'l.jpg', '159.jpg', '165.jpg',
+            '173.jpg', '167.jpg', '99.jpg', '8.jpg', 'd.jpg', '22b.jpg', '107.jpg',
+            '100.jpg', '85.jpg', '93.jpg', 'a.jpg', '204.jpg', '210.jpg', 'g.jpg',
+            '190.jpg', 'f.jpg', '191.jpg', '73b.jpg', '149.jpg', '35b.jpg', '27.jpg',
+            '33.jpg', '171.jpg', '177.jpg', '184.jpg', '178.jpg', 'o.jpg', '9.jpg',
+            '98.jpg', '91.jpg', '105.jpg', '112.jpg', '19b1.jpg', '126.jpg', '119.jpg',
+            '133.jpg', '140.jpg', '147.jpg', '24.jpg', '31.jpg', '38.jpg', '45.jpg',
+            '52.jpg', '132.jpg', '146.jpg', '153.jpg', '139.jpg', '160.jpg', '125.jpg',
+            '118.jpg', '67.jpg', '74.jpg', '81.jpg', '60.jpg', '205.jpg', '198.jpg',
+            '18b.jpg', '134.jpg', '3.jpg', '17.jpg', '10.jpg', '68.jpg', '75b.jpg',
+            '82.jpg', 'b.jpg', '96.jpg', '214.jpg', '200.jpg', '193.jpg', '73.jpg',
+            '87.jpg', '80.jpg', '94.jpg', '101.jpg', '108.jpg', '115.jpg', '35c.jpg',
+            '42.jpg', '49.jpg', '56.jpg', '28.jpg', '141.jpg', '155.jpg', '162.jpg',
+            '148b.jpg', '169.jpg', '183.jpg', '22.jpg', '176b.jpg', '136.jpg', '16.jpg',
+            '154.jpg', '15.jpg', '113.jpg', '106.jpg', '92.jpg', 'n.jpg', '211.jpg',
+            '218.jpg', '225.jpg', '36b.jpg', '72.jpg', '86.jpg', '79.jpg', 'e.jpg',
+            '208.jpg', '194.jpg', '128.jpg', '121.jpg', '179.jpg', '30.jpg', '2.jpg',
+            '195.jpg', '192.jpg', '74b.jpg', '103.jpg', '117.jpg', '36.jpg', '43.jpg',
+            '71.jpg', '114.jpg', '84.jpg', '97.jpg', '90.jpg', '104.jpg', '111.jpg',
+            'c.jpg', '209.jpg', '189.jpg', '135.jpg', '142.jpg', '156.jpg', '15b.jpg',
+            '41.jpg', '62.jpg', '55.jpg', '34.jpg', '51.jpg', '44.jpg', '58.jpg',
+            '69.jpg', '20.jpg', '19.jpg', '120.jpg', '35.jpg', '83.jpg', '143.jpg'
+        ];
+        
         // Function to load gallery
         function loadGallery() {
             const gallery = document.getElementById('gallery');
             const loading = document.getElementById('loading');
             
-            // Get list of images from thumbs directory
-            fetch(`${GALLERY_CONFIG.IMAGE_SERVER_URL}/crisis/thumbs/`)
-                .then(response => response.text())
-                .then(html => {
-                    // Parse the directory listing
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const links = doc.querySelectorAll('a');
-                    
-                    links.forEach(link => {
-                        const href = link.getAttribute('href');
-                        if (href && href.match(/\.(jpg|jpeg|png)$/i)) {
-                            images.push(href);
-                        }
-                    });
-                    
-                    // If parsing fails, use a predefined list
-                    if (images.length === 0) {
-                        // Add first batch of images
-                        for (let i = 1; i <= 50; i++) {
-                            images.push(`${i}.jpg`);
-                        }
-                    }
-                    
-                    // Create gallery items
-                    images.forEach((img, index) => {
-                        const item = document.createElement('div');
-                        item.className = 'gallery-item';
-                        const thumbUrl = getImageUrl('crisis', 'thumbs', img);
-                        const fullUrl = getImageUrl('crisis', 'full', img);
-                        item.innerHTML = `<img src="${thumbUrl}" alt="Crisis Art ${index + 1}" loading="lazy">`;
-                        item.onclick = () => openLightbox(fullUrl);
-                        gallery.appendChild(item);
-                    });
-                    
-                    loading.style.display = 'none';
-                })
-                .catch(error => {
-                    // Fallback: manually add some images
-                    const fallbackImages = [
-                        '114c.jpg', '60b.jpg', '88.jpg', '77.jpg', '63.jpg', 'k.jpg', '76b.jpg',
-                        '215.jpg', '201.jpg', 'j.jpg', '188.jpg', '76.jpg', '163.jpg', '89.jpg',
-                        '114b.jpg', '115d.jpg', '161.jpg', '175.jpg', 'h.jpg', '48.jpg',
-                        '217.jpg', '203.jpg', '202.jpg', '216.jpg', '75.jpg', 'i.jpg', '61.jpg',
-                        '148.jpg', '139d.jpg', '40b.jpg', '35b1.jpg', '164.jpg', '170.jpg',
-                        '16b.jpg', '59.jpg', '65.jpg', 'm.jpg', '212.jpg', '206.jpg', '207.jpg',
-                        '213.jpg', '70.jpg', '64.jpg', '135b.jpg', 'l.jpg', '159.jpg', '165.jpg',
-                        '173.jpg', '167.jpg', '99.jpg', '8.jpg'
-                    ];
-                    
-                    fallbackImages.forEach((img, index) => {
-                        const item = document.createElement('div');
-                        item.className = 'gallery-item';
-                        const thumbUrl = getImageUrl('crisis', 'thumbs', img);
-                        const fullUrl = getImageUrl('crisis', 'full', img);
-                        item.innerHTML = `<img src="${thumbUrl}" alt="Crisis Art ${index + 1}" loading="lazy">`;
-                        item.onclick = () => openLightbox(fullUrl);
-                        gallery.appendChild(item);
-                    });
-                    
-                    loading.style.display = 'none';
-                });
+            // Create gallery items
+            crisisImages.forEach((img, index) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                const thumbUrl = getImageUrl('crisis', 'thumbs', img);
+                const fullUrl = getImageUrl('crisis', 'full', img);
+                item.innerHTML = `<img src="${thumbUrl}" alt="Crisis Art ${index + 1}" loading="lazy">`;
+                item.onclick = () => openLightbox(fullUrl);
+                gallery.appendChild(item);
+            });
+            
+            loading.style.display = 'none';
         }
 
         // Lightbox functions

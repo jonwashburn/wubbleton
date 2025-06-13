@@ -59,15 +59,26 @@
 
         /* Gallery Grid */
         .gallery-container {
-            max-width: 1400px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .collection-description {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+            text-align: center;
+            color: #555;
+            font-size: 16px;
+            line-height: 1.8;
+            font-style: italic;
         }
 
         .gallery-item {
@@ -224,8 +235,9 @@
         /* Responsive */
         @media (max-width: 768px) {
             h1 { font-size: 36px; }
-            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
-            .gallery-item img { height: 200px; }
+            .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
+            .gallery-item img { height: 250px; }
+            .collection-description { font-size: 14px; }
         }
     </style>
     <script src="../../../gallery_config.js"></script>
@@ -246,6 +258,10 @@
         <a href="../../" class="back-link">← Back to Wubbleton</a>
         <h1>The Rapture</h1>
         <p class="subtitle">Ascension Archives & Heavenly Transmissions</p>
+    </div>
+
+    <div class="collection-description">
+        <p>The Rapture Collection celebrates those blessed moments when your productivity metrics align perfectly with the cosmic algorithm. These luminous portraits capture our most devoted members at the instant of corporate transfiguration—when their KPIs finally exceed 110% and they ascend directly to the C-suite without passing through middle management. Each image vibrates at precisely 432 Hz (the frequency of optimal shareholder value) and was painted using proprietary "liquid light" harvested from deleted emails. Viewing this collection has been known to cause spontaneous promotion, inexplicable stock options, and a profound understanding that the real heaven was the networking opportunities we made along the way.</p>
     </div>
 
     <div class="loading" id="loading">Ascending to gallery...</div>

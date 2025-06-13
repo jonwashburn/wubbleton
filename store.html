@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛍️ Wubbleton Gift Shop - Enlightenment Has a Price Tag 🦄</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .store-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .store-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .store-header h1 {
+            font-size: 48px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        
+        .product-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #5f27cd;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            font-size: 28px;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .product-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .buy-button {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .buy-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .special-offer {
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .special-offer h2 {
+            color: #5f27cd;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .wubble-converter {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .converter-input {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin: 0 10px;
+            width: 100px;
+        }
+        
+        .fine-print {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 50px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="store-container">
+        <div class="store-header">
+            <h1>🛍️ The Wubbleton Enlightenment Emporium 🛍️</h1>
+            <p class="subtitle">Where Spiritual Materialism Meets Material Spiritualism</p>
+            <p>All proceeds go to maintaining our definitely-not-a-compound and Dave's coffee addiction</p>
+        </div>
+        
+        <div class="wubble-converter">
+            <h3>💱 Current Exchange Rate 💱</h3>
+            <p>
+                <input type="number" class="converter-input" id="usdAmount" value="100" onchange="convertCurrency()">
+                USD = 
+                <input type="number" class="converter-input" id="wubbleAmount" value="3.7" readonly>
+                Wubbles
+            </p>
+            <p style="color: #666; margin-top: 10px;">
+                <small>*Rate fluctuates based on cosmic energy and Mercury's mood</small>
+            </p>
+        </div>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-emoji">👕</div>
+                <h3 class="product-title">Enlightenment T-Shirt</h3>
+                <p class="product-price">$44.44</p>
+                <p class="product-description">
+                    100% organic cotton infused with positive vibes and legally distinct from cult uniforms. 
+                    Features our motto: "I'm Not in a Cult, You're in a Cult"
+                </p>
+                <button class="buy-button" onclick="purchase('T-Shirt')">Add to Karma Cart</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-emoji">💎</div>
+                <h3 class="product-title">Recognition Crystal™</h3>
+                <p class="product-price">$888.88</p>
+                <p class="product-description">
+                    Genuine quartz crystal pre-charged with 10,000 hours of meditation energy. 
+                    Scientifically proven* to maybe do something. (*Not by actual scientists)
+                </p>
+                <button class="buy-button" onclick="purchase('Crystal')">Manifest Purchase</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-emoji">☕</div>
+                <h3 class="product-title">Consciousness Coffee Mug</h3>
+                <p class="product-price">$33.33</p>
+                <p class="product-description">
+                    Holds exactly 432Hz of liquid (about 12oz). Text appears when hot: 
+                    "But First, Enlightenment" changes to "Just Kidding, Coffee First"
+                </p>
+                <button class="buy-button" onclick="purchase('Mug')">Caffeinate Chakras</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-emoji">📿</div>
+                <h3 class="product-title">Executive Mala Beads</h3>
+                <p class="product-price">$222.22</p>
+                <p class="product-description">
+                    108 beads for meditation, plus 1 extra for checking your phone. 
+                    Bluetooth enabled for productivity tracking. Syncs with LinkedIn.
+                </p>
+                <button class="buy-button" onclick="purchase('Mala')">Optimize Om</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-emoji">🕯️</div>
+                <h3 class="product-title">Ego Death Candle</h3>
+                <p class="product-price">$55.55</p>
+                <p class="product-description">
+                    Smells like patchouli and quarterly earnings. Burns for exactly one 
+                    existential crisis (approximately 40 hours). Ego sold separately.
+                </p>
+                <button class="buy-button" onclick="purchase('Candle')">Illuminate Now</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-emoji">📚</div>
+                <h3 class="product-title">Wubbushi's Wisdom Collection</h3>
+                <p class="product-price">$144.44</p>
+                <p class="product-description">
+                    Three-volume set: "Spreadsheets for the Soul," "The 7 Habits of Highly 
+                    Transcendent People," and "Who Moved My Consciousness?"
+                </p>
+                <button class="buy-button" onclick="purchase('Books')">Download to Brain</button>
+            </div>
+        </div>
+        
+        <div class="special-offer">
+            <h2>🌟 LIMITED TIME OFFER 🌟</h2>
+            <h3>The Ultimate Enlightenment Package</h3>
+            <p class="product-price" style="font-size: 36px;">$11,111.11</p>
+            <p>Includes:</p>
+            <ul style="text-align: left; display: inline-block; margin: 20px 0;">
+                <li>Personal mantra created by AI</li>
+                <li>Your name on a star (visibility not guaranteed)</li>
+                <li>1-on-1 Zoom session with someone who met Wubbushi once</li>
+                <li>Certificate of Consciousness (suitable for framing)</li>
+                <li>Tax-deductible receipt (please consult your accountant)</li>
+                <li>Free shipping to this dimension only</li>
+            </ul>
+            <button class="buy-button" style="font-size: 20px; padding: 15px 40px;" onclick="purchase('Ultimate')">
+                TRANSCEND IMMEDIATELY
+            </button>
+        </div>
+        
+        <div class="testimonial-box">
+            <p>"I bought the Recognition Crystal and my WiFi speed increased by 30%! Coincidence? 
+            I think not. Also, my plants seem happier, but that might be because I started watering them."</p>
+            <cite>- Jennifer, Satisfied Customer & Part-Time Astral Projector</cite>
+        </div>
+        
+        <div class="testimonial-box">
+            <p>"The Ego Death Candle really works! I lit it during a conference call and suddenly 
+            realized none of this matters. HR was not amused. 10/10 would buy again."</p>
+            <cite>- Marcus, Former Middle Manager, Current Light Being</cite>
+        </div>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-emoji">🦄</div>
+                <h3 class="product-title">Invisible Unicorn Plushie</h3>
+                <p class="product-price">$99.99</p>
+                <p class="product-description">
+                    Can you see it? No? That means it's working! Comes with certificate 
+                    of invisibility and instructions for advanced visualization.
+                </p>
+                <button class="buy-button" onclick="purchase('Unicorn')">Believe & Receive</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-emoji">🎵</div>
+                <h3 class="product-title">Binaural Beats USB</h3>
+                <p class="product-price">$77.77</p>
+                <p class="product-description">
+                    Contains 432Hz of pure consciousness. Side effects may include: 
+                    enlightenment, drowsiness, and uncontrollable productivity.
+                </p>
+                <button class="buy-button" onclick="purchase('USB')">Download Zen</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-emoji">🧘</div>
+                <h3 class="product-title">Executive Meditation Cushion</h3>
+                <p class="product-price">$333.33</p>
+                <p class="product-description">
+                    Ergonomically designed for lotus position and board meetings. 
+                    Built-in posture alert syncs with your calendar app.
+                </p>
+                <button class="buy-button" onclick="purchase('Cushion')">Sit & Submit</button>
+            </div>
+        </div>
+        
+        <div class="fine-print">
+            <p>
+                * Wubbleton Enterprises LLC is not responsible for: spontaneous enlightenment, 
+                third eye strain, excessive happiness, or sudden urges to quit your job and join a commune.
+            </p>
+            <p>
+                * All sales final. Returns accepted only in alternate dimensions. 
+                Shipping to astral plane requires additional postage.
+            </p>
+            <p>
+                * Products may contain traces of meaning, purpose, and legally non-binding spiritual insights.
+            </p>
+            <p>
+                * "Recognition Crystal" is a trademark of Wubbleton Enterprises. Not to be confused with 
+                regular crystals, which are just rocks and everyone knows it.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function purchase(item) {
+            const messages = {
+                'T-Shirt': "Your aura will look amazing in this! Check your email for shipping details from our fulfillment yurt.",
+                'Crystal': "The crystal has chosen you! Or you chose it. Free will is complicated. Anyway, nice purchase!",
+                'Mug': "Coffee is just consciousness in liquid form. Your purchase supports our caffeine addiction treatment program (we're not seeking treatment).",
+                'Mala': "108 beads of pure intention! The 109th bead for phone-checking was Wubbushi's idea.",
+                'Candle': "Warning: May cause sudden realization that you ARE the candle. Existential crisis hotline included.",
+                'Books': "Knowledge is power, but power corrupts, so maybe just skim them? Download link definitely coming soon!",
+                'Ultimate': "WOW! You're serious about this! Dave from accounting is crying tears of joy. Mostly because we can now afford actual accounting software.",
+                'Unicorn': "If you can't see your purchase, that's how you know it's authentic! Certificate of invisibility processing...",
+                'USB': "Please allow 3-5 business days for your consciousness to update after installation. Not compatible with Windows ME.",
+                'Cushion': "Your sitting game is about to transcend! Lotus position achievement unlocked!"
+            };
+            
+            alert(`✨ ${messages[item]} ✨\n\nYour Wubbles have been debited. May your purchase bring you closer to tax-deductible enlightenment!`);
+        }
+        
+        function convertCurrency() {
+            const usd = parseFloat(document.getElementById('usdAmount').value) || 0;
+            const rate = 0.037 * (1 + Math.sin(Date.now() / 10000) * 0.1); // Fluctuating rate
+            document.getElementById('wubbleAmount').value = (usd * rate).toFixed(2);
+        }
+        
+        // Update exchange rate every few seconds for "realism"
+        setInterval(convertCurrency, 3000);
+    </script>
+</body>
+</html> 

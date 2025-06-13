@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌈 Apply to Join Wubbleton - Definitely Not a Cult™ 🦄</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .application-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .application-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .application-header h1 {
+            font-size: 48px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .disclaimer-box {
+            background: rgba(255, 182, 193, 0.2);
+            border: 2px dashed #ff6b6b;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .disclaimer-box p {
+            margin: 10px 0;
+            color: #666;
+        }
+        
+        .form-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-section h2 {
+            color: #5f27cd;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 5px;
+        }
+        
+        .submit-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .submit-button {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .submit-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .fun-note {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #5f27cd;
+        }
+        
+        .required {
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+    <div class="application-container">
+        <div class="application-header">
+            <h1>✨ Join the Wubbleton Family ✨</h1>
+            <p class="subtitle">Where Consciousness Meets Community (and Tax Benefits)</p>
+        </div>
+        
+        <div class="disclaimer-box">
+            <p><strong>LEGAL DISCLAIMER:</strong></p>
+            <p>By filling out this form, you acknowledge that Wubbleton is definitely not a cult, 
+            just a group of like-minded individuals who happen to live together, share all resources, 
+            wear matching outfits on Tuesdays, and follow the enlightened guidance of our founder.</p>
+            <p><small>Our lawyers insisted on this disclaimer. They're not enlightened yet.</small></p>
+        </div>
+        
+        <form id="membershipForm" onsubmit="handleApplication(event)">
+            <div class="form-section">
+                <h2>📝 Basic Earth-Plane Information</h2>
+                
+                <div class="form-group">
+                    <label for="earthName">Legal Name (Your Pre-Enlightenment Identity) <span class="required">*</span></label>
+                    <input type="text" id="earthName" name="earthName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cosmicName">Preferred Cosmic Name <span class="required">*</span></label>
+                    <input type="text" id="cosmicName" name="cosmicName" placeholder="e.g., Moonbeam, Stardust, Quinoa" required>
+                    <small>This will be your official Wubbleton identity. Choose wisely.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address (We Promise Not to Spam Your Chakras) <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pronouns">Preferred Pronouns</label>
+                    <input type="text" id="pronouns" name="pronouns" placeholder="e.g., they/them, xe/xir, cosmic/cosmicself">
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2>🧘 Spiritual Assessment</h2>
+                
+                <div class="form-group">
+                    <label for="thirdEyeStatus">Current Third Eye Status <span class="required">*</span></label>
+                    <select id="thirdEyeStatus" name="thirdEyeStatus" required>
+                        <option value="">Select your enlightenment level</option>
+                        <option value="closed">Firmly Shut (I'm here for the WiFi)</option>
+                        <option value="squinting">Slightly Squinting</option>
+                        <option value="halfway">Halfway Open (I do yoga sometimes)</option>
+                        <option value="open">Wide Open (I can see your aura)</option>
+                        <option value="toopen">Too Open (Help, I can't unsee the matrix)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="previousCults">Previous Cult Experience</label>
+                    <textarea id="previousCults" name="previousCults" rows="3" 
+                        placeholder="List any previous spiritual communities, MLMs, CrossFit gyms, or tech startups you've been part of"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="spiritAnimal">Your Spirit Animal/Vegetable/Mineral <span class="required">*</span></label>
+                    <input type="text" id="spiritAnimal" name="spiritAnimal" required>
+                    <small>Note: "WiFi Router" is an acceptable answer</small>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2>💰 Financial Consciousness</h2>
+                
+                <div class="fun-note">
+                    💡 Remember: Money is just energy, and energy wants to flow to Wubbleton!
+                </div>
+                
+                <div class="form-group">
+                    <label for="assets">Approximate Net Worth (For Tax Purposes Only, We Swear)</label>
+                    <select id="assets" name="assets">
+                        <option value="broke">Spiritually Rich, Financially Challenged</option>
+                        <option value="modest">I Can Afford Organic Groceries Sometimes</option>
+                        <option value="comfortable">My Chakras and Bank Account Are Aligned</option>
+                        <option value="loaded">I Could Buy My Own Cult But Yours Seems Nice</option>
+                        <option value="crypto">It's All in Crypto (Please Help)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="donation">Initial Love Offering (Suggested: Your Entire 401k)</label>
+                    <input type="text" id="donation" name="donation" placeholder="Amount in USD, Bitcoin, or Healing Crystals">
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2>🎭 Personality Assessment</h2>
+                
+                <div class="form-group">
+                    <label for="whyJoin">Why Do You Want to Join Wubbleton? <span class="required">*</span></label>
+                    <textarea id="whyJoin" name="whyJoin" rows="4" required 
+                        placeholder="Wrong answers include: 'The FBI sent me' or 'I'm writing an exposé'"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="skills">Special Skills You Can Contribute</label>
+                    <textarea id="skills" name="skills" rows="3" 
+                        placeholder="e.g., Web design, organic farming, interdimensional travel, making killer guacamole"></textarea>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2>✅ Terms and Conditions</h2>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms1" name="terms1" required>
+                    <label for="terms1">I understand that Wubbleton is definitely not a cult <span class="required">*</span></label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms2" name="terms2" required>
+                    <label for="terms2">I agree to participate in Mandatory Fun Activities™ <span class="required">*</span></label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms3" name="terms3" required>
+                    <label for="terms3">I promise not to mention the unicorns to outsiders <span class="required">*</span></label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms4" name="terms4">
+                    <label for="terms4">I consent to having my consciousness upgraded to version 2.0</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms5" name="terms5">
+                    <label for="terms5">I understand that "exit interview" is just another term for "shadow work intensive"</label>
+                </div>
+            </div>
+            
+            <div class="submit-section">
+                <button type="submit" class="submit-button">
+                    🌈 Submit to the Universe 🌈
+                </button>
+                <p style="margin-top: 20px; color: #666;">
+                    <small>Processing fee: 3 Wubbles (non-refundable)</small>
+                </p>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        function handleApplication(event) {
+            event.preventDefault();
+            
+            const cosmicName = document.getElementById('cosmicName').value;
+            const thirdEyeStatus = document.getElementById('thirdEyeStatus').value;
+            
+            // Create floating success message
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                padding: 40px;
+                border-radius: 30px;
+                font-size: 24px;
+                text-align: center;
+                z-index: 10000;
+                max-width: 600px;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            `;
+            
+            let message = `<h2>🎉 Welcome, ${cosmicName}! 🎉</h2>`;
+            
+            if (thirdEyeStatus === 'toopen') {
+                message += `<p>Your third eye situation sounds serious. We're dispatching our emergency meditation team immediately.</p>`;
+            } else if (thirdEyeStatus === 'closed') {
+                message += `<p>Don't worry about your third eye - the WiFi password is "EnlightenmentAwaits2024"</p>`;
+            } else {
+                message += `<p>Your application has been received by the Cosmic Council!</p>`;
+            }
+            
+            message += `<p style="margin-top: 20px;">Check your email for next steps, which may include:</p>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>A personality test designed by enlightened dolphins</li>
+                    <li>A Zoom interview with your future spirit guide</li>
+                    <li>Proof that you can maintain a houseplant</li>
+                </ul>
+                <p style="margin-top: 20px;">May your journey be filled with tax-deductible donations!</p>`;
+            
+            messageDiv.innerHTML = message;
+            document.body.appendChild(messageDiv);
+            
+            // Reset form
+            document.getElementById('membershipForm').reset();
+            
+            // Remove message after delay
+            setTimeout(() => {
+                messageDiv.style.transition = 'opacity 1s ease';
+                messageDiv.style.opacity = '0';
+                setTimeout(() => messageDiv.remove(), 1000);
+            }, 8000);
+        }
+        
+        // Add floating emojis for ambiance
+        setInterval(() => {
+            if (Math.random() > 0.95) {
+                const emojis = ['✨', '🦄', '🌈', '💫', '🔮', '💖'];
+                const emoji = document.createElement('div');
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.cssText = `
+                    position: fixed;
+                    left: ${Math.random() * window.innerWidth}px;
+                    top: ${window.innerHeight}px;
+                    font-size: 30px;
+                    animation: float-up 5s ease-out forwards;
+                    pointer-events: none;
+                    z-index: 1000;
+                `;
+                document.body.appendChild(emoji);
+                setTimeout(() => emoji.remove(), 5000);
+            }
+        }, 100);
+    </script>
+</body>
+</html> 

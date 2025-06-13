@@ -1,37 +1,27 @@
-// Gallery Image Server Configuration
-// Change IMAGE_SERVER_URL when deploying to production
-
+// Gallery Configuration for Wubbleton
 const GALLERY_CONFIG = {
-    // For local development with image_server.py
+    // Supabase configuration
+    USE_SUPABASE: true,
+    SUPABASE_URL: 'https://ozxhahlykxeeiuvmzrbb.supabase.co',
+    BUCKET_NAME: 'gallery-images',
+    
+    // Fallback to local server if needed
     IMAGE_SERVER_URL: 'http://localhost:8004',
     
-    // For production (update this when you have a CDN or cloud storage)
-    // IMAGE_SERVER_URL: 'https://cdn.wubbleton.com/galleries',
-    
-    // Gallery paths
+    // Gallery names
     galleries: {
-        crisis: {
-            name: 'The Crisis',
-            path: 'crisis',
-            thumbs: 'thumbs',
-            full: 'full'
-        },
-        zombies: {
-            name: 'Modern Zombies', 
-            path: 'zombies',
-            thumbs: 'thumbs',
-            full: 'full'
-        },
-        rapture: {
-            name: 'The Rapture',
-            path: 'rapture',
-            thumbs: 'thumbs',
-            full: 'full'
-        }
+        crisis: 'The Crisis',
+        zombies: 'Modern Zombies', 
+        rapture: 'The Rapture'
     }
 };
 
 // Helper function to get image URL
 function getImageUrl(gallery, type, filename) {
-    return `${GALLERY_CONFIG.IMAGE_SERVER_URL}/${gallery}/${type}/${filename}`;
+    if (GALLERY_CONFIG.USE_SUPABASE) {
+        const path = `${gallery}/${type}/${filename}`;
+        return `${GALLERY_CONFIG.SUPABASE_URL}/storage/v1/object/public/${GALLERY_CONFIG.BUCKET_NAME}/${path}`;
+    } else {
+        return `${GALLERY_CONFIG.IMAGE_SERVER_URL}/${gallery}/${type}/${filename}`;
+    }
 } 
