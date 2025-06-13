@@ -1,18 +1,19 @@
 // Gallery Configuration for Wubbleton
 const GALLERY_CONFIG = {
     // Supabase configuration
-    USE_SUPABASE: true,
+    USE_SUPABASE: false,
     SUPABASE_URL: 'https://ozxhahlykxeeiuvmzrbb.supabase.co',
     BUCKET_NAME: 'gallery-images',
     
     // Fallback to local server if needed
-    IMAGE_SERVER_URL: 'http://localhost:8004',
+    IMAGE_SERVER_URL: 'http://localhost:8003/web/galleries',
     
     // Gallery names
     galleries: {
         crisis: 'The Crisis',
         zombies: 'Modern Zombies', 
-        rapture: 'The Rapture'
+        rapture: 'The Rapture',
+        wubbleton: 'Daily Visions'
     }
 };
 
