@@ -12,7 +12,7 @@ from pathlib import Path
 # Supabase configuration
 SUPABASE_URL = "https://ozxhahlykxeeiuvmzrbb.supabase.co"
 SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im96eGhhaGx5a3hlZWl1dm16cmJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk3OTE1NDgsImV4cCI6MjA2NTM2NzU0OH0.SP-nxe_faZurceOYkXTTZlMDHw3bDFkLQxgMbQKTxZU"
-BUCKET_NAME = "wubbleton-galleries"
+BUCKET_NAME = "gallery-images"
 
 def upload_file(file_path, storage_path):
     """Upload a single file to Supabase storage"""

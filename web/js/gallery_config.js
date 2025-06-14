@@ -15,6 +15,10 @@ const galleries = {
     rapture: {
         name: 'The Rapture',
         bucketPath: 'rapture'
+    },
+    wubbleton: {
+        name: 'Daily Visions',
+        bucketPath: 'wubbleton'
     }
 };
 

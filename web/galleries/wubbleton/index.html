@@ -208,6 +208,8 @@
         <img id="lightbox-img" src="" alt="">
     </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../js/gallery_config.js"></script>
     <script>
         // Create floating hearts
         function createHeart() {
@@ -240,10 +242,11 @@
             wrapper.style.transform = `rotate(${Math.random() * 4 - 2}deg)`;
             
             const imgElement = document.createElement('img');
-            imgElement.src = `thumbs/${img}`;
+            // Use Supabase URLs
+            imgElement.src = getSupabaseThumbnailUrl('wubbleton', img);
             imgElement.alt = `Vision ${index + 1}`;
             imgElement.loading = 'lazy';
-            imgElement.onclick = () => openLightbox(`full/${img}`);
+            imgElement.onclick = () => openLightbox(getSupabaseImageUrl('wubbleton/full', img));
             
             wrapper.appendChild(imgElement);
             gallery.appendChild(wrapper);
