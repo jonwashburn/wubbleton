@@ -15,6 +15,12 @@ const GALLERY_CONFIG = {
 
 // Helper function to get image URL
 function getImageUrl(gallery, type, filename) {
-    // Since we're serving locally from the same server, use relative paths
-    return `${type}/${filename}`;
+    // Since we're serving locally from the same server, use absolute paths from web root
+    // This ensures images load correctly regardless of page location
+    if (!GALLERY_CONFIG.USE_SUPABASE) {
+        return `/web/galleries/${gallery}/${type}/${filename}`;
+    }
+    
+    // Remote (Supabase) mode
+    return `${GALLERY_CONFIG.IMAGE_SERVER_URL}/${gallery}/${type}/${filename}`;
 } 

@@ -290,6 +290,7 @@
                 item.className = 'gallery-item';
                 const thumbUrl = getImageUrl('crisis', 'thumbs', img);
                 const fullUrl = getImageUrl('crisis', 'full', img);
+                
                 item.innerHTML = `<img src="${thumbUrl}" alt="Crisis Art ${index + 1}" loading="lazy">`;
                 item.onclick = () => openLightbox(fullUrl);
                 gallery.appendChild(item);
