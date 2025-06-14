@@ -5,7 +5,7 @@ import time
 
 # Supabase configuration
 SUPABASE_URL = "https://ozxhahlykxeeiuvmzrbb.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im96eGhhaGx5a3hlZWl1dm16cmJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI5MzA0NjAsImV4cCI6MjA0ODUwNjQ2MH0.Vc-bnFlZAR7LSUP4rB0qHINWTlZpfBaVlXqiH4c9pqI"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im96eGhhaGx5a3hlZWl1dm16cmJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk3OTE1NDgsImV4cCI6MjA2NTM2NzU0OH0.SP-nxe_faZurceOYkXTTZlMDHw3bDFkLQxgMbQKTxZU"
 
 # Create Supabase client
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
