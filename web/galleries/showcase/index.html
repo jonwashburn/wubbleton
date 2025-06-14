@@ -58,7 +58,6 @@
         .lightbox img { max-width: 90%; max-height: 90vh; border-radius: var(--radius); box-shadow: 0 4px 30px rgba(0,0,0,.4); }
         .close-btn { position: fixed; top: 30px; right: 40px; font-size: 32px; color: #fff; cursor:pointer; }
     </style>
-    <script src="../../../gallery_config.js"></script>
 </head>
 <body>
     <a class="back" href="../../">← Back</a>
@@ -83,8 +82,8 @@ function buildGrid() {
     showcaseImages.forEach((file, idx) => {
         const card = document.createElement('div');
         card.className = 'card';
-        const thumb = getImageUrl('wubbleton', 'thumbs', file);
-        const full  = getImageUrl('wubbleton', 'full', file);
+        const thumb = `../wubbleton/thumbs/${file}`;
+        const full = `../wubbleton/full/${file}`;
         card.innerHTML = `<img src="${thumb}" alt="Showcase ${idx+1}" loading="lazy">`;
         card.onclick = () => openLightbox(full);
         grid.appendChild(card);

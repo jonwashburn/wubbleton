@@ -3,358 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Zombies - Wubbleton Sacred Art Collection</title>
+    <title>Modern Zombies - Wubbleton Sacred Art</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-            background: #F5F5FF;
-            color: #1a1a1a;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: #1a1a1a;
+            color: #e0e0e0;
         }
-
-        /* Header */
+        
         .header {
             text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(to bottom, #E6E6FA 0%, #F5F5FF 100%);
-            border-bottom: 1px solid rgba(147, 112, 219, 0.2);
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+            border-bottom: 1px solid #333;
         }
-
+        
         .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #9370DB;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: #00ff88;
             text-decoration: none;
             font-size: 14px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
+            z-index: 100;
         }
-
-        .back-link:hover {
-            color: #7B68EE;
-            transform: translateX(-3px);
-        }
-
+        
         h1 {
-            font-size: 48px;
-            font-weight: 300;
-            letter-spacing: -1px;
+            font-size: 3em;
+            font-weight: 100;
+            letter-spacing: 0.1em;
             margin-bottom: 10px;
-            color: #2a2a2a;
+            text-transform: uppercase;
         }
-
+        
         .subtitle {
-            font-size: 18px;
-            color: #666;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        /* Gallery Grid */
-        .gallery-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .gallery-grid {
-            columns: 4;
-            column-gap: 20px;
+            color: #888;
+            font-size: 1.1em;
         }
         
-        @media (max-width: 1200px) {
-            .gallery-grid { columns: 3; }
-        }
-        
-        @media (max-width: 900px) {
-            .gallery-grid { columns: 2; }
-        }
-        
-        @media (max-width: 600px) {
-            .gallery-grid { columns: 1; }
-        }
-        
-        .collection-description {
+        .description {
             max-width: 800px;
-            margin: 0 auto 40px;
+            margin: 0 auto 60px;
             padding: 0 20px;
             text-align: center;
-            color: #555;
-            font-size: 16px;
-            line-height: 1.8;
-            font-style: italic;
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 1.05em;
         }
-
-        .gallery-item {
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2px;
+            padding: 0 2px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .img-wrapper {
             position: relative;
             overflow: hidden;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #222;
             cursor: pointer;
-            margin-bottom: 20px;
-            break-inside: avoid;
-            display: inline-block;
-            width: 100%;
         }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(147, 112, 219, 0.2);
+        
+        .img-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(0,255,136,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
         }
-
-        .gallery-item img {
+        
+        .img-wrapper:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .img-wrapper img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: filter 0.3s ease;
         }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
+        
+        .img-wrapper:hover img {
+            filter: brightness(1.1) contrast(1.1);
         }
-
+        
         /* Lightbox */
         .lightbox {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
+            background: rgba(0,0,0,0.98);
             z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .lightbox.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-        }
-
-        .lightbox img {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-        }
-
-        .close-lightbox {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: #fff;
-            font-size: 36px;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            z-index: 1001;
         }
-
-        .close-lightbox:hover {
-            transform: rotate(90deg);
-        }
-
-        /* Loading animation */
-        .loading {
-            position: fixed;
+        
+        .lightbox img {
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 24px;
-            color: #9370DB;
-            letter-spacing: 2px;
-            animation: pulse 1.5s ease-in-out infinite;
+            max-width: 90%;
+            max-height: 90%;
         }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: #00ff88;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
-
-        /* Floating decorations */
-        .decoration {
-            position: fixed;
-            font-size: 20px;
-            opacity: 0.3;
-            animation: float 20s ease-in-out infinite;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-            25% { transform: translateY(-20px) rotate(90deg) scale(1.1); }
-            50% { transform: translateY(10px) rotate(180deg) scale(0.9); }
-            75% { transform: translateY(-15px) rotate(270deg) scale(1.05); }
-        }
-
-        /* Zombie Mode Effect */
-        @keyframes glitch {
-            0%, 100% { transform: translateX(0); filter: hue-rotate(0deg); }
-            20% { transform: translateX(-2px); filter: hue-rotate(90deg); }
-            40% { transform: translateX(2px); filter: hue-rotate(180deg); }
-            60% { transform: translateX(-1px); filter: hue-rotate(270deg); }
-            80% { transform: translateX(1px); filter: hue-rotate(360deg); }
-        }
-
-        .gallery-item:nth-child(5n):hover {
-            animation: glitch 0.3s ease-in-out;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 { font-size: 36px; }
-            .collection-description { font-size: 14px; }
+        
+        .close:hover {
+            transform: rotate(90deg);
         }
     </style>
-    <script src="../../../gallery_config.js"></script>
 </head>
 <body>
-    <!-- Floating decorations -->
-    <div class="decoration" style="top: 10%; left: 5%;">👻</div>
-    <div class="decoration" style="top: 20%; right: 10%; animation-delay: -5s;">💀</div>
-    <div class="decoration" style="bottom: 15%; left: 8%; animation-delay: -10s;">🧟</div>
-    <div class="decoration" style="bottom: 30%; right: 5%; animation-delay: -15s;">⚡</div>
-
+    <a href="../../" class="back-link">← Back to Wubbleton</a>
+    
     <div class="header">
-        <a href="../../" class="back-link">← Back to Wubbleton</a>
-        <h1>Modern Zombies</h1>
-        <p class="subtitle">Digital Resurrections & Post-Life Transmissions</p>
+        <h1>MODERN ZOMBIES</h1>
+        <p class="subtitle">Loss of Human Connection</p>
     </div>
-
-    <div class="collection-description">
-        <p>Modern Zombies documents the walking dead of late capitalism—those who've achieved the Wubbleton ideal of "productive emptiness." Each portrait captures souls mid-transformation, their consciousness uploading to the cloud while their bodies continue their daily routines. These aren't horror stories but success stories: former executives who now communicate only in LinkedIn keywords, influencers whose personalities have been fully replaced by engagement metrics, and middle managers who've transcended the burden of original thought. Witness the beautiful surrender of the self to the algorithm. Side effects may include sudden urges to check your phone, speaking in corporate jargon, or feeling mysteriously refreshed by targeted advertising.</p>
+    
+    <div class="description">
+        <p>176 portraits of the walking disconnected. These pieces document the great hollowing—faces lit by screens, eyes that look but don't see, conversations happening in parallel isolation. Each image captures souls caught in infinite scroll, hearts measured in likes, presence reduced to status indicators. The modern zombie doesn't need to eat brains; it feeds on notifications.</p>
     </div>
-
-    <div class="loading" id="loading">Reanimating artworks...</div>
-
-    <div class="gallery-container">
-        <div class="gallery-grid" id="gallery"></div>
+    
+    <div class="gallery" id="gallery">
+        <!-- Images will be added by JavaScript -->
     </div>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
-        <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="">
-        </div>
+    
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close" onclick="event.stopPropagation(); closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="">
     </div>
-
+    
     <script>
-        // List of images (generated from the resized images)
-        const images = [];
+        // Modern Zombies gallery images
+        const images = [
+            '2.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg',
+            '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg',
+            '26.jpg', '27.jpg', '28.jpg', '29.jpg', '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg',
+            '36.jpg', '37.jpg', '38.jpg', '39.jpg', '40.jpg', '41.jpg', '42.jpg', '43.jpg', '44.jpg', '45.jpg',
+            '46.jpg', '47.jpg', '48.jpg', '49.jpg', '50.jpg', '51.jpg', '52.jpg', '53.jpg', '54.jpg', '55.jpg',
+            '56.jpg', '57.jpg', '58.jpg', '59.jpg', '60.jpg', '61.jpg', '62.jpg', '63.jpg', '64.jpg', '65.jpg',
+            '66.jpg', '67.jpg', '68.jpg', '69.jpg', '70.jpg', '71.jpg', '72.jpg', '73.jpg', '74.jpg', '75.jpg',
+            '76.jpg', '77.jpg', '78.jpg', '79.jpg', '80.jpg', '81.jpg', '82.jpg', '83.jpg', '84.jpg', '85.jpg',
+            '86.jpg', '87.jpg', '88.jpg', '89.jpg', '90.jpg', '91.jpg', '92.jpg', '93.jpg', '94.jpg', '95.jpg',
+            '96.jpg', '97.jpg', '98.jpg', '99.jpg', '100.jpg', '101.jpg', '102.jpg', '103.jpg', '104.jpg',
+            '105.jpg', '106.jpg', '107.jpg', '108.jpg', '109.jpg', '110.jpg', '111.jpg', '112.jpg', '113.jpg',
+            '114.jpg', '115.jpg', '116.jpg', '117.jpg', '118.jpg', '119.jpg', '120.jpg', '121.jpg', '122.jpg',
+            '123.jpg', '124.jpg', '125.jpg', '126.jpg', '127.jpg', '128.jpg', '129.jpg', '130.jpg', '131.jpg',
+            '132.jpg', '133.jpg', '134.jpg', '135.jpg', '136.jpg', '137.jpg', '138.jpg', '139.jpg', '140.jpg',
+            '141.jpg', '142.jpg', '143.jpg', '144.jpg', '145.jpg', '146.jpg', '147.jpg', '148.jpg', '149.jpg',
+            '150.jpg', '151.jpg', '152.jpg', '153.jpg', '154.jpg', '155.jpg', '156.jpg', '157.jpg', '158.jpg',
+            '159.jpg', '160.jpg', '161.jpg', '162.jpg', '163.jpg', '164.jpg', '165.jpg', '166.jpg', '167.jpg',
+            '168.jpg', '169.jpg', '170.jpg', '171.jpg', '172.jpg', '173.jpg', '174.jpg', '175.jpg', '176.jpg'
+        ];
         
-        // Function to load gallery
-        function loadGallery() {
-            const gallery = document.getElementById('gallery');
-            const loading = document.getElementById('loading');
+        const gallery = document.getElementById('gallery');
+        
+        // Create gallery items
+        images.forEach((img, index) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'img-wrapper';
             
-            // Get list of images from thumbs directory
-            fetch(`${GALLERY_CONFIG.IMAGE_SERVER_URL}/zombies/thumbs/`)
-                .then(response => response.text())
-                .then(html => {
-                    // Parse the directory listing
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const links = doc.querySelectorAll('a');
-                    
-                    links.forEach(link => {
-                        const href = link.getAttribute('href');
-                        if (href && href.match(/\.(jpg|jpeg|png)$/i)) {
-                            images.push(href);
-                        }
-                    });
-                    
-                    // If parsing fails, use a predefined list
-                    if (images.length === 0) {
-                        // Add first batch of images
-                        for (let i = 1; i <= 50; i++) {
-                            images.push(`${i}.jpg`);
-                        }
-                    }
-                    
-                    // Create gallery items
-                    images.forEach((img, index) => {
-                        const item = document.createElement('div');
-                        item.className = 'gallery-item';
-                        const thumbUrl = getImageUrl('zombies', 'thumbs', img);
-                        const fullUrl = getImageUrl('zombies', 'full', img);
-                        item.innerHTML = `<img src="${thumbUrl}" alt="Zombies Art ${index + 1}" loading="lazy">`;
-                        item.onclick = () => openLightbox(fullUrl);
-                        gallery.appendChild(item);
-                    });
-                    
-                    loading.style.display = 'none';
-                })
-                .catch(error => {
-                    // Fallback: manually add some images
-                    const fallbackImages = [
-                        '176.jpg', '88.jpg', '162.jpg', '189.jpg', '77.jpg', '63.jpg', '200.jpg',
-                        '62.jpg', '188.jpg', '76.jpg', '163.jpg', '177.jpg', '89.jpg', '149.jpg',
-                        '161.jpg', '175.jpg', '60.jpg', '74.jpg', '48.jpg', '49.jpg', '75.jpg',
-                        '61.jpg', '174.jpg', '160.jpg', '148.jpg', '164.jpg', '170.jpg', '158.jpg',
-                        '59.jpg', '65.jpg', '71.jpg', '70.jpg', '64.jpg', '58.jpg', '159.jpg',
-                        '171.jpg', '165.jpg', '173.jpg', '167.jpg', '99.jpg', '72.jpg', '198.jpg',
-                        '66.jpg', '199.jpg', '67.jpg', '73.jpg', '9.jpg', '166.jpg', '98.jpg'
-                    ];
-                    
-                    fallbackImages.forEach((img, index) => {
-                        const item = document.createElement('div');
-                        item.className = 'gallery-item';
-                        const thumbUrl = getImageUrl('zombies', 'thumbs', img);
-                        const fullUrl = getImageUrl('zombies', 'full', img);
-                        item.innerHTML = `<img src="${thumbUrl}" alt="Zombies Art ${index + 1}" loading="lazy">`;
-                        item.onclick = () => openLightbox(fullUrl);
-                        gallery.appendChild(item);
-                    });
-                    
-                    loading.style.display = 'none';
-                });
-        }
-
-        // Lightbox functions
+            const imgElement = document.createElement('img');
+            imgElement.src = `thumbs/${img}`;
+            imgElement.alt = `Modern Zombie ${index + 1}`;
+            imgElement.loading = 'lazy';
+            imgElement.onclick = () => openLightbox(`full/${img}`);
+            
+            wrapper.appendChild(imgElement);
+            gallery.appendChild(wrapper);
+        });
+        
         function openLightbox(src) {
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lightbox-img');
-            img.src = src;
-            lightbox.classList.add('active');
+            document.getElementById('lightbox').style.display = 'block';
+            document.getElementById('lightbox-img').src = src;
             document.body.style.overflow = 'hidden';
         }
-
+        
         function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
+            document.getElementById('lightbox').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-
-        // Close lightbox with escape key
+        
+        // Escape key to close
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeLightbox();
         });
-
-        // Close lightbox when clicking outside
-        document.getElementById('lightbox').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) closeLightbox();
-        });
-
-        // Load gallery when page loads
-        window.addEventListener('load', loadGallery);
     </script>
 </body>
 </html> 

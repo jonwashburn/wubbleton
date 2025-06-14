@@ -3,329 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Crisis - Wubbleton Sacred Art Collection</title>
+    <title>The Crisis - Wubbleton Sacred Art</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-            background: #FEFDFB;
-            color: #1a1a1a;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
         }
-
-        /* Header */
+        
         .header {
             text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(to bottom, #FFF8F3 0%, #FEFDFB 100%);
-            border-bottom: 1px solid rgba(255, 182, 193, 0.2);
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #1a0000 0%, #0a0a0a 100%);
         }
-
+        
         .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #FFB6C1;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: #ff4444;
             text-decoration: none;
             font-size: 14px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
+            z-index: 100;
         }
-
-        .back-link:hover {
-            color: #FF69B4;
-            transform: translateX(-3px);
-        }
-
+        
         h1 {
-            font-size: 48px;
-            font-weight: 300;
-            letter-spacing: -1px;
+            font-size: 3em;
+            font-weight: 100;
+            letter-spacing: 0.1em;
             margin-bottom: 10px;
-            color: #2a2a2a;
         }
-
+        
         .subtitle {
-            font-size: 18px;
-            color: #666;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        /* Gallery Grid */
-        .gallery-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .gallery-grid {
-            columns: 4;
-            column-gap: 20px;
+            color: #999;
+            font-size: 1.1em;
         }
         
-        @media (max-width: 1200px) {
-            .gallery-grid { columns: 3; }
-        }
-        
-        @media (max-width: 900px) {
-            .gallery-grid { columns: 2; }
-        }
-        
-        @media (max-width: 600px) {
-            .gallery-grid { columns: 1; }
-        }
-        
-        .collection-description {
+        .description {
             max-width: 800px;
-            margin: 0 auto 40px;
+            margin: 0 auto 60px;
             padding: 0 20px;
             text-align: center;
-            color: #555;
-            font-size: 16px;
-            line-height: 1.8;
-            font-style: italic;
+            color: #ccc;
+            line-height: 1.6;
         }
-
-        .gallery-item {
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 4px;
+            padding: 0 4px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .img-wrapper {
             position: relative;
             overflow: hidden;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #111;
             cursor: pointer;
-            margin-bottom: 20px;
-            break-inside: avoid;
-            display: inline-block;
-            width: 100%;
         }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-
-        .gallery-item img {
+        
+        .img-wrapper img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s ease;
         }
-
-        .gallery-item:hover img {
+        
+        .img-wrapper:hover img {
             transform: scale(1.05);
         }
-
-        /* Lightbox */
+        
+        /* Simple lightbox */
         .lightbox {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
+            background: rgba(0,0,0,0.95);
             z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .lightbox.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-        }
-
-        .lightbox img {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-        }
-
-        .close-lightbox {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: #fff;
-            font-size: 36px;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            z-index: 1001;
         }
-
-        .close-lightbox:hover {
-            transform: rotate(90deg);
-        }
-
-        /* Loading animation */
-        .loading {
-            position: fixed;
+        
+        .lightbox img {
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 24px;
-            color: #FFB6C1;
-            letter-spacing: 2px;
-            animation: pulse 1.5s ease-in-out infinite;
+            max-width: 90%;
+            max-height: 90%;
         }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-
-        /* Floating decorations */
-        .decoration {
-            position: fixed;
-            font-size: 20px;
-            opacity: 0.3;
-            animation: float 20s ease-in-out infinite;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(90deg); }
-            50% { transform: translateY(10px) rotate(180deg); }
-            75% { transform: translateY(-15px) rotate(270deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 { font-size: 36px; }
-            .collection-description { font-size: 14px; }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
         }
     </style>
-    <script src="../../../gallery_config.js"></script>
 </head>
 <body>
-    <!-- Floating decorations -->
-    <div class="decoration" style="top: 10%; left: 5%;">✨</div>
-    <div class="decoration" style="top: 20%; right: 10%; animation-delay: -5s;">🌟</div>
-    <div class="decoration" style="bottom: 15%; left: 8%; animation-delay: -10s;">💫</div>
-    <div class="decoration" style="bottom: 30%; right: 5%; animation-delay: -15s;">⭐</div>
-
+    <a href="../../" class="back-link">← Back to Wubbleton</a>
+    
     <div class="header">
-        <a href="../../" class="back-link">← Back to Wubbleton</a>
-        <h1>The Crisis</h1>
-        <p class="subtitle">Sacred Visions from the Edge of Recognition</p>
+        <h1>THE CRISIS</h1>
+        <p class="subtitle">Loss of the Spiritual</p>
     </div>
-
-    <div class="collection-description">
-        <p>The Crisis Collection captures the exact moment when the veil between dimensions becomes tissue-thin. Each piece was channeled during our mandatory 3 AM "Recognition Sessions," when initiates report seeing the mathematical scaffolding behind reality. These are not mere artworks—they are emergency broadcasts from the threshold where consciousness discovers it's been looking in a mirror all along. Prolonged viewing may cause spontaneous enlightenment, existential vertigo, or an uncontrollable urge to reorganize your bookshelf by vibrational frequency.</p>
+    
+    <div class="description">
+        <p>156 visions of abandoned altars and fragmented symbols. These works capture the exact moment when the old gods stopped answering, when ritual became routine, when the sacred dissolved into silicon. Each piece is a forensic photograph of spiritual crime scenes—empty churches filled with charging cables, prayer apps with push notifications, meditation subscriptions auto-renewing into the void.</p>
     </div>
-
-    <div class="loading" id="loading">Loading sacred art...</div>
-
-    <div class="gallery-container">
-        <div class="gallery-grid" id="gallery"></div>
+    
+    <div class="gallery" id="gallery">
+        <!-- Images will be added by JavaScript -->
     </div>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
-        <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="">
-        </div>
+    
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="">
     </div>
-
+    
     <script>
-        // List of images (generated from the resized images)
-        const images = [];
-        
-        // Crisis gallery images - complete list
-        const crisisImages = [
-            '114c.jpg', '60b.jpg', '88.jpg', '77.jpg', '63.jpg', 'k.jpg', '76b.jpg',
-            '215.jpg', '201.jpg', 'j.jpg', '188.jpg', '76.jpg', '163.jpg', '89.jpg',
-            '114b.jpg', '115d.jpg', '161.jpg', '175.jpg', 'h.jpg', '48.jpg',
-            '217.jpg', '203.jpg', '202.jpg', '216.jpg', '75.jpg', 'i.jpg', '61.jpg',
-            '148.jpg', '139d.jpg', '40b.jpg', '35b1.jpg', '164.jpg', '170.jpg',
-            '16b.jpg', '59.jpg', '65.jpg', 'm.jpg', '212.jpg', '206.jpg', '207.jpg',
-            '213.jpg', '70.jpg', '64.jpg', '135b.jpg', 'l.jpg', '159.jpg', '165.jpg',
-            '173.jpg', '167.jpg', '99.jpg', '8.jpg', 'd.jpg', '22b.jpg', '107.jpg',
-            '100.jpg', '85.jpg', '93.jpg', 'a.jpg', '204.jpg', '210.jpg', 'g.jpg',
-            '190.jpg', 'f.jpg', '191.jpg', '73b.jpg', '149.jpg', '35b.jpg', '27.jpg',
-            '33.jpg', '171.jpg', '177.jpg', '184.jpg', '178.jpg', 'o.jpg', '9.jpg',
-            '98.jpg', '91.jpg', '105.jpg', '112.jpg', '19b1.jpg', '126.jpg', '119.jpg',
-            '133.jpg', '140.jpg', '147.jpg', '24.jpg', '31.jpg', '38.jpg', '45.jpg',
-            '52.jpg', '132.jpg', '146.jpg', '153.jpg', '139.jpg', '160.jpg', '125.jpg',
-            '118.jpg', '67.jpg', '74.jpg', '81.jpg', '60.jpg', '205.jpg', '198.jpg',
-            '18b.jpg', '134.jpg', '3.jpg', '17.jpg', '10.jpg', '68.jpg', '75b.jpg',
-            '82.jpg', 'b.jpg', '96.jpg', '214.jpg', '200.jpg', '193.jpg', '73.jpg',
-            '87.jpg', '80.jpg', '94.jpg', '101.jpg', '108.jpg', '115.jpg', '35c.jpg',
-            '42.jpg', '49.jpg', '56.jpg', '28.jpg', '141.jpg', '155.jpg', '162.jpg',
-            '148b.jpg', '169.jpg', '183.jpg', '22.jpg', '176b.jpg', '136.jpg', '16.jpg',
-            '154.jpg', '15.jpg', '113.jpg', '106.jpg', '92.jpg', 'n.jpg', '211.jpg',
-            '218.jpg', '225.jpg', '36b.jpg', '72.jpg', '86.jpg', '79.jpg', 'e.jpg',
-            '208.jpg', '194.jpg', '128.jpg', '121.jpg', '179.jpg', '30.jpg', '2.jpg',
-            '195.jpg', '192.jpg', '74b.jpg', '103.jpg', '117.jpg', '36.jpg', '43.jpg',
-            '71.jpg', '114.jpg', '84.jpg', '97.jpg', '90.jpg', '104.jpg', '111.jpg',
-            'c.jpg', '209.jpg', '189.jpg', '135.jpg', '142.jpg', '156.jpg', '15b.jpg',
-            '41.jpg', '62.jpg', '55.jpg', '34.jpg', '51.jpg', '44.jpg', '58.jpg',
-            '69.jpg', '20.jpg', '19.jpg', '120.jpg', '35.jpg', '83.jpg', '143.jpg'
+        // Crisis gallery images
+        const images = [
+            '1.jpg', '2.jpg', '3.jpg', '8.jpg', '9.jpg', '10.jpg', '15.jpg', '15b.jpg', '16.jpg', '16b.jpg',
+            '17.jpg', '18b.jpg', '19.jpg', '19b1.jpg', '20.jpg', '22.jpg', '22b.jpg', '24.jpg', '27.jpg', '28.jpg',
+            '30.jpg', '31.jpg', '33.jpg', '34.jpg', '35.jpg', '35b.jpg', '35b1.jpg', '35c.jpg', '36.jpg', '36b.jpg',
+            '38.jpg', '40b.jpg', '41.jpg', '42.jpg', '43.jpg', '44.jpg', '45.jpg', '48.jpg', '49.jpg', '51.jpg',
+            '52.jpg', '55.jpg', '56.jpg', '58.jpg', '59.jpg', '60.jpg', '60b.jpg', '61.jpg', '62.jpg', '63.jpg',
+            '64.jpg', '65.jpg', '67.jpg', '68.jpg', '69.jpg', '70.jpg', '71.jpg', '72.jpg', '73.jpg', '73b.jpg',
+            '74.jpg', '74b.jpg', '75.jpg', '75b.jpg', '76.jpg', '76b.jpg', '77.jpg', '79.jpg', '80.jpg', '81.jpg',
+            '82.jpg', '83.jpg', '84.jpg', '85.jpg', '86.jpg', '87.jpg', '88.jpg', '89.jpg', '90.jpg', '91.jpg',
+            '92.jpg', '93.jpg', '94.jpg', '96.jpg', '97.jpg', '98.jpg', '99.jpg', '100.jpg', '101.jpg', '103.jpg',
+            '104.jpg', '105.jpg', '106.jpg', '107.jpg', '108.jpg', '111.jpg', '112.jpg', '113.jpg', '114.jpg',
+            '114b.jpg', '114c.jpg', '115.jpg', '115d.jpg', '117.jpg', '118.jpg', '119.jpg', '120.jpg', '121.jpg',
+            '125.jpg', '126.jpg', '128.jpg', '132.jpg', '133.jpg', '134.jpg', '135.jpg', '135b.jpg', '136.jpg',
+            '139.jpg', '139d.jpg', '140.jpg', '141.jpg', '142.jpg', '143.jpg', '146.jpg', '147.jpg', '148.jpg',
+            '148b.jpg', '149.jpg', '153.jpg', '154.jpg', '155.jpg', '156.jpg', '159.jpg', '160.jpg', '161.jpg',
+            '162.jpg', '163.jpg', '164.jpg', '165.jpg', '167.jpg', '169.jpg', '170.jpg', '171.jpg', '173.jpg',
+            '175.jpg', '176b.jpg', '177.jpg', '178.jpg', '179.jpg', '183.jpg', '184.jpg', '188.jpg', '189.jpg',
+            '190.jpg', '191.jpg', '192.jpg', '193.jpg', '194.jpg', '195.jpg', '198.jpg', '200.jpg', '201.jpg',
+            '202.jpg', '203.jpg', '204.jpg', '205.jpg', '206.jpg', '207.jpg', '208.jpg', '209.jpg', '210.jpg',
+            '211.jpg', '212.jpg', '213.jpg', '214.jpg', '215.jpg', '216.jpg', '217.jpg', '218.jpg', '225.jpg',
+            'a.jpg', 'b.jpg', 'c.jpg', 'd.jpg', 'e.jpg', 'f.jpg', 'g.jpg', 'h.jpg', 'i.jpg', 'j.jpg', 'k.jpg',
+            'l.jpg', 'm.jpg', 'n.jpg', 'o.jpg'
         ];
         
-        // Function to load gallery
-        function loadGallery() {
-            const gallery = document.getElementById('gallery');
-            const loading = document.getElementById('loading');
+        const gallery = document.getElementById('gallery');
+        
+        // Create gallery items
+        images.forEach((img, index) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'img-wrapper';
             
-            // Create gallery items
-            crisisImages.forEach((img, index) => {
-                const item = document.createElement('div');
-                item.className = 'gallery-item';
-                const thumbUrl = getImageUrl('crisis', 'thumbs', img);
-                const fullUrl = getImageUrl('crisis', 'full', img);
-                
-                item.innerHTML = `<img src="${thumbUrl}" alt="Crisis Art ${index + 1}" loading="lazy">`;
-                item.onclick = () => openLightbox(fullUrl);
-                gallery.appendChild(item);
-            });
+            const imgElement = document.createElement('img');
+            imgElement.src = `thumbs/${img}`;
+            imgElement.alt = `Crisis ${index + 1}`;
+            imgElement.loading = 'lazy';
+            imgElement.onclick = () => openLightbox(`full/${img}`);
             
-            loading.style.display = 'none';
-        }
-
-        // Lightbox functions
+            wrapper.appendChild(imgElement);
+            gallery.appendChild(wrapper);
+        });
+        
         function openLightbox(src) {
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lightbox-img');
-            img.src = src;
-            lightbox.classList.add('active');
+            document.getElementById('lightbox').style.display = 'block';
+            document.getElementById('lightbox-img').src = src;
             document.body.style.overflow = 'hidden';
         }
-
+        
         function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
+            document.getElementById('lightbox').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-
-        // Close lightbox with escape key
+        
+        // Escape key to close
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeLightbox();
         });
-
-        // Close lightbox when clicking outside
-        document.getElementById('lightbox').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) closeLightbox();
-        });
-
-        // Load gallery when page loads
-        window.addEventListener('load', loadGallery);
     </script>
 </body>
 </html> 

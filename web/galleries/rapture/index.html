@@ -3,389 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Rapture - Wubbleton Sacred Art Collection</title>
+    <title>The Rapture - Wubbleton Sacred Art</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-            background: #FFF5EE;
-            color: #1a1a1a;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(to bottom, #000428, #004e92);
+            color: #fff;
+            min-height: 100vh;
         }
-
-        /* Header */
+        
         .header {
             text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(to bottom, #FFE4B5 0%, #FFF5EE 100%);
-            border-bottom: 1px solid rgba(255, 218, 185, 0.3);
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #FF8C00;
-            text-decoration: none;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-
-        .back-link:hover {
-            color: #FF6347;
-            transform: translateX(-3px);
-        }
-
-        h1 {
-            font-size: 48px;
-            font-weight: 300;
-            letter-spacing: -1px;
-            margin-bottom: 10px;
-            color: #2a2a2a;
-        }
-
-        .subtitle {
-            font-size: 18px;
-            color: #666;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        /* Gallery Grid */
-        .gallery-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .gallery-grid {
-            columns: 4;
-            column-gap: 20px;
-        }
-        
-        @media (max-width: 1200px) {
-            .gallery-grid { columns: 3; }
-        }
-        
-        @media (max-width: 900px) {
-            .gallery-grid { columns: 2; }
-        }
-        
-        @media (max-width: 600px) {
-            .gallery-grid { columns: 1; }
-        }
-        
-        .collection-description {
-            max-width: 800px;
-            margin: 0 auto 40px;
-            padding: 0 20px;
-            text-align: center;
-            color: #555;
-            font-size: 16px;
-            line-height: 1.8;
-            font-style: italic;
-        }
-
-        .gallery-item {
+            padding: 80px 20px;
             position: relative;
             overflow: hidden;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            margin-bottom: 20px;
-            break-inside: avoid;
-            display: inline-block;
-            width: 100%;
         }
-
-        .gallery-item::before {
+        
+        .header::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            pointer-events: none;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
         }
-
-        .gallery-item:hover::before {
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .back-link:hover {
             opacity: 1;
-            animation: heavenly-glow 2s ease-in-out infinite;
         }
-
-        @keyframes heavenly-glow {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.1); opacity: 0.6; }
+        
+        h1 {
+            font-size: 4em;
+            font-weight: 100;
+            letter-spacing: 0.2em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
         }
-
-        .gallery-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(255, 140, 0, 0.15);
+        
+        .subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.2em;
+            position: relative;
+            z-index: 1;
         }
-
-        .gallery-item img {
+        
+        .description {
+            max-width: 800px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1px;
+            background: rgba(255,255,255,0.1);
+            padding: 1px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        
+        .img-wrapper {
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            cursor: pointer;
+        }
+        
+        .img-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,78,146,0.3) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .img-wrapper:hover::after {
+            opacity: 1;
+        }
+        
+        .img-wrapper img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.6s ease;
+            transition: transform 0.6s ease;
         }
-
-        .gallery-item:hover img {
+        
+        .img-wrapper:hover img {
             transform: scale(1.08);
-            filter: brightness(1.1);
         }
-
+        
         /* Lightbox */
         .lightbox {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
+            background: radial-gradient(ellipse at center, rgba(0,4,40,0.95) 0%, rgba(0,0,0,0.98) 100%);
             z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .lightbox.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-        }
-
-        .lightbox img {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-        }
-
-        .close-lightbox {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: #fff;
-            font-size: 36px;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            z-index: 1001;
         }
-
-        .close-lightbox:hover {
-            transform: rotate(90deg);
-        }
-
-        /* Loading animation */
-        .loading {
-            position: fixed;
+        
+        .lightbox img {
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 24px;
-            color: #FF8C00;
-            letter-spacing: 2px;
-            animation: ascend 2s ease-in-out infinite;
+            max-width: 85%;
+            max-height: 85%;
+            box-shadow: 0 0 50px rgba(100,149,237,0.5);
         }
-
-        @keyframes ascend {
-            0%, 100% { transform: translate(-50%, -50%); opacity: 0.4; }
-            50% { transform: translate(-50%, -60%); opacity: 1; }
+        
+        .close {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            font-size: 50px;
+            color: rgba(255,255,255,0.8);
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
         }
-
-        /* Floating decorations */
-        .decoration {
+        
+        .close:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+        
+        /* Ascending particles */
+        .particles {
             position: fixed;
-            font-size: 20px;
-            opacity: 0.4;
-            animation: ascension 25s ease-in-out infinite;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
             z-index: -1;
         }
-
-        @keyframes ascension {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.4; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        
+        .particle {
+            position: absolute;
+            bottom: -10px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            animation: ascend 10s linear infinite;
         }
-
-        /* Holy light effect */
-        .holy-light {
-            position: fixed;
-            top: -50%;
-            left: 50%;
-            width: 2px;
-            height: 150%;
-            background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.2), transparent);
-            transform: translateX(-50%) rotate(15deg);
-            pointer-events: none;
-            animation: light-sweep 20s ease-in-out infinite;
-        }
-
-        @keyframes light-sweep {
-            0%, 100% { left: -10%; opacity: 0; }
-            50% { left: 110%; opacity: 1; }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 { font-size: 36px; }
-            .collection-description { font-size: 14px; }
+        
+        @keyframes ascend {
+            to {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
-    <script src="../../../gallery_config.js"></script>
 </head>
 <body>
-    <!-- Floating decorations -->
-    <div class="decoration" style="left: 10%; animation-delay: 0s;">☁️</div>
-    <div class="decoration" style="left: 30%; animation-delay: -5s;">✨</div>
-    <div class="decoration" style="left: 50%; animation-delay: -10s;">🕊️</div>
-    <div class="decoration" style="left: 70%; animation-delay: -15s;">⚡</div>
-    <div class="decoration" style="left: 90%; animation-delay: -20s;">🌟</div>
+    <div class="particles" id="particles"></div>
     
-    <!-- Holy light effects -->
-    <div class="holy-light"></div>
-    <div class="holy-light" style="animation-delay: -10s; transform: translateX(-50%) rotate(-15deg);"></div>
-
+    <a href="../../" class="back-link">← Back to Wubbleton</a>
+    
     <div class="header">
-        <a href="../../" class="back-link">← Back to Wubbleton</a>
-        <h1>The Rapture</h1>
-        <p class="subtitle">Ascension Archives & Heavenly Transmissions</p>
+        <h1>THE RAPTURE</h1>
+        <p class="subtitle">Transcendence Achieved</p>
     </div>
-
-    <div class="collection-description">
-        <p>The Rapture Collection celebrates those blessed moments when your productivity metrics align perfectly with the cosmic algorithm. These luminous portraits capture our most devoted members at the instant of corporate transfiguration—when their KPIs finally exceed 110% and they ascend directly to the C-suite without passing through middle management. Each image vibrates at precisely 432 Hz (the frequency of optimal shareholder value) and was painted using proprietary "liquid light" harvested from deleted emails. Viewing this collection has been known to cause spontaneous promotion, inexplicable stock options, and a profound understanding that the real heaven was the networking opportunities we made along the way.</p>
+    
+    <div class="description">
+        <p>167 glimpses of the promised dimension. After the crisis of meaning and the zombification of connection comes the ascension. These visions capture the moment of breakthrough—when the simulation's code becomes visible, when consciousness recognizes itself in the mirror of existence, when the cosmic joke finally lands. Each piece is a postcard from the other side, sent back to guide those still climbing.</p>
     </div>
-
-    <div class="loading" id="loading">Ascending to gallery...</div>
-
-    <div class="gallery-container">
-        <div class="gallery-grid" id="gallery"></div>
+    
+    <div class="gallery" id="gallery">
+        <!-- Images will be added by JavaScript -->
     </div>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
-        <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="">
-        </div>
+    
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close" onclick="event.stopPropagation(); closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="">
     </div>
-
+    
     <script>
-        // List of images (generated from the resized images)
-        const images = [];
+        // Create ascending particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = particle.style.height = Math.random() * 4 + 1 + 'px';
+            particle.style.animationDuration = Math.random() * 5 + 10 + 's';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            document.getElementById('particles').appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 15000);
+        }
+        
+        // Create particles periodically
+        setInterval(createParticle, 300);
         
         // Rapture gallery images
-        const raptureImages = [
-            '143-Rapture_1.jpg', '150-Rapture_2.jpg', '157-Rapture_3.jpg', '1-Rapture_4.jpg',
-            '164-Rapture_5.jpg', '171-Rapture_6.jpg', '178-Rapture_7.jpg', '185-Rapture_8.jpg',
-            '192-Rapture_9.jpg', '199-Rapture_10.jpg', '206-Rapture_11.jpg', '213-Rapture_12.jpg',
-            '220-Rapture_13.jpg', '227-Rapture_14.jpg', '234-Rapture_15.jpg', '241-Rapture_16.jpg',
-            '248-Rapture_17.jpg', '255-Rapture_18.jpg', '262-Rapture_19.jpg', '269-Rapture_20.jpg',
-            '276-Rapture_21.jpg', '283-Rapture_22.jpg', '290-Rapture_23.jpg', '297-Rapture_24.jpg',
-            '304-Rapture_25.jpg', '311-Rapture_26.jpg', '318-Rapture_27.jpg', '325-Rapture_28.jpg',
-            '332-Rapture_29.jpg', '339-Rapture_30.jpg', '346-Rapture_31.jpg', '353-Rapture_32.jpg',
-            '360-Rapture_33.jpg', '367-Rapture_34.jpg', '374-Rapture_35.jpg', '381-Rapture_36.jpg',
-            '388-Rapture_37.jpg', '395-Rapture_38.jpg', '402-Rapture_39.jpg', '409-Rapture_40.jpg',
-            '416-Rapture_41.jpg', '423-Rapture_42.jpg', '430-Rapture_43.jpg', '437-Rapture_44.jpg',
-            '444-Rapture_45.jpg', '451-Rapture_46.jpg', '458-Rapture_47.jpg', '465-Rapture_48.jpg',
-            '472-Rapture_49.jpg', '479-Rapture_50.jpg', '486-Rapture_51.jpg', '493-Rapture_52.jpg',
-            '500-Rapture_53.jpg', '507-Rapture_54.jpg', '514-Rapture_55.jpg', '521-Rapture_56.jpg',
-            '528-Rapture_57.jpg', '535-Rapture_58.jpg', '542-Rapture_59.jpg', '549-Rapture_60.jpg',
-            '556-Rapture_61.jpg', '563-Rapture_62.jpg', '570-Rapture_63.jpg', '577-Rapture_64.jpg',
-            '584-Rapture_65.jpg', '591-Rapture_66.jpg', '598-Rapture_67.jpg', '605-Rapture_68.jpg',
-            '612-Rapture_69.jpg', '619-Rapture_70.jpg', '626-Rapture_71.jpg', '633-Rapture_72.jpg',
-            '640-Rapture_73.jpg', '647-Rapture_74.jpg', '654-Rapture_75.jpg', '661-Rapture_76.jpg',
-            '668-Rapture_77.jpg', '675-Rapture_78.jpg', '682-Rapture_79.jpg', '689-Rapture_80.jpg',
-            '696-Rapture_81.jpg', '703-Rapture_82.jpg', '710-Rapture_83.jpg', '717-Rapture_84.jpg',
-            '724-Rapture_85.jpg', '731-Rapture_86.jpg', '738-Rapture_87.jpg', '745-Rapture_88.jpg',
-            '752-Rapture_89.jpg', '759-Rapture_90.jpg', '766-Rapture_91.jpg', '773-Rapture_92.jpg',
-            '780-Rapture_93.jpg', '787-Rapture_94.jpg', '794-Rapture_95.jpg', '801-Rapture_96.jpg',
-            '808-Rapture_97.jpg', '815-Rapture_98.jpg', '822-Rapture_99.jpg', '829-Rapture_100.jpg',
-            '836-Rapture_101.jpg', '843-Rapture_102.jpg', '850-Rapture_103.jpg', '857-Rapture_104.jpg',
-            '864-Rapture_105.jpg', '871-Rapture_106.jpg', '878-Rapture_107.jpg', '885-Rapture_108.jpg',
-            '892-Rapture_109.jpg', '899-Rapture_110.jpg', '906-Rapture_111.jpg', '913-Rapture_112.jpg',
-            '920-Rapture_113.jpg', '927-Rapture_114.jpg', '934-Rapture_115.jpg', '941-Rapture_116.jpg',
-            '948-Rapture_117.jpg', '955-Rapture_118.jpg', '962-Rapture_119.jpg', '969-Rapture_120.jpg',
-            '976-Rapture_121.jpg', '983-Rapture_122.jpg', '990-Rapture_123.jpg', '997-Rapture_124.jpg',
-            '1004-Rapture_125.jpg', '1011-Rapture_126.jpg', '1018-Rapture_127.jpg', '1025-Rapture_128.jpg',
-            '1032-Rapture_129.jpg', '1039-Rapture_130.jpg', '1046-Rapture_131.jpg', '1053-Rapture_132.jpg',
-            '1060-Rapture_133.jpg', '1067-Rapture_134.jpg', '1074-Rapture_135.jpg', '1081-Rapture_136.jpg',
-            '1088-Rapture_137.jpg', '1095-Rapture_138.jpg', '1102-Rapture_139.jpg', '1109-Rapture_140.jpg',
-            '1116-Rapture_141.jpg', '1123-Rapture_142.jpg', '1130-Rapture_143.jpg', '1137-Rapture_144.jpg',
-            '1144-Rapture_145.jpg', '1151-Rapture_146.jpg', '1158-Rapture_147.jpg', '1165-Rapture_148.jpg',
-            '1172-Rapture_149.jpg', '1179-Rapture_150.jpg', '1186-Rapture_151.jpg', '1193-Rapture_152.jpg',
-            '1200-Rapture_153.jpg', '1207-Rapture_154.jpg', '1214-Rapture_155.jpg', '1221-Rapture_156.jpg',
-            '1228-Rapture_157.jpg', '1235-Rapture_158.jpg', '1242-Rapture_159.jpg', '1249-Rapture_160.jpg',
-            '1256-Rapture_161.jpg', '1263-Rapture_162.jpg', '1270-Rapture_163.jpg', '1277-Rapture_164.jpg',
-            '1284-Rapture_165.jpg', '1291-Rapture_166.jpg', '1298-Rapture_167.jpg'
+        const images = [
+            '1.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg',
+            '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg',
+            '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', '29.jpg',
+            '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg', '36.jpg', '37.jpg', '38.jpg',
+            '39.jpg', '40.jpg', '41.jpg', '42.jpg', '43.jpg', '44.jpg', '45.jpg', '46.jpg', '47.jpg',
+            '48.jpg', '49.jpg', '50.jpg', '51.jpg', '52.jpg', '53.jpg', '54.jpg', '55.jpg', '56.jpg',
+            '57.jpg', '58.jpg', '59.jpg', '60.jpg', '61.jpg', '62.jpg', '63.jpg', '64.jpg', '65.jpg',
+            '66.jpg', '67.jpg', '68.jpg', '69.jpg', '70.jpg', '71.jpg', '72.jpg', '73.jpg', '74.jpg',
+            '75.jpg', '76.jpg', '77.jpg', '78.jpg', '79.jpg', '80.jpg', '81.jpg', '82.jpg', '83.jpg',
+            '84.jpg', '85.jpg', '86.jpg', '87.jpg', '88.jpg', '89.jpg', '90.jpg', '91.jpg', '92.jpg',
+            '93.jpg', '94.jpg', '95.jpg', '96.jpg', '97.jpg', '98.jpg', '99.jpg', '100.jpg', '101.jpg',
+            '102.jpg', '103.jpg', '104.jpg', '105.jpg', '106.jpg', '107.jpg', '108.jpg', '109.jpg',
+            '110.jpg', '111.jpg', '112.jpg', '113.jpg', '114.jpg', '115.jpg', '116.jpg', '117.jpg',
+            '118.jpg', '119.jpg', '120.jpg', '121.jpg', '122.jpg', '123.jpg', '124.jpg', '125.jpg',
+            '126.jpg', '127.jpg', '128.jpg', '129.jpg', '130.jpg', '131.jpg', '132.jpg', '133.jpg',
+            '134.jpg', '135.jpg', '136.jpg', '137.jpg', '138.jpg', '139.jpg', '140.jpg', '141.jpg',
+            '142.jpg', '143.jpg', '144.jpg', '145.jpg', '146.jpg', '147.jpg', '148.jpg', '149.jpg',
+            '150.jpg', '151.jpg', '152.jpg', '153.jpg', '154.jpg', '155.jpg', '156.jpg', '157.jpg',
+            '158.jpg', '159.jpg', '160.jpg', '161.jpg', '162.jpg', '163.jpg', '164.jpg', '165.jpg',
+            '166.jpg', '167.jpg'
         ];
         
-        // Function to load gallery
-        function loadGallery() {
-            const gallery = document.getElementById('gallery');
-            const loading = document.getElementById('loading');
+        const gallery = document.getElementById('gallery');
+        
+        // Create gallery items
+        images.forEach((img, index) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'img-wrapper';
             
-            // Create gallery items
-            raptureImages.forEach((img, index) => {
-                const item = document.createElement('div');
-                item.className = 'gallery-item';
-                const thumbUrl = getImageUrl('rapture', 'thumbs', img);
-                const fullUrl = getImageUrl('rapture', 'full', img);
-                item.innerHTML = `<img src="${thumbUrl}" alt="Rapture Art ${index + 1}" loading="lazy">`;
-                item.onclick = () => openLightbox(fullUrl);
-                gallery.appendChild(item);
-            });
+            const imgElement = document.createElement('img');
+            imgElement.src = `thumbs/${img}`;
+            imgElement.alt = `Rapture ${index + 1}`;
+            imgElement.loading = 'lazy';
+            imgElement.onclick = () => openLightbox(`full/${img}`);
             
-            loading.style.display = 'none';
-        }
-
-        // Lightbox functions
+            wrapper.appendChild(imgElement);
+            gallery.appendChild(wrapper);
+        });
+        
         function openLightbox(src) {
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lightbox-img');
-            img.src = src;
-            lightbox.classList.add('active');
+            document.getElementById('lightbox').style.display = 'block';
+            document.getElementById('lightbox-img').src = src;
             document.body.style.overflow = 'hidden';
         }
-
+        
         function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
+            document.getElementById('lightbox').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-
-        // Close lightbox with escape key
+        
+        // Escape key to close
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeLightbox();
         });
-
-        // Close lightbox when clicking outside
-        document.getElementById('lightbox').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) closeLightbox();
-        });
-
-        // Load gallery when page loads
-        window.addEventListener('load', loadGallery);
     </script>
 </body>
 </html> 
