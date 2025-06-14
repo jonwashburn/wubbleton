@@ -9,48 +9,25 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(to bottom, #000428, #004e92);
-            color: #fff;
+            background: #FFFFFF;
+            color: #333;
             min-height: 100vh;
         }
         
         .header {
             text-align: center;
             padding: 80px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
+            background: #FFFFFF;
         }
         
         .back-link {
             position: fixed;
             top: 20px;
             left: 20px;
-            color: #fff;
+            color: #4A90E2;
             text-decoration: none;
             font-size: 14px;
             z-index: 100;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-        
-        .back-link:hover {
-            opacity: 1;
         }
         
         h1 {
@@ -59,15 +36,12 @@
             letter-spacing: 0.2em;
             margin-bottom: 10px;
             text-transform: uppercase;
-            position: relative;
-            z-index: 1;
+            color: #333;
         }
         
         .subtitle {
-            color: rgba(255,255,255,0.8);
+            color: #666;
             font-size: 1.2em;
-            position: relative;
-            z-index: 1;
         }
         
         .description {
@@ -75,53 +49,34 @@
             margin: 0 auto 80px;
             padding: 0 20px;
             text-align: center;
-            color: rgba(255,255,255,0.9);
+            color: #555;
             line-height: 1.8;
             font-size: 1.1em;
         }
         
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1px;
-            background: rgba(255,255,255,0.1);
-            padding: 1px;
-            max-width: 1800px;
-            margin: 0 auto;
+            column-count: 2;
+            column-gap: 0;
+            width: 100%;
         }
         
         .img-wrapper {
+            break-inside: avoid;
             position: relative;
             overflow: hidden;
-            background: #000;
             cursor: pointer;
-        }
-        
-        .img-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to top, rgba(0,78,146,0.3) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        
-        .img-wrapper:hover::after {
-            opacity: 1;
+            margin-bottom: 0;
         }
         
         .img-wrapper img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.6s ease;
+            transition: transform 0.3s ease;
         }
         
         .img-wrapper:hover img {
-            transform: scale(1.08);
+            transform: scale(1.02);
         }
         
         /* Lightbox */
@@ -132,7 +87,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at center, rgba(0,4,40,0.95) 0%, rgba(0,0,0,0.98) 100%);
+            background: rgba(255,255,255,0.95);
             z-index: 1000;
             cursor: pointer;
         }
@@ -144,7 +99,7 @@
             transform: translate(-50%, -50%);
             max-width: 85%;
             max-height: 85%;
-            box-shadow: 0 0 50px rgba(100,149,237,0.5);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
         
         .close {
@@ -152,46 +107,38 @@
             top: 30px;
             right: 50px;
             font-size: 50px;
-            color: rgba(255,255,255,0.8);
+            color: #333;
             cursor: pointer;
-            transition: color 0.3s, transform 0.3s;
         }
         
-        .close:hover {
-            color: #fff;
-            transform: scale(1.1);
-        }
-        
-        /* Ascending particles */
-        .particles {
+        /* Floating emojis */
+        .emoji {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
+            font-size: 20px;
+            animation: float-up 15s linear infinite;
+            pointer-events: none;
             z-index: -1;
         }
         
-        .particle {
-            position: absolute;
-            bottom: -10px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 50%;
-            animation: ascend 10s linear infinite;
-        }
-        
-        @keyframes ascend {
-            to {
-                transform: translateY(-110vh) rotate(360deg);
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
                 opacity: 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
-    
     <a href="../../" class="back-link">← Back to Wubbleton</a>
     
     <div class="header">
@@ -213,21 +160,22 @@
     </div>
     
     <script>
-        // Create ascending particles
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.width = particle.style.height = Math.random() * 4 + 1 + 'px';
-            particle.style.animationDuration = Math.random() * 5 + 10 + 's';
-            particle.style.animationDelay = Math.random() * 5 + 's';
-            document.getElementById('particles').appendChild(particle);
+        // Create floating emojis
+        function createEmoji() {
+            const emojis = ['✨', '🌟', '⭐', '💫', '🌈', '☁️', '🕊️', '👁️'];
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji';
+            emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + '%';
+            emoji.style.animationDuration = Math.random() * 10 + 15 + 's';
+            emoji.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(emoji);
             
-            setTimeout(() => particle.remove(), 15000);
+            setTimeout(() => emoji.remove(), 25000);
         }
         
-        // Create particles periodically
-        setInterval(createParticle, 300);
+        // Create emojis periodically
+        setInterval(createEmoji, 3000);
         
         // Rapture gallery images
         const images = [

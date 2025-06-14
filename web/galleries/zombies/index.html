@@ -9,22 +9,21 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-            background: #1a1a1a;
-            color: #e0e0e0;
+            background: #FFFFFF;
+            color: #333;
         }
         
         .header {
             text-align: center;
             padding: 60px 20px;
-            background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
-            border-bottom: 1px solid #333;
+            background: #FFFFFF;
         }
         
         .back-link {
             position: fixed;
             top: 20px;
             left: 20px;
-            color: #00ff88;
+            color: #00cc66;
             text-decoration: none;
             font-size: 14px;
             z-index: 100;
@@ -36,10 +35,11 @@
             letter-spacing: 0.1em;
             margin-bottom: 10px;
             text-transform: uppercase;
+            color: #333;
         }
         
         .subtitle {
-            color: #888;
+            color: #666;
             font-size: 1.1em;
         }
         
@@ -48,52 +48,60 @@
             margin: 0 auto 60px;
             padding: 0 20px;
             text-align: center;
-            color: #aaa;
+            color: #555;
             line-height: 1.6;
             font-size: 1.05em;
         }
         
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2px;
-            padding: 0 2px;
-            max-width: 1600px;
-            margin: 0 auto;
+            column-count: 2;
+            column-gap: 0;
+            width: 100%;
         }
         
         .img-wrapper {
+            break-inside: avoid;
             position: relative;
             overflow: hidden;
-            background: #222;
             cursor: pointer;
-        }
-        
-        .img-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(0,255,136,0.1) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-        
-        .img-wrapper:hover::before {
-            transform: translateX(100%);
+            margin-bottom: 0;
         }
         
         .img-wrapper img {
             width: 100%;
             height: auto;
             display: block;
-            transition: filter 0.3s ease;
+            transition: transform 0.3s ease;
         }
         
         .img-wrapper:hover img {
-            filter: brightness(1.1) contrast(1.1);
+            transform: scale(1.02);
+        }
+        
+        /* Floating emojis */
+        .emoji {
+            position: fixed;
+            font-size: 20px;
+            animation: float-up 15s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
         
         /* Lightbox */
@@ -104,7 +112,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.98);
+            background: rgba(255,255,255,0.95);
             z-index: 1000;
             cursor: pointer;
         }
@@ -116,6 +124,7 @@
             transform: translate(-50%, -50%);
             max-width: 90%;
             max-height: 90%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
         
         .close {
@@ -123,13 +132,8 @@
             top: 20px;
             right: 40px;
             font-size: 40px;
-            color: #00ff88;
+            color: #333;
             cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .close:hover {
-            transform: rotate(90deg);
         }
     </style>
 </head>
@@ -155,6 +159,23 @@
     </div>
     
     <script>
+        // Create floating emojis
+        function createEmoji() {
+            const emojis = ['📱', '💤', '🧟', '👻', '📵', '🔌', '📡', '🤖'];
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji';
+            emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + '%';
+            emoji.style.animationDuration = Math.random() * 10 + 15 + 's';
+            emoji.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(emoji);
+            
+            setTimeout(() => emoji.remove(), 25000);
+        }
+        
+        // Create emojis periodically
+        setInterval(createEmoji, 3000);
+        
         // Modern Zombies gallery images
         const images = [
             '2.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg',
