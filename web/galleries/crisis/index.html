@@ -226,7 +226,7 @@
     </style>
 </head>
 <body>
-    <a href="../../" class="back-link">← Back to Wubbleton</a>
+    <a href="/" class="back-link">← Back to Wubbleton</a>
     
     <div class="hero">
         <img class="hero-image" id="hero-image" src="" alt="The Crisis">
@@ -311,42 +311,22 @@
         
         const gallery = document.getElementById('gallery');
         
-        // Preload images and create gallery items with better loading
+        // Load images after they've finished downloading to prevent layout shifts
         function loadImage(img, index) {
             return new Promise((resolve) => {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'img-wrapper';
-                
-                // Add skeleton loader
-                const skeleton = document.createElement('div');
-                skeleton.className = 'skeleton';
-                skeleton.style.height = Math.random() * 200 + 300 + 'px';
-                wrapper.appendChild(skeleton);
-                
-                const imgElement = document.createElement('img');
-                const imageUrl = getSupabaseUrl(`crisis/full/${img}`); // Use full size images
-                
-                // Preload image
+                const imageUrl = getSupabaseUrl(`crisis/full/${img}`);
                 const tempImg = new Image();
+                tempImg.src = imageUrl;
                 tempImg.onload = () => {
-                    imgElement.src = imageUrl;
-                    imgElement.alt = `Crisis ${index + 1}`;
-                    imgElement.onclick = () => openLightbox(imageUrl);
-                    
-                    // Replace skeleton with image
-                    wrapper.removeChild(skeleton);
-                    wrapper.appendChild(imgElement);
-                    
-                    // Trigger animation with delay
-                    setTimeout(() => {
-                        wrapper.classList.add('loaded');
-                    }, index * 30);
-                    
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'img-wrapper';
+                    tempImg.alt = `Crisis ${index + 1}`;
+                    tempImg.onclick = () => openLightbox(imageUrl);
+                    wrapper.appendChild(tempImg);
+                    gallery.appendChild(wrapper);
+                    setTimeout(() => wrapper.classList.add('loaded'), index * 30);
                     resolve();
                 };
-                
-                tempImg.src = imageUrl;
-                gallery.appendChild(wrapper);
             });
         }
         
