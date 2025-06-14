@@ -47,9 +47,9 @@ The Rapture/
 images_*/
 wubbleton-website/
 
-# Ignore gallery images (served separately)
-web/galleries/*/full/
-web/galleries/*/thumbs/
+# --- Gallery images now served from repo, do not ignore ----
+# web/galleries/*/full/
+# web/galleries/*/thumbs/
 
 # Node modules
 node_modules/
