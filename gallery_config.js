@@ -15,10 +15,10 @@ const GALLERY_CONFIG = {
 
 // Helper function to get image URL
 function getImageUrl(gallery, type, filename) {
-    // Local hosting: the HTTP server is started with doc-root = web/
-    // Therefore URLs should begin with /galleries/...
+    // Local hosting: the HTTP server is started from project root
+    // Therefore URLs need to include /web/galleries/...
     if (!GALLERY_CONFIG.USE_SUPABASE) {
-        return `/galleries/${gallery}/${type}/${filename}`;
+        return `/web/galleries/${gallery}/${type}/${filename}`;
     }
     
     // Remote (Supabase) mode
