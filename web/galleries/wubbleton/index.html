@@ -203,9 +203,16 @@
         <img id="lightbox-img" src="" alt="">
     </div>
     
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../../js/gallery_config.js"></script>
     <script>
+        // Supabase configuration
+        const SUPABASE_URL = 'https://ozxhahlykxeeiuvmzrbb.supabase.co';
+        const BUCKET_NAME = 'gallery-images';
+        
+        // Function to get Supabase URL
+        function getSupabaseUrl(path) {
+            return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${path}`;
+        }
+        
         // Create floating hearts
         function createHeart() {
             const heart = document.createElement('div');
@@ -234,14 +241,13 @@
         images.forEach((img, index) => {
             const wrapper = document.createElement('div');
             wrapper.className = 'img-wrapper';
-            wrapper.style.transform = `rotate(${Math.random() * 4 - 2}deg)`;
             
             const imgElement = document.createElement('img');
             // Use Supabase URLs
-            imgElement.src = getSupabaseThumbnailUrl('wubbleton', img);
+            imgElement.src = getSupabaseUrl(`wubbleton/thumbs/${img}`);
             imgElement.alt = `Vision ${index + 1}`;
             imgElement.loading = 'lazy';
-            imgElement.onclick = () => openLightbox(getSupabaseImageUrl('wubbleton/full', img));
+            imgElement.onclick = () => openLightbox(getSupabaseUrl(`wubbleton/full/${img}`));
             
             wrapper.appendChild(imgElement);
             gallery.appendChild(wrapper);

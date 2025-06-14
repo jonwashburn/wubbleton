@@ -159,6 +159,15 @@
     </div>
     
     <script>
+        // Supabase configuration
+        const SUPABASE_URL = 'https://ozxhahlykxeeiuvmzrbb.supabase.co';
+        const BUCKET_NAME = 'gallery-images';
+        
+        // Function to get Supabase URL
+        function getSupabaseUrl(path) {
+            return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${path}`;
+        }
+        
         // Create floating emojis
         function createEmoji() {
             const emojis = ['📱', '💤', '🧟', '👻', '📵', '🔌', '📡', '🤖'];
@@ -206,10 +215,10 @@
             wrapper.className = 'img-wrapper';
             
             const imgElement = document.createElement('img');
-            imgElement.src = `thumbs/${img}`;
+            imgElement.src = getSupabaseUrl(`zombies/thumbs/${img}`);
             imgElement.alt = `Modern Zombie ${index + 1}`;
             imgElement.loading = 'lazy';
-            imgElement.onclick = () => openLightbox(`full/${img}`);
+            imgElement.onclick = () => openLightbox(getSupabaseUrl(`zombies/full/${img}`));
             
             wrapper.appendChild(imgElement);
             gallery.appendChild(wrapper);
