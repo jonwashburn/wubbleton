@@ -169,10 +169,10 @@
         </div>
 
             <div style="display: flex; justify-content: center; gap: 20px; margin-top: 40px; flex-wrap: wrap;">
-                <img src="web/galleries/wubbleton/thumbs/wubbleton_50.jpg" alt="Vision 1" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(-2deg);">
-                <img src="web/galleries/wubbleton/thumbs/wubbleton_100.jpg" alt="Vision 2" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(1deg);">
-                <img src="web/galleries/wubbleton/thumbs/wubbleton_150.jpg" alt="Vision 3" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(-1deg);">
-                <img src="web/galleries/wubbleton/thumbs/wubbleton_200.jpg" alt="Vision 4" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(2deg);">
+                <img id="wubbleton-preview-1" src="" alt="Vision 1" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(-2deg);">
+                <img id="wubbleton-preview-2" src="" alt="Vision 2" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(1deg);">
+                <img id="wubbleton-preview-3" src="" alt="Vision 3" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(-1deg);">
+                <img id="wubbleton-preview-4" src="" alt="Vision 4" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(2deg);">
             </div>
         </div>
     </section>
@@ -188,22 +188,22 @@
             
             <div class="samples-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 40px 0;">
                 <div class="sample-item" style="position: relative; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(-2deg); transition: all 0.3s;">
-                    <img src="samples/thumbs/sample_1.jpg" alt="Sample 1" style="width: 100%; height: auto; display: block;">
+                    <img id="sample-1" src="" alt="Sample 1" style="width: 100%; height: auto; display: block;">
                 </div>
                 <div class="sample-item" style="position: relative; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(1deg); transition: all 0.3s;">
-                    <img src="samples/thumbs/sample_2.jpg" alt="Sample 2" style="width: 100%; height: auto; display: block;">
+                    <img id="sample-2" src="" alt="Sample 2" style="width: 100%; height: auto; display: block;">
                 </div>
                 <div class="sample-item" style="position: relative; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(-1deg); transition: all 0.3s;">
-                    <img src="samples/thumbs/sample_3.jpg" alt="Sample 3" style="width: 100%; height: auto; display: block;">
+                    <img id="sample-3" src="" alt="Sample 3" style="width: 100%; height: auto; display: block;">
                 </div>
                 <div class="sample-item" style="position: relative; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(2deg); transition: all 0.3s;">
-                    <img src="samples/thumbs/sample_4.jpg" alt="Sample 4" style="width: 100%; height: auto; display: block;">
+                    <img id="sample-4" src="" alt="Sample 4" style="width: 100%; height: auto; display: block;">
                 </div>
                 <div class="sample-item" style="position: relative; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(-2deg); transition: all 0.3s;">
-                    <img src="samples/thumbs/sample_5.jpg" alt="Sample 5" style="width: 100%; height: auto; display: block;">
+                    <img id="sample-5" src="" alt="Sample 5" style="width: 100%; height: auto; display: block;">
                 </div>
                 <div class="sample-item" style="position: relative; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(1deg); transition: all 0.3s;">
-                    <img src="samples/thumbs/sample_6.jpg" alt="Sample 6" style="width: 100%; height: auto; display: block;">
+                    <img id="sample-6" src="" alt="Sample 6" style="width: 100%; height: auto; display: block;">
             </div>
         </div>
 
@@ -570,5 +570,37 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Supabase configuration
+        const SUPABASE_URL = 'https://ozxhahlykxeeiuvmzrbb.supabase.co';
+        const BUCKET_NAME = 'gallery-images';
+        
+        // Function to get Supabase URL
+        function getSupabaseUrl(path) {
+            return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${path}`;
+        }
+        
+        // Load gallery preview images
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load trilogy preview images
+            document.getElementById('crisis-preview').src = getSupabaseUrl('crisis/full/1-Crisis_1.jpg');
+            document.getElementById('zombies-preview').src = getSupabaseUrl('zombies/full/1-Zombies_1.jpg');
+            document.getElementById('rapture-preview').src = getSupabaseUrl('rapture/full/1-Rapture_1.jpg');
+            
+            // Load wubbleton preview images
+            document.getElementById('wubbleton-preview-1').src = getSupabaseUrl('wubbleton/full/wubbleton_50.jpg');
+            document.getElementById('wubbleton-preview-2').src = getSupabaseUrl('wubbleton/full/wubbleton_100.jpg');
+            document.getElementById('wubbleton-preview-3').src = getSupabaseUrl('wubbleton/full/wubbleton_150.jpg');
+            document.getElementById('wubbleton-preview-4').src = getSupabaseUrl('wubbleton/full/wubbleton_200.jpg');
+            
+            // Load sample images (using crisis images as samples for now)
+            document.getElementById('sample-1').src = getSupabaseUrl('crisis/full/10-Crisis_1.jpg');
+            document.getElementById('sample-2').src = getSupabaseUrl('crisis/full/20-Crisis_1.jpg');
+            document.getElementById('sample-3').src = getSupabaseUrl('crisis/full/30-Crisis_1.jpg');
+            document.getElementById('sample-4').src = getSupabaseUrl('crisis/full/40-Crisis_1.jpg');
+            document.getElementById('sample-5').src = getSupabaseUrl('crisis/full/50-Crisis_1.jpg');
+            document.getElementById('sample-6').src = getSupabaseUrl('crisis/full/60-Crisis_1.jpg');
+        });
+    </script>
 </body>
 </html> 
