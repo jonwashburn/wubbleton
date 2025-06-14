@@ -1,8 +1,8 @@
 // Gallery Configuration for Wubbleton
 const GALLERY_CONFIG = {
     // Local serving configuration
-    USE_SUPABASE: false,
-    IMAGE_SERVER_URL: '',
+    USE_SUPABASE: true,
+    IMAGE_SERVER_URL: 'https://your-project.supabase.co/storage/v1/object/public/wubbleton-galleries',
     
     // Gallery names
     galleries: {

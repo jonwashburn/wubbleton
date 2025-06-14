@@ -3,6 +3,9 @@
 *.jpg
 *.png
 
+# Allow gallery images
+!web/galleries/**/*.jpg
+
 # But include the specific images we need for the website
 !images/crisis-sacred-1.png
 !images/zombies-sacred-1.png
