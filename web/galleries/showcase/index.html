@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showcase – Wubbleton Main Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f4f6f8;
+            --card-bg: #ffffff;
+            --primary: #5562ff;
+            --grey: #6b7280;
+            --radius: 12px;
+            --shadow: 0 2px 8px rgba(0,0,0,.08);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: var(--bg);
+            color: #111827;
+        }
+        header {
+            padding: 40px 20px 10px;
+            text-align: center;
+        }
+        header h1 {
+            font-weight: 600;
+            font-size: 42px;
+            letter-spacing: -1px;
+        }
+        header p { color: var(--grey); margin-top: 6px; }
+        .back {
+            position: absolute; left: 20px; top: 20px;
+            text-decoration: none; color: var(--primary); font-size: 14px; font-weight: 400;
+        }
+        main { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform .3s ease, box-shadow .3s ease;
+            cursor: pointer;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0,0,0,.12); }
+        .card img { width: 100%; height: auto; display: block; }
+        /* Lightbox */
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.92); display:none; align-items:center; justify-content:center; z-index: 1000; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 90%; max-height: 90vh; border-radius: var(--radius); box-shadow: 0 4px 30px rgba(0,0,0,.4); }
+        .close-btn { position: fixed; top: 30px; right: 40px; font-size: 32px; color: #fff; cursor:pointer; }
+    </style>
+    <script src="../../../gallery_config.js"></script>
+</head>
+<body>
+    <a class="back" href="../../">← Back</a>
+    <header>
+        <h1>Wubbleton Showcase</h1>
+        <p>Hand-picked daily visions straight from the cosmic buffer.</p>
+    </header>
+    <main>
+        <div id="grid" class="grid"></div>
+    </main>
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <span class="close-btn" onclick="closeLightbox(event)">&times;</span>
+        <img id="lb-img" src="" alt="">
+    </div>
+
+<script>
+// List first 40 wubbleton images for showcase
+const showcaseImages = Array.from({length: 40}, (_,i) => `wubbleton_${i+1}.jpg`);
+
+function buildGrid() {
+    const grid = document.getElementById('grid');
+    showcaseImages.forEach((file, idx) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        const thumb = getImageUrl('wubbleton', 'thumbs', file);
+        const full  = getImageUrl('wubbleton', 'full', file);
+        card.innerHTML = `<img src="${thumb}" alt="Showcase ${idx+1}" loading="lazy">`;
+        card.onclick = () => openLightbox(full);
+        grid.appendChild(card);
+    });
+}
+function openLightbox(src){
+    const lb=document.getElementById('lightbox');
+    document.getElementById('lb-img').src=src;
+    lb.classList.add('active');
+    document.body.style.overflow='hidden';
+}
+function closeLightbox(e){
+    if(e && e.target.id!=='lb-img'){
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow='auto';
+    }
+}
+window.addEventListener('load', buildGrid);
+</script>
+</body>
+</html> 
