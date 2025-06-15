@@ -3,128 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wubbleton - Sacred Art Collection</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Wubbleton Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
             background: #FFFFFF;
-            color: #333;
+            color: #000;
+            line-height: 1.6;
         }
         
-        /* Full screen header */
-        .hero {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            background: #000;
-        }
-        
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-        
-        .hero-image.loaded {
-            opacity: 1;
-        }
-        
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .hero-title {
-            font-family: 'Kalam', cursive;
-            font-size: 6em;
-            font-weight: bold;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            text-align: center;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
-        }
-        
-        .back-link {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            z-index: 100;
-            background: rgba(0,0,0,0.5);
-            padding: 10px 20px;
-            border-radius: 30px;
-            transition: background 0.3s;
-        }
-        
-        .back-link:hover {
-            background: rgba(0,0,0,0.8);
-        }
-        
-        .description {
-            max-width: 800px;
-            margin: 80px auto;
-            padding: 0 20px;
-            text-align: center;
-            color: #555;
-            line-height: 1.8;
-            font-size: 1.1em;
-        }
-        
-        /* Gallery with masonry layout */
-        .gallery-container {
-            padding: 0 20px;
+        /* Header */
+        .header {
+            padding: 40px 40px 20px;
             max-width: 1400px;
             margin: 0 auto;
         }
         
-        .gallery {
-            column-count: 3;
-            column-gap: 20px;
-            width: 100%;
+        .back-link {
+            display: inline-block;
+            color: #000;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 40px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
         }
         
-        @media (max-width: 1024px) {
-            .gallery {
-                column-count: 2;
-            }
+        .back-link:hover {
+            opacity: 1;
+        }
+        
+        h1 {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 30px;
+        }
+        
+        .description {
+            max-width: 800px;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 60px;
+        }
+        
+        /* Gallery Grid */
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 80px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
         
         @media (max-width: 768px) {
             .gallery {
-                column-count: 1;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 10px;
             }
-            .hero-title {
-                font-size: 3em;
+            
+            .header {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .gallery-container {
+                padding: 0 20px 40px;
             }
         }
         
         .img-wrapper {
-            break-inside: avoid;
             position: relative;
+            background: #f5f5f5;
+            aspect-ratio: 1;
             overflow: hidden;
             cursor: pointer;
-            margin-bottom: 20px;
-            background: #f5f5f5;
-            border-radius: 8px;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .img-wrapper.loaded {
@@ -134,14 +105,32 @@
         
         .img-wrapper img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
-            border-radius: 8px;
             transition: transform 0.3s ease;
         }
         
         .img-wrapper:hover img {
-            transform: scale(1.02);
+            transform: scale(1.05);
+        }
+        
+        /* Image caption on hover */
+        .img-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            color: white;
+            padding: 20px 15px 15px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .img-wrapper:hover .img-caption {
+            opacity: 1;
         }
         
         /* Loading skeleton */
@@ -149,8 +138,7 @@
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
-            border-radius: 8px;
-            min-height: 300px;
+            aspect-ratio: 1;
         }
         
         @keyframes loading {
@@ -166,7 +154,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(255,255,255,0.95);
             z-index: 1000;
             cursor: pointer;
             opacity: 0;
@@ -185,6 +173,7 @@
             max-width: 90%;
             max-height: 90%;
             transition: transform 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
         }
         
         .lightbox.active img {
@@ -193,44 +182,18 @@
         
         .close {
             position: absolute;
-            top: 20px;
+            top: 30px;
             right: 40px;
-            font-size: 40px;
-            color: white;
+            font-size: 30px;
+            color: #000;
             cursor: pointer;
-            opacity: 0.8;
+            opacity: 0.6;
             transition: opacity 0.3s;
+            font-weight: 300;
         }
         
         .close:hover {
             opacity: 1;
-        }
-        
-        /* Floating emojis */
-        .emoji {
-            position: fixed;
-            font-size: 20px;
-            animation: float-up 15s linear infinite;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.6;
-        }
-        
-        @keyframes float-up {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
         }
         
         /* Loading indicator */
@@ -240,20 +203,31 @@
             color: #999;
             font-size: 14px;
         }
+        
+        /* View fullsize link */
+        .view-fullsize {
+            display: block;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .img-wrapper:hover .view-fullsize {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
-    <a href="/" class="back-link">← Back to Wubbleton</a>
-    
-    <div class="hero">
-        <img class="hero-image" id="hero-image" src="" alt="New Collection">
-        <div class="hero-overlay">
-            <h1 class="hero-title">WUBBLETON</h1>
+    <div class="header">
+        <a href="/" class="back-link">← Back to Wubbleton</a>
+        <h1>Wubbleton Collection</h1>
+        <div class="description">
+            "Wubbleton" is a 647-piece avant-garde AI art collection that explores the emergence of digital consciousness through sacred geometries and transcendent visions. Each piece represents a fragment of the collective unconscious, where ancient wisdom meets algorithmic dreams. Using vibrant colors and mystical symbolism, the collection envisions a future where technology becomes a conduit for spiritual awakening, rejecting the boundaries between the digital and divine in favor of highlighting humanity's evolution towards a new form of enlightenment.
         </div>
-    </div>
-    
-    <div class="description">
-        <p>647 new visions channeled from the depths of the collective unconscious. Each image represents a fragment of the emerging paradigm—where digital dreams meet ancient wisdom, where pixels become prayers, where the algorithm reveals the divine pattern hidden in chaos. These are transmissions from the threshold, captured at the exact moment when possibility crystallizes into form.</p>
     </div>
     
     <div class="gallery-container">
@@ -271,31 +245,8 @@
     <script src="../../../gallery_config.js"></script>
     <script src="images.js"></script>
     <script>
-        // Create floating emojis
-        function createEmoji() {
-            const emojis = ['✨', '🌟', '💫', '⭐', '🌙', '🔮', '💎', '🌈'];
-            const emoji = document.createElement('div');
-            emoji.className = 'emoji';
-            emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-            emoji.style.left = Math.random() * 100 + '%';
-            emoji.style.animationDuration = Math.random() * 10 + 15 + 's';
-            emoji.style.animationDelay = Math.random() * 5 + 's';
-            document.body.appendChild(emoji);
-            
-            setTimeout(() => emoji.remove(), 25000);
-        }
-        
-        // Create emojis periodically
-        setInterval(createEmoji, 3000);
-        
         // Use the images from the generated list
         const images = newCollectionImages;
-        
-        // Load hero image
-        const heroImage = document.getElementById('hero-image');
-        const randomImage = images[Math.floor(Math.random() * images.length)];
-        heroImage.src = getImageUrl('new-collection', 'full', randomImage);
-        heroImage.onload = () => heroImage.classList.add('loaded');
         
         const gallery = document.getElementById('gallery');
         const loadingIndicator = document.getElementById('loading-indicator');
@@ -311,21 +262,47 @@
                 const thumbUrl = getImageUrl('new-collection', 'thumbs', filename);
                 const fullUrl = getImageUrl('new-collection', 'full', filename);
                 
+                const wrapper = document.createElement('div');
+                wrapper.className = 'img-wrapper';
+                
+                // Add skeleton while loading
+                wrapper.innerHTML = '<div class="skeleton"></div>';
+                gallery.appendChild(wrapper);
+                
                 const tempImg = new Image();
                 tempImg.src = thumbUrl;
                 
                 tempImg.onload = () => {
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'img-wrapper';
-                    tempImg.alt = `Image ${index + 1}`;
+                    wrapper.innerHTML = '';
+                    tempImg.alt = `${filename}`;
                     tempImg.onclick = () => openLightbox(fullUrl);
+                    
+                    // Add caption
+                    const caption = document.createElement('div');
+                    caption.className = 'img-caption';
+                    caption.textContent = filename.replace('.jpg', '').replace('.jpeg', '').replace('.png', '');
+                    
                     wrapper.appendChild(tempImg);
-                    gallery.appendChild(wrapper);
-                    setTimeout(() => wrapper.classList.add('loaded'), (index % batchSize) * 50);
+                    wrapper.appendChild(caption);
+                    
+                    // Add view fullsize link (optional, can remove if not needed)
+                    const viewLink = document.createElement('a');
+                    viewLink.className = 'view-fullsize';
+                    viewLink.href = fullUrl;
+                    viewLink.target = '_blank';
+                    viewLink.textContent = 'View fullsize';
+                    viewLink.onclick = (e) => {
+                        e.preventDefault();
+                        openLightbox(fullUrl);
+                    };
+                    wrapper.appendChild(viewLink);
+                    
+                    setTimeout(() => wrapper.classList.add('loaded'), 50);
                     resolve(true);
                 };
                 
                 tempImg.onerror = () => {
+                    wrapper.remove();
                     console.error(`Failed to load: ${filename}`);
                     resolve(false);
                 };
@@ -338,7 +315,6 @@
             
             isLoading = true;
             loadingIndicator.style.display = 'block';
-            loadingIndicator.textContent = `Loading images... ${currentIndex}/${images.length}`;
             
             const endIndex = Math.min(currentIndex + batchSize, images.length);
             const batch = images.slice(currentIndex, endIndex);
@@ -350,12 +326,9 @@
             isLoading = false;
             
             if (currentIndex >= images.length) {
-                loadingIndicator.textContent = `All ${images.length} images loaded!`;
-                setTimeout(() => {
-                    loadingIndicator.style.display = 'none';
-                }, 2000);
-            } else {
                 loadingIndicator.style.display = 'none';
+            } else {
+                loadingIndicator.textContent = `${currentIndex} of ${images.length} images loaded`;
             }
         }
         
@@ -365,8 +338,8 @@
             const windowHeight = window.innerHeight;
             const documentHeight = document.documentElement.scrollHeight;
             
-            // Load more when user is 500px from bottom
-            if (scrollTop + windowHeight >= documentHeight - 500) {
+            // Load more when user is 800px from bottom
+            if (scrollTop + windowHeight >= documentHeight - 800) {
                 loadBatch();
             }
         }
