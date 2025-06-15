@@ -298,100 +298,113 @@
     <script src="../new-collection/images.js"></script>
     
     <script>
-        // Supabase configuration
-        const SUPABASE_URL = 'https://ybejyjqqxfwecpxllmqv.supabase.co';
-        const BUCKET_NAME = 'wubbleton-images';
-        const DIR = 'new-collection';
-        
-        // Function to get Supabase URL
-        function getSupabaseUrl(path) {
-            return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${path}`;
-        }
-        
-        // Create floating hearts
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.innerHTML = '💖';
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.animationDuration = Math.random() * 5 + 10 + 's';
-            heart.style.animationDelay = Math.random() * 5 + 's';
-            document.body.appendChild(heart);
-            
-            setTimeout(() => heart.remove(), 15000);
-        }
-        
-        // Create hearts periodically
-        setInterval(createHeart, 2000);
-        
-        // Remove old hard-coded images array and instead use newCollectionImages
-        const images = newCollectionImages;
-        
-        // Load hero image
-        const heroImage = document.getElementById('hero-image');
-        const heroImageUrl = getSupabaseUrl(`${DIR}/full/${images[Math.floor(Math.random() * images.length)]}`);
-        heroImage.src = heroImageUrl;
-        heroImage.onload = () => heroImage.classList.add('loaded');
-        
-        const gallery = document.getElementById('gallery');
-        
-        // Load images after they've finished downloading to prevent layout shifts
-        function loadImage(img, index) {
-            return new Promise((resolve) => {
-                const imageUrl = getSupabaseUrl(`${DIR}/full/${img}`);
-                const tempImg = new Image();
-                tempImg.src = imageUrl;
-                tempImg.onload = () => {
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'img-wrapper';
-                    tempImg.alt = `Vision ${index + 1}`;
-                    tempImg.onclick = () => openLightbox(imageUrl);
-                    wrapper.appendChild(tempImg);
-                    gallery.appendChild(wrapper);
-                    setTimeout(() => wrapper.classList.add('loaded'), index * 30);
-                    resolve();
-                };
-            });
-        }
-        
-        // Load images in batches for better performance
-        async function loadGallery() {
-            const batchSize = 10;
-            for (let i = 0; i < images.length; i += batchSize) {
-                const batch = images.slice(i, i + batchSize);
-                const promises = batch.map((img, idx) => loadImage(img, i + idx));
-                await Promise.all(promises);
+        // Wait for images.js to load
+        window.addEventListener('DOMContentLoaded', function() {
+            // Check if newCollectionImages is available
+            if (typeof newCollectionImages === 'undefined') {
+                console.error('newCollectionImages not found. Check if images.js loaded correctly.');
+                return;
             }
-        }
-        
-        // Start loading gallery
-        loadGallery();
-        
-        function openLightbox(src) {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.style.display = 'block';
-            document.getElementById('lightbox-img').src = src;
-            document.body.style.overflow = 'hidden';
             
-            // Trigger animation
-            setTimeout(() => {
-                lightbox.classList.add('active');
-            }, 10);
-        }
-        
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
+            // Supabase configuration
+            const SUPABASE_URL = 'https://ybejyjqqxfwecpxllmqv.supabase.co';
+            const BUCKET_NAME = 'wubbleton-images';
+            const DIR = 'new-collection';
             
-            setTimeout(() => {
-                lightbox.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }, 300);
-        }
-        
-        // Escape key to close
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeLightbox();
+            // Function to get Supabase URL
+            function getSupabaseUrl(path) {
+                return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${path}`;
+            }
+            
+            // Create floating hearts
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '💖';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = Math.random() * 5 + 10 + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 15000);
+            }
+            
+            // Create hearts periodically
+            setInterval(createHeart, 2000);
+            
+            // Use newCollectionImages from the loaded script
+            const images = newCollectionImages;
+            
+            // Load hero image
+            const heroImage = document.getElementById('hero-image');
+            const heroImageUrl = getSupabaseUrl(`${DIR}/full/${images[Math.floor(Math.random() * images.length)]}`);
+            heroImage.src = heroImageUrl;
+            heroImage.onload = () => heroImage.classList.add('loaded');
+            
+            const gallery = document.getElementById('gallery');
+            
+            // Load images after they've finished downloading to prevent layout shifts
+            function loadImage(img, index) {
+                return new Promise((resolve) => {
+                    const imageUrl = getSupabaseUrl(`${DIR}/full/${img}`);
+                    const tempImg = new Image();
+                    tempImg.src = imageUrl;
+                    tempImg.onload = () => {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'img-wrapper';
+                        tempImg.alt = `Vision ${index + 1}`;
+                        tempImg.onclick = () => openLightbox(imageUrl);
+                        wrapper.appendChild(tempImg);
+                        gallery.appendChild(wrapper);
+                        setTimeout(() => wrapper.classList.add('loaded'), index * 30);
+                        resolve();
+                    };
+                    tempImg.onerror = () => {
+                        console.error(`Failed to load image: ${img}`);
+                        resolve();
+                    };
+                });
+            }
+            
+            // Load images in batches for better performance
+            async function loadGallery() {
+                const batchSize = 10;
+                for (let i = 0; i < images.length; i += batchSize) {
+                    const batch = images.slice(i, i + batchSize);
+                    const promises = batch.map((img, idx) => loadImage(img, i + idx));
+                    await Promise.all(promises);
+                }
+            }
+            
+            // Start loading gallery
+            loadGallery();
+            
+            window.openLightbox = function(src) {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.style.display = 'block';
+                document.getElementById('lightbox-img').src = src;
+                document.body.style.overflow = 'hidden';
+                
+                // Trigger animation
+                setTimeout(() => {
+                    lightbox.classList.add('active');
+                }, 10);
+            }
+            
+            window.closeLightbox = function() {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('active');
+                
+                setTimeout(() => {
+                    lightbox.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
+            
+            // Escape key to close
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeLightbox();
+            });
         });
     </script>
 </body>
