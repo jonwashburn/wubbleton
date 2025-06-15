@@ -270,7 +270,7 @@
     
     <div class="stats">
         <div class="stat">
-            <div class="stat-number">647</div>
+            <div class="stat-number">319</div>
             <div class="stat-label">Visions Today</div>
         </div>
         <div class="stat">
@@ -302,18 +302,18 @@
         window.addEventListener('DOMContentLoaded', function() {
             console.log('DOM loaded, checking for newCollectionImages...');
             
-            // Check if newCollectionImages is available
-            if (typeof newCollectionImages === 'undefined') {
-                console.error('newCollectionImages not found. Check if images.js loaded correctly.');
+            // Check if dailyVisionsImages is available
+            if (typeof dailyVisionsImages === 'undefined') {
+                console.error('dailyVisionsImages not found. Check if images.js loaded correctly.');
                 return;
             }
             
-            console.log('Found newCollectionImages with', newCollectionImages.length, 'images');
+            console.log('Found dailyVisionsImages with', dailyVisionsImages.length, 'images');
             
             // Supabase configuration
             const SUPABASE_URL = 'https://ybejyjqqxfwecpxllmqv.supabase.co';
             const BUCKET_NAME = 'wubbleton-images';
-            const DIR = 'new-collection';
+            const DIR = 'wubbleton';
             
             console.log('Using Supabase URL:', SUPABASE_URL);
             console.log('Bucket:', BUCKET_NAME, 'Directory:', DIR);
@@ -339,8 +339,8 @@
             // Create hearts periodically
             setInterval(createHeart, 2000);
             
-            // Use newCollectionImages from the loaded script
-            const images = newCollectionImages;
+            // Use dailyVisionsImages from the loaded script
+            const images = dailyVisionsImages;
             
             // Load hero image
             const heroImage = document.getElementById('hero-image');
