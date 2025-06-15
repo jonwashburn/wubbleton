@@ -310,17 +310,16 @@
             
             console.log('Found dailyVisionsImages with', dailyVisionsImages.length, 'images');
             
-            // Supabase configuration
-            const SUPABASE_URL = 'https://ybejyjqqxfwecpxllmqv.supabase.co';
-            const BUCKET_NAME = 'wubbleton-images';
+            // Cloudinary configuration
+            const CLOUDINARY_URL = 'https://res.cloudinary.com/dqwxeg4qw/image/upload';
             const DIR = 'wubbleton';
             
-            console.log('Using Supabase URL:', SUPABASE_URL);
-            console.log('Bucket:', BUCKET_NAME, 'Directory:', DIR);
+            console.log('Using Cloudinary URL:', CLOUDINARY_URL);
+            console.log('Directory:', DIR);
             
-            // Function to get Supabase URL
-            function getSupabaseUrl(path) {
-                return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${path}`;
+            // Function to get Cloudinary URL
+            function getCloudinaryUrl(path) {
+                return `${CLOUDINARY_URL}/${path}`;
             }
             
             // Create floating hearts
@@ -344,7 +343,8 @@
             
             // Load hero image
             const heroImage = document.getElementById('hero-image');
-            const heroImageUrl = getSupabaseUrl(`${DIR}/full/${images[Math.floor(Math.random() * images.length)]}`);
+            const randomImage = images[Math.floor(Math.random() * images.length)];
+            const heroImageUrl = getCloudinaryUrl(`${DIR}/full/${randomImage.replace('.jpg', '')}`);
             heroImage.src = heroImageUrl;
             heroImage.onload = () => heroImage.classList.add('loaded');
             
@@ -368,7 +368,7 @@
                 const wrapper = document.createElement('div');
                 wrapper.className = 'img-wrapper';
                 
-                const imageUrl = getSupabaseUrl(`${DIR}/full/${filename}`);
+                const imageUrl = getCloudinaryUrl(`${DIR}/full/${filename.replace('.jpg', '')}`);
                 const tempImg = new Image();
                 tempImg.src = imageUrl;
                 tempImg.alt = `Vision ${index + 1}`;

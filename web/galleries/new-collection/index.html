@@ -383,7 +383,7 @@
             for (let i = 0; i < 2; i++) {
                 marqueeImages.forEach(filename => {
                     const img = document.createElement('img');
-                    img.src = `https://ybejyjqqxfwecpxllmqv.supabase.co/storage/v1/object/public/wubbleton-images/new-collection/full/${filename}`;
+                    img.src = `https://res.cloudinary.com/dqwxeg4qw/image/upload/new-collection/full/${filename.replace('.jpg', '')}`;
                     img.alt = filename;
                     marqueeContainer.appendChild(img);
                 });
@@ -416,7 +416,7 @@
                 item.appendChild(placeholder);
                 
                 const img = document.createElement('img');
-                img.src = `https://ybejyjqqxfwecpxllmqv.supabase.co/storage/v1/object/public/wubbleton-images/new-collection/full/${filename}`;
+                img.src = `https://res.cloudinary.com/dqwxeg4qw/image/upload/new-collection/full/${filename.replace('.jpg', '')}`;
                 img.alt = filename;
                 img.loading = 'lazy';
                 
@@ -470,7 +470,7 @@
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             
-            lightboxImg.src = `https://ybejyjqqxfwecpxllmqv.supabase.co/storage/v1/object/public/wubbleton-images/new-collection/full/${images[index]}`;
+            lightboxImg.src = `https://res.cloudinary.com/dqwxeg4qw/image/upload/new-collection/full/${images[index].replace('.jpg', '')}`;
             lightbox.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
