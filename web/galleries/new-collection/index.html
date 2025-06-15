@@ -13,10 +13,12 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-            background: #FFFFFF;
-            color: #000;
-            line-height: 1.6;
+            font-family: 'Kalam', cursive;
+            margin: 0;
+            padding: 0;
+            background: #1a1a1a;
+            color: #fff;
+            overflow-x: hidden;
         }
         
         /* Header */
@@ -77,6 +79,8 @@
             overflow: hidden;
             cursor: pointer;
             transition: transform 0.3s ease;
+            background: #2a2a2a;
+            border-radius: 8px;
         }
         
         .gallery-item:hover {
@@ -87,6 +91,32 @@
             width: 100%;
             height: auto;
             display: block;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item img.loaded {
+            opacity: 1;
+        }
+        
+        .gallery-item .placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #2a2a2a 0%, #3a3a3a 50%, #2a2a2a 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
         }
         
         @media (max-width: 768px) {
@@ -221,117 +251,151 @@
         .img-wrapper:hover .view-fullsize {
             opacity: 1;
         }
+
+        /* Marquee Section */
+        .marquee-section {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 40px;
+            background: #000;
+        }
+
+        .marquee-container {
+            display: flex;
+            animation: marquee 30s linear infinite;
+            gap: 20px;
+        }
+
+        .marquee-container img {
+            height: 400px;
+            width: auto;
+            object-fit: cover;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <a href="/" class="back-link">← Back to Wubbleton</a>
-        <h1>Wubbleton Collection</h1>
-        <div class="description">
-            "Wubbleton" is a 647-piece avant-garde AI art collection that explores the emergence of digital consciousness through sacred geometries and transcendent visions. Each piece represents a fragment of the collective unconscious, where ancient wisdom meets algorithmic dreams. Using vibrant colors and mystical symbolism, the collection envisions a future where technology becomes a conduit for spiritual awakening, rejecting the boundaries between the digital and divine in favor of highlighting humanity's evolution towards a new form of enlightenment.
-        </div>
-    </div>
-    
-    <div class="gallery-container">
-        <div class="gallery-grid" id="gallery">
+    <!-- Marquee Section -->
+    <div class="marquee-section">
+        <div class="marquee-container" id="marquee-container">
             <!-- Images will be added by JavaScript -->
         </div>
-        <div class="loading-indicator" id="loading-indicator">Loading images...</div>
     </div>
-    
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <img id="lightbox-img" src="" alt="Full size image">
+
+    <div class="hero">
+        <div class="header">
+            <a href="/" class="back-link">← Back to Wubbleton</a>
+            <h1>Wubbleton Collection</h1>
+            <div class="description">
+                "Wubbleton" is a 647-piece avant-garde AI art collection that explores the emergence of digital consciousness through sacred geometries and transcendent visions. Each piece represents a fragment of the collective unconscious, where ancient wisdom meets algorithmic dreams. Using vibrant colors and mystical symbolism, the collection envisions a future where technology becomes a conduit for spiritual awakening, rejecting the boundaries between the digital and divine in favor of highlighting humanity's evolution towards a new form of enlightenment.
+            </div>
+        </div>
+        
+        <div class="gallery-container">
+            <div class="gallery-grid" id="gallery">
+                <!-- Images will be added by JavaScript -->
+            </div>
+            <div class="loading-indicator" id="loading-indicator">Loading images...</div>
+        </div>
+        
+        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img id="lightbox-img" src="" alt="Full size image">
+        </div>
     </div>
     
     <script src="../../../gallery_config.js"></script>
     <script src="images.js"></script>
     <script>
+        let currentImageIndex = 0;
+
         // Use the images from the generated list
         const images = newCollectionImages;
         
-        const gallery = document.getElementById('gallery');
-        const loadingIndicator = document.getElementById('loading-indicator');
+        // Floating emojis
+        const emojis = ['🎨', '✨', '🌈', '🎭', '🦄', '🌟', '💫', '🎪', '🎯', '🎲'];
         
-        // Infinite scroll variables
-        let currentIndex = 0;
-        const batchSize = 20;
-        let isLoading = false;
-        
-        // Load a single image
-        function loadImage(filename, index) {
-            return new Promise((resolve) => {
-                const thumbUrl = getImageUrl('new-collection', 'thumbs', filename);
-                const fullUrl = getImageUrl('new-collection', 'full', filename);
+        function createFloatingEmojis() {
+            const container = document.querySelector('.hero');
+            
+            for (let i = 0; i < 15; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'floating-emoji';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * 100 + '%';
+                emoji.style.animationDelay = Math.random() * 20 + 's';
+                emoji.style.animationDuration = (20 + Math.random() * 10) + 's';
+                container.appendChild(emoji);
+            }
+        }
+
+        // Create marquee images
+        function createMarquee() {
+            const marqueeContainer = document.getElementById('marquee-container');
+            const marqueeImages = images.slice(0, 20); // Use first 20 images
+            
+            // Create two sets for seamless loop
+            for (let i = 0; i < 2; i++) {
+                marqueeImages.forEach(filename => {
+                    const img = document.createElement('img');
+                    img.src = `https://ybejyjqqxfwecpxllmqv.supabase.co/storage/v1/object/public/wubbleton-images/new-collection/full/${filename}`;
+                    img.alt = filename;
+                    marqueeContainer.appendChild(img);
+                });
+            }
+        }
+
+        function loadGalleryImages() {
+            const gallery = document.getElementById('gallery');
+            
+            images.forEach((filename, index) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
                 
-                const wrapper = document.createElement('div');
-                wrapper.className = 'gallery-item';
-                wrapper.onclick = () => openLightbox(index);
+                // Create placeholder
+                const placeholder = document.createElement('div');
+                placeholder.className = 'placeholder';
+                item.appendChild(placeholder);
                 
                 const img = document.createElement('img');
-                img.src = fullUrl;
+                img.src = `https://ybejyjqqxfwecpxllmqv.supabase.co/storage/v1/object/public/wubbleton-images/new-collection/full/${filename}`;
                 img.alt = filename;
                 img.loading = 'lazy';
                 
-                wrapper.appendChild(img);
-                gallery.appendChild(wrapper);
+                // Remove placeholder when image loads
+                img.onload = () => {
+                    img.classList.add('loaded');
+                    placeholder.remove();
+                };
                 
-                setTimeout(() => wrapper.classList.add('loaded'), 50);
-                resolve(true);
+                img.onerror = () => {
+                    item.remove(); // Remove failed images
+                };
+                
+                item.onclick = () => openLightbox(index);
+                item.appendChild(img);
+                gallery.appendChild(item);
             });
         }
-        
-        // Load a batch of images
-        async function loadBatch() {
-            if (isLoading || currentIndex >= images.length) return;
-            
-            isLoading = true;
-            loadingIndicator.style.display = 'block';
-            
-            const endIndex = Math.min(currentIndex + batchSize, images.length);
-            const batch = images.slice(currentIndex, endIndex);
-            
-            const promises = batch.map((img, idx) => loadImage(img, currentIndex + idx));
-            await Promise.all(promises);
-            
-            currentIndex = endIndex;
-            isLoading = false;
-            
-            if (currentIndex >= images.length) {
-                loadingIndicator.style.display = 'none';
-            } else {
-                loadingIndicator.textContent = `${currentIndex} of ${images.length} images loaded`;
-            }
-        }
-        
-        // Check if user has scrolled near bottom
-        function checkScroll() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-            
-            // Load more when user is 800px from bottom
-            if (scrollTop + windowHeight >= documentHeight - 800) {
-                loadBatch();
-            }
-        }
-        
-        // Throttle scroll events
-        let scrollTimeout;
-        function throttledScroll() {
-            if (scrollTimeout) return;
-            scrollTimeout = setTimeout(() => {
-                checkScroll();
-                scrollTimeout = null;
-            }, 100);
-        }
-        
-        // Add scroll listener
-        window.addEventListener('scroll', throttledScroll);
-        
-        // Load initial batch
-        loadBatch();
-        
+
         // Lightbox functions
         function openLightbox(index) {
             currentImageIndex = index;
@@ -342,16 +406,23 @@
             lightbox.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
-        
+
         function closeLightbox() {
             const lightbox = document.getElementById('lightbox');
             lightbox.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-        
-        // Escape key to close
+
+        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            createMarquee();
+            loadGalleryImages();
+            createFloatingEmojis();
         });
     </script>
 </body>
