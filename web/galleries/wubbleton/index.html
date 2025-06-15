@@ -270,7 +270,7 @@
     
     <div class="stats">
         <div class="stat">
-            <div class="stat-number">319</div>
+            <div class="stat-number">647</div>
             <div class="stat-label">Visions Today</div>
         </div>
         <div class="stat">
@@ -300,16 +300,23 @@
     <script>
         // Wait for images.js to load
         window.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, checking for newCollectionImages...');
+            
             // Check if newCollectionImages is available
             if (typeof newCollectionImages === 'undefined') {
                 console.error('newCollectionImages not found. Check if images.js loaded correctly.');
                 return;
             }
             
+            console.log('Found newCollectionImages with', newCollectionImages.length, 'images');
+            
             // Supabase configuration
             const SUPABASE_URL = 'https://ozxhahlykxeeiuvmzrbb.supabase.co';
             const BUCKET_NAME = 'gallery-images';
             const DIR = 'new-collection';
+            
+            console.log('Using Supabase URL:', SUPABASE_URL);
+            console.log('Bucket:', BUCKET_NAME, 'Directory:', DIR);
             
             // Function to get Supabase URL
             function getSupabaseUrl(path) {
@@ -342,39 +349,83 @@
             heroImage.onload = () => heroImage.classList.add('loaded');
             
             const gallery = document.getElementById('gallery');
+            const loadingIndicator = document.createElement('div');
+            loadingIndicator.id = 'loading-indicator';
+            loadingIndicator.style.textAlign = 'center';
+            loadingIndicator.style.padding = '40px';
+            loadingIndicator.style.color = '#999';
+            loadingIndicator.style.fontSize = '14px';
+            loadingIndicator.textContent = 'Loading images...';
+            gallery.parentNode.appendChild(loadingIndicator);
             
-            // Load images after they've finished downloading to prevent layout shifts
-            function loadImage(img, index) {
-                return new Promise((resolve) => {
-                    const imageUrl = getSupabaseUrl(`${DIR}/full/${img}`);
-                    const tempImg = new Image();
-                    tempImg.src = imageUrl;
-                    tempImg.onload = () => {
-                        const wrapper = document.createElement('div');
-                        wrapper.className = 'img-wrapper';
-                        tempImg.alt = `Vision ${index + 1}`;
-                        tempImg.onclick = () => openLightbox(imageUrl);
-                        wrapper.appendChild(tempImg);
-                        gallery.appendChild(wrapper);
-                        setTimeout(() => wrapper.classList.add('loaded'), index * 30);
-                        resolve();
-                    };
-                    tempImg.onerror = () => {
-                        console.error(`Failed to load image: ${img}`);
-                        resolve();
-                    };
-                });
+            // Lazy loading config
+            const IMAGES_PER_LOAD = 20;
+            let currentlyLoaded = 0;
+            let isLoading = false;
+            
+            // Create image element and append to gallery
+            function appendImage(filename, index) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'img-wrapper';
+                
+                const imageUrl = getSupabaseUrl(`${DIR}/full/${filename}`);
+                const tempImg = new Image();
+                tempImg.src = imageUrl;
+                tempImg.alt = `Vision ${index + 1}`;
+                tempImg.loading = 'lazy';
+                tempImg.onclick = () => openLightbox(imageUrl);
+                
+                // placeholder skeleton
+                const skeleton = document.createElement('div');
+                skeleton.className = 'skeleton';
+                wrapper.appendChild(skeleton);
+                
+                tempImg.onload = () => {
+                    wrapper.replaceChild(tempImg, skeleton);
+                    setTimeout(() => wrapper.classList.add('loaded'), 10);
+                };
+                tempImg.onerror = () => {
+                    wrapper.remove();
+                };
+                
+                gallery.appendChild(wrapper);
             }
             
-            // Load images in batches for better performance
-            async function loadGallery() {
-                const batchSize = 10;
-                for (let i = 0; i < images.length; i += batchSize) {
-                    const batch = images.slice(i, i + batchSize);
-                    const promises = batch.map((img, idx) => loadImage(img, i + idx));
-                    await Promise.all(promises);
+            function loadMoreImages() {
+                if (isLoading || currentlyLoaded >= images.length) return;
+                isLoading = true;
+                
+                const endIndex = Math.min(currentlyLoaded + IMAGES_PER_LOAD, images.length);
+                for (let i = currentlyLoaded; i < endIndex; i++) {
+                    appendImage(images[i], i);
                 }
+                
+                currentlyLoaded = endIndex;
+                
+                if (currentlyLoaded >= images.length) {
+                    loadingIndicator.style.display = 'none';
+                } else {
+                    loadingIndicator.textContent = `Scroll down to load more... (${currentlyLoaded} of ${images.length} loaded)`;
+                }
+                
+                isLoading = false;
             }
+            
+            function setupInfiniteScroll() {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadMoreImages();
+                        }
+                    });
+                }, { rootMargin: '200px' });
+                
+                observer.observe(loadingIndicator);
+            }
+            
+            // Initialize lazy loading
+            loadMoreImages();
+            setupInfiniteScroll();
             
             // Define lightbox functions before gallery loads
             window.openLightbox = function(src) {
@@ -398,9 +449,6 @@
                     document.body.style.overflow = 'auto';
                 }, 300);
             }
-            
-            // Start loading gallery after lightbox functions defined
-            loadGallery();
             
             // Escape key to close
             document.addEventListener('keydown', (e) => {
