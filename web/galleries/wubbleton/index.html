@@ -307,8 +307,8 @@
             }
             
             // Supabase configuration
-            const SUPABASE_URL = 'https://ybejyjqqxfwecpxllmqv.supabase.co';
-            const BUCKET_NAME = 'wubbleton-images';
+            const SUPABASE_URL = 'https://ozxhahlykxeeiuvmzrbb.supabase.co';
+            const BUCKET_NAME = 'gallery-images';
             const DIR = 'new-collection';
             
             // Function to get Supabase URL
@@ -376,9 +376,7 @@
                 }
             }
             
-            // Start loading gallery
-            loadGallery();
-            
+            // Define lightbox functions before gallery loads
             window.openLightbox = function(src) {
                 const lightbox = document.getElementById('lightbox');
                 lightbox.style.display = 'block';
@@ -400,6 +398,9 @@
                     document.body.style.overflow = 'auto';
                 }, 300);
             }
+            
+            // Start loading gallery after lightbox functions defined
+            loadGallery();
             
             // Escape key to close
             document.addEventListener('keydown', (e) => {
