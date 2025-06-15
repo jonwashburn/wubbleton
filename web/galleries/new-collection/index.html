@@ -300,6 +300,11 @@
         const gallery = document.getElementById('gallery');
         const loadingIndicator = document.getElementById('loading-indicator');
         
+        // Infinite scroll variables
+        let currentIndex = 0;
+        const batchSize = 20;
+        let isLoading = false;
+        
         // Load a single image
         function loadImage(filename, index) {
             return new Promise((resolve) => {
@@ -316,7 +321,7 @@
                     tempImg.onclick = () => openLightbox(fullUrl);
                     wrapper.appendChild(tempImg);
                     gallery.appendChild(wrapper);
-                    setTimeout(() => wrapper.classList.add('loaded'), (index % 20) * 50);
+                    setTimeout(() => wrapper.classList.add('loaded'), (index % batchSize) * 50);
                     resolve(true);
                 };
                 
@@ -327,24 +332,60 @@
             });
         }
         
-        // Load gallery images in batches
-        async function loadGallery() {
-            let loadedCount = 0;
-            const batchSize = 20;
+        // Load a batch of images
+        async function loadBatch() {
+            if (isLoading || currentIndex >= images.length) return;
             
-            for (let i = 0; i < images.length; i += batchSize) {
-                const batch = images.slice(i, i + batchSize);
-                const promises = batch.map((img, idx) => loadImage(img, i + idx));
-                await Promise.all(promises);
-                loadedCount += batch.length;
-                loadingIndicator.textContent = `Loading images... ${loadedCount}/${images.length}`;
+            isLoading = true;
+            loadingIndicator.style.display = 'block';
+            loadingIndicator.textContent = `Loading images... ${currentIndex}/${images.length}`;
+            
+            const endIndex = Math.min(currentIndex + batchSize, images.length);
+            const batch = images.slice(currentIndex, endIndex);
+            
+            const promises = batch.map((img, idx) => loadImage(img, currentIndex + idx));
+            await Promise.all(promises);
+            
+            currentIndex = endIndex;
+            isLoading = false;
+            
+            if (currentIndex >= images.length) {
+                loadingIndicator.textContent = `All ${images.length} images loaded!`;
+                setTimeout(() => {
+                    loadingIndicator.style.display = 'none';
+                }, 2000);
+            } else {
+                loadingIndicator.style.display = 'none';
             }
-            
-            loadingIndicator.style.display = 'none';
         }
         
-        // Start loading gallery
-        loadGallery();
+        // Check if user has scrolled near bottom
+        function checkScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            // Load more when user is 500px from bottom
+            if (scrollTop + windowHeight >= documentHeight - 500) {
+                loadBatch();
+            }
+        }
+        
+        // Throttle scroll events
+        let scrollTimeout;
+        function throttledScroll() {
+            if (scrollTimeout) return;
+            scrollTimeout = setTimeout(() => {
+                checkScroll();
+                scrollTimeout = null;
+            }, 100);
+        }
+        
+        // Add scroll listener
+        window.addEventListener('scroll', throttledScroll);
+        
+        // Load initial batch
+        loadBatch();
         
         // Lightbox functions
         function openLightbox(src) {
