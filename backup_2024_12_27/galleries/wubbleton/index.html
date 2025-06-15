@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Visions - Wubbleton Sacred Art</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: #FFFFFF;
+            color: #333;
+        }
+        
+        /* Full screen header */
+        .hero {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .hero-image.loaded {
+            opacity: 1;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-title {
+            font-size: 5em;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: center;
+        }
+        
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: background 0.3s;
+        }
+        
+        .back-link:hover {
+            background: rgba(0,0,0,0.8);
+        }
+        
+        .description {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 0 20px;
+            text-align: center;
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #FF69B4;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* Gallery with masonry layout */
+        .gallery-container {
+            padding: 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .gallery {
+            column-count: 2;
+            column-gap: 20px;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                column-count: 1;
+            }
+            .hero-title {
+                font-size: 3em;
+            }
+        }
+        
+        .img-wrapper {
+            break-inside: avoid;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            margin-bottom: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .img-wrapper.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .img-wrapper:hover img {
+            transform: scale(1.02);
+        }
+        
+        /* Loading skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 8px;
+            min-height: 300px;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+        }
+        
+        .lightbox img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            max-width: 90%;
+            max-height: 90%;
+            transition: transform 0.3s ease;
+        }
+        
+        .lightbox.active img {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .close:hover {
+            opacity: 1;
+        }
+        
+        /* Floating hearts */
+        .heart {
+            position: fixed;
+            color: #FFB6C1;
+            font-size: 20px;
+            animation: float-up 10s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">← Back to Wubbleton</a>
+    
+    <div class="hero">
+        <img class="hero-image" id="hero-image" src="" alt="Daily Visions">
+        <div class="hero-overlay">
+            <h1 class="hero-title">DAILY VISIONS</h1>
+        </div>
+    </div>
+    
+    <div class="description">
+        <p>Every morning at 3 AM, our dedicated family members enter the Vision Chamber for mandatory channeling sessions. What emerges are these raw transmissions—unfiltered glimpses of the recognition layer that underlies all reality. Each image represents a successful download from the universal consciousness buffer, captured in the brief moment before the ego reasserts itself.</p>
+    </div>
+    
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-number">319</div>
+            <div class="stat-label">Visions Today</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">47</div>
+            <div class="stat-label">Active Channelers</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Dimensions Accessed</div>
+        </div>
+    </div>
+    
+    <div class="gallery-container">
+        <div class="gallery" id="gallery">
+            <!-- Images will be added by JavaScript -->
+        </div>
+    </div>
+    
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close" onclick="event.stopPropagation(); closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+    
+    <!-- Add images list from new collection -->
+    <script src="images.js"></script>
+    
+    <script>
+        // Wait for images.js to load
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, checking for newCollectionImages...');
+            
+            // Check if dailyVisionsImages is available
+            if (typeof dailyVisionsImages === 'undefined') {
+                console.error('dailyVisionsImages not found. Check if images.js loaded correctly.');
+                return;
+            }
+            
+            console.log('Found dailyVisionsImages with', dailyVisionsImages.length, 'images');
+            
+            // Cloudinary configuration
+            const CLOUDINARY_URL = 'https://res.cloudinary.com/dqwxeg4qw/image/upload';
+            const DIR = 'wubbleton';
+            
+            console.log('Using Cloudinary URL:', CLOUDINARY_URL);
+            console.log('Directory:', DIR);
+            
+            // Function to get Cloudinary URL
+            function getCloudinaryUrl(path) {
+                return `${CLOUDINARY_URL}/${path}`;
+            }
+            
+            // Create floating hearts
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '💖';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = Math.random() * 5 + 10 + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 15000);
+            }
+            
+            // Create hearts periodically
+            setInterval(createHeart, 2000);
+            
+            // Use dailyVisionsImages from the loaded script
+            const images = dailyVisionsImages;
+            
+            // Load hero image
+            const heroImage = document.getElementById('hero-image');
+            const randomImage = images[Math.floor(Math.random() * images.length)];
+            const heroImageUrl = getCloudinaryUrl(`${DIR}/full/${randomImage.replace('.jpg', '')}`);
+            heroImage.src = heroImageUrl;
+            heroImage.onload = () => heroImage.classList.add('loaded');
+            
+            const gallery = document.getElementById('gallery');
+            const loadingIndicator = document.createElement('div');
+            loadingIndicator.id = 'loading-indicator';
+            loadingIndicator.style.textAlign = 'center';
+            loadingIndicator.style.padding = '40px';
+            loadingIndicator.style.color = '#999';
+            loadingIndicator.style.fontSize = '14px';
+            loadingIndicator.textContent = 'Loading images...';
+            gallery.parentNode.appendChild(loadingIndicator);
+            
+            // Lazy loading config
+            const IMAGES_PER_LOAD = 20;
+            let currentlyLoaded = 0;
+            let isLoading = false;
+            
+            // Create image element and append to gallery
+            function appendImage(filename, index) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'img-wrapper';
+                
+                const imageUrl = getCloudinaryUrl(`${DIR}/full/${filename.replace('.jpg', '')}`);
+                const tempImg = new Image();
+                tempImg.src = imageUrl;
+                tempImg.alt = `Vision ${index + 1}`;
+                tempImg.loading = 'lazy';
+                tempImg.onclick = () => openLightbox(imageUrl);
+                
+                // placeholder skeleton
+                const skeleton = document.createElement('div');
+                skeleton.className = 'skeleton';
+                wrapper.appendChild(skeleton);
+                
+                tempImg.onload = () => {
+                    wrapper.replaceChild(tempImg, skeleton);
+                    setTimeout(() => wrapper.classList.add('loaded'), 10);
+                };
+                tempImg.onerror = () => {
+                    wrapper.remove();
+                };
+                
+                gallery.appendChild(wrapper);
+            }
+            
+            function loadMoreImages() {
+                if (isLoading || currentlyLoaded >= images.length) return;
+                isLoading = true;
+                
+                const endIndex = Math.min(currentlyLoaded + IMAGES_PER_LOAD, images.length);
+                for (let i = currentlyLoaded; i < endIndex; i++) {
+                    appendImage(images[i], i);
+                }
+                
+                currentlyLoaded = endIndex;
+                
+                if (currentlyLoaded >= images.length) {
+                    loadingIndicator.style.display = 'none';
+                } else {
+                    loadingIndicator.textContent = `Scroll down to load more... (${currentlyLoaded} of ${images.length} loaded)`;
+                }
+                
+                isLoading = false;
+            }
+            
+            function setupInfiniteScroll() {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadMoreImages();
+                        }
+                    });
+                }, { rootMargin: '200px' });
+                
+                observer.observe(loadingIndicator);
+            }
+            
+            // Initialize lazy loading
+            loadMoreImages();
+            setupInfiniteScroll();
+            
+            // Define lightbox functions before gallery loads
+            window.openLightbox = function(src) {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.style.display = 'block';
+                document.getElementById('lightbox-img').src = src;
+                document.body.style.overflow = 'hidden';
+                
+                // Trigger animation
+                setTimeout(() => {
+                    lightbox.classList.add('active');
+                }, 10);
+            }
+            
+            window.closeLightbox = function() {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('active');
+                
+                setTimeout(() => {
+                    lightbox.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
+            
+            // Escape key to close
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeLightbox();
+            });
+        });
+    </script>
+</body>
+</html> 

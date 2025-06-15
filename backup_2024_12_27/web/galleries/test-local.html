@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Local Gallery - Wubbleton</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: #FFFFFF;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background: #FFFFFF;
+        }
+        
+        h1 {
+            font-size: 3em;
+            font-weight: 200;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .gallery {
+            column-count: 2;
+            column-gap: 0;
+            width: 100%;
+        }
+        
+        .img-wrapper {
+            break-inside: avoid;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+        
+        .img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .img-wrapper:hover img {
+            transform: scale(1.02);
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.95);
+            z-index: 1000;
+            cursor: pointer;
+        }
+        
+        .lightbox img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        /* Floating emojis */
+        .emoji {
+            position: fixed;
+            font-size: 20px;
+            animation: float-up 15s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>TEST LOCAL GALLERY</h1>
+        <p class="subtitle">Testing with Local Images</p>
+    </div>
+    
+    <div id="gallery" class="gallery">
+        <!-- Images will be added by JavaScript -->
+    </div>
+    
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+    
+    <script>
+        // Test with local Crisis images
+        const testImages = [
+            '100d.jpg', '114c.jpg', '115d.jpg', '120d.jpg', '129d.jpg',
+            '11.jpg', '12.jpg', '13.jpg', '15.jpg', '16.jpg',
+            '18.jpg', '20.jpg', '21.jpg', '25.jpg', '26.jpg'
+        ];
+        
+        // Create floating emojis
+        function createEmoji() {
+            const emojis = ['🎨', '🖼️', '✨', '🌟', '💫', '🎭', '🔮', '👁️'];
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji';
+            emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + '%';
+            emoji.style.animationDuration = Math.random() * 10 + 15 + 's';
+            emoji.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(emoji);
+            
+            setTimeout(() => emoji.remove(), 25000);
+        }
+        
+        // Create emojis periodically
+        setInterval(createEmoji, 3000);
+        
+        // Load gallery
+        const gallery = document.getElementById('gallery');
+        
+        testImages.forEach((img, index) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'img-wrapper';
+            
+            const imgElement = document.createElement('img');
+            imgElement.src = `../crisis/thumbs/${img}`;
+            imgElement.alt = `Test Image ${index + 1}`;
+            imgElement.loading = 'lazy';
+            imgElement.onclick = () => openLightbox(`../crisis/full/${img}`);
+            
+            wrapper.appendChild(imgElement);
+            gallery.appendChild(wrapper);
+        });
+        
+        // Lightbox functions
+        function openLightbox(src) {
+            document.getElementById('lightbox').style.display = 'block';
+            document.getElementById('lightbox-img').src = src;
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Escape key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html> 

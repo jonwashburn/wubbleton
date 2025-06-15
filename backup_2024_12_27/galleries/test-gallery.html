@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Gallery - Wubbleton</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: #FFFFFF;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background: #FFFFFF;
+        }
+        
+        h1 {
+            font-size: 3em;
+            font-weight: 200;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .gallery {
+            column-count: 2;
+            column-gap: 0;
+            width: 100%;
+        }
+        
+        .img-wrapper {
+            break-inside: avoid;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+        
+        .img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .img-wrapper:hover img {
+            transform: scale(1.02);
+        }
+        
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
+        /* Error state */
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #ff4444;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.95);
+            z-index: 1000;
+            cursor: pointer;
+        }
+        
+        .lightbox img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        /* Floating emojis */
+        .emoji {
+            position: fixed;
+            font-size: 20px;
+            animation: float-up 15s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>TEST GALLERY</h1>
+        <p class="subtitle">Testing Supabase Image Loading</p>
+    </div>
+    
+    <div id="gallery" class="gallery">
+        <div class="loading">Loading images...</div>
+    </div>
+    
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+    
+    <script>
+        // Supabase configuration
+        const SUPABASE_URL = 'https://ozxhahlykxeeiuvmzrbb.supabase.co';
+        const BUCKET_NAME = 'gallery-images';
+        
+        // Test with a mix of images from different galleries
+        const testImages = [
+            // Crisis images
+            { thumb: 'crisis/thumbs/100d.jpg', full: 'crisis/full/100d.jpg' },
+            { thumb: 'crisis/thumbs/114c.jpg', full: 'crisis/full/114c.jpg' },
+            { thumb: 'crisis/thumbs/115d.jpg', full: 'crisis/full/115d.jpg' },
+            { thumb: 'crisis/thumbs/120d.jpg', full: 'crisis/full/120d.jpg' },
+            { thumb: 'crisis/thumbs/129d.jpg', full: 'crisis/full/129d.jpg' },
+            
+            // Wubbleton images
+            { thumb: 'wubbleton/thumbs/wubbleton_1.jpg', full: 'wubbleton/full/wubbleton_1.jpg' },
+            { thumb: 'wubbleton/thumbs/wubbleton_10.jpg', full: 'wubbleton/full/wubbleton_10.jpg' },
+            { thumb: 'wubbleton/thumbs/wubbleton_50.jpg', full: 'wubbleton/full/wubbleton_50.jpg' },
+            { thumb: 'wubbleton/thumbs/wubbleton_100.jpg', full: 'wubbleton/full/wubbleton_100.jpg' },
+            { thumb: 'wubbleton/thumbs/wubbleton_150.jpg', full: 'wubbleton/full/wubbleton_150.jpg' },
+            
+            // Rapture images
+            { thumb: 'rapture/thumbs/1-Rapture_1.jpg', full: 'rapture/full/1-Rapture_1.jpg' },
+            { thumb: 'rapture/thumbs/10-Rapture_1.jpg', full: 'rapture/full/10-Rapture_1.jpg' },
+            { thumb: 'rapture/thumbs/50-Rapture_1.jpg', full: 'rapture/full/50-Rapture_1.jpg' },
+            { thumb: 'rapture/thumbs/100-Rapture_1.jpg', full: 'rapture/full/100-Rapture_1.jpg' },
+            { thumb: 'rapture/thumbs/150-Rapture_1.jpg', full: 'rapture/full/150-Rapture_1.jpg' }
+        ];
+        
+        // Function to get Supabase URL
+        function getSupabaseUrl(path) {
+            return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${path}`;
+        }
+        
+        // Create floating emojis
+        function createEmoji() {
+            const emojis = ['🎨', '🖼️', '✨', '🌟', '💫', '🎭', '🔮', '👁️'];
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji';
+            emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + '%';
+            emoji.style.animationDuration = Math.random() * 10 + 15 + 's';
+            emoji.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(emoji);
+            
+            setTimeout(() => emoji.remove(), 25000);
+        }
+        
+        // Create emojis periodically
+        setInterval(createEmoji, 3000);
+        
+        // Load gallery
+        function loadGallery() {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = ''; // Clear loading message
+            
+            testImages.forEach((img, index) => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'img-wrapper';
+                
+                const imgElement = document.createElement('img');
+                imgElement.src = getSupabaseUrl(img.thumb);
+                imgElement.alt = `Test Image ${index + 1}`;
+                imgElement.loading = 'lazy';
+                imgElement.onclick = () => openLightbox(getSupabaseUrl(img.full));
+                
+                // Add error handling
+                imgElement.onerror = function() {
+                    console.error(`Failed to load: ${img.thumb}`);
+                    this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjIwMCIgeT0iMTUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjE5cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+SW1hZ2UgTm90IEZvdW5kPC90ZXh0Pjwvc3ZnPg==';
+                };
+                
+                wrapper.appendChild(imgElement);
+                gallery.appendChild(wrapper);
+            });
+        }
+        
+        // Lightbox functions
+        function openLightbox(src) {
+            document.getElementById('lightbox').style.display = 'block';
+            document.getElementById('lightbox-img').src = src;
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Escape key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+        
+        // Load gallery on page load
+        loadGallery();
+        
+        // Log the URLs being used for debugging
+        console.log('Test Gallery URLs:');
+        testImages.forEach(img => {
+            console.log('Thumb:', getSupabaseUrl(img.thumb));
+        });
+    </script>
+</body>
+</html> 
