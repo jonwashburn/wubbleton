@@ -2,7 +2,7 @@
 const GALLERY_CONFIG = {
     // Local serving configuration
     USE_SUPABASE: true,
-    IMAGE_SERVER_URL: 'https://ozxhahlykxeeiuvmzrbb.supabase.co/storage/v1/object/public/wubbleton-galleries',
+    IMAGE_SERVER_URL: 'https://ozxhahlykxeeiuvmzrbb.supabase.co/storage/v1/object/public/gallery-images',
     
     // Gallery names
     galleries: {
