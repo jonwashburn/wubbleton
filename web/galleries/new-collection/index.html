@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wubbleton Collection</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Creepster&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         * { 
             margin: 0; 
@@ -43,10 +43,13 @@
         }
         
         h1 {
+            font-family: 'Creepster', cursive;
             font-size: 48px;
-            font-weight: 300;
-            letter-spacing: -0.02em;
+            font-weight: 400;
+            letter-spacing: 0.05em;
             margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .description {
@@ -290,6 +293,25 @@
             position: relative;
             overflow: hidden;
         }
+
+        /* Floating emojis */
+        .floating-emoji {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.3;
+            animation: float 20s infinite linear;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
@@ -330,6 +352,11 @@
         // Use the images from the generated list
         const images = newCollectionImages;
         
+        // Lazy loading configuration
+        const IMAGES_PER_LOAD = 20;
+        let currentlyLoaded = 0;
+        let isLoading = false;
+        
         // Floating emojis
         const emojis = ['🎨', '✨', '🌈', '🎭', '🦄', '🌟', '💫', '🎪', '🎯', '🎲'];
         
@@ -363,10 +390,23 @@
             }
         }
 
-        function loadGalleryImages() {
-            const gallery = document.getElementById('gallery');
+        function loadMoreImages() {
+            if (isLoading || currentlyLoaded >= images.length) return;
             
-            images.forEach((filename, index) => {
+            isLoading = true;
+            const gallery = document.getElementById('gallery');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            
+            // Show loading indicator if we have more to load
+            if (currentlyLoaded + IMAGES_PER_LOAD < images.length) {
+                loadingIndicator.style.display = 'block';
+                loadingIndicator.textContent = `Loading more images... (${currentlyLoaded} of ${images.length})`;
+            }
+            
+            const endIndex = Math.min(currentlyLoaded + IMAGES_PER_LOAD, images.length);
+            
+            for (let i = currentlyLoaded; i < endIndex; i++) {
+                const filename = images[i];
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
                 
@@ -390,10 +430,38 @@
                     item.remove(); // Remove failed images
                 };
                 
-                item.onclick = () => openLightbox(index);
+                item.onclick = () => openLightbox(i);
                 item.appendChild(img);
                 gallery.appendChild(item);
+            }
+            
+            currentlyLoaded = endIndex;
+            
+            // Hide loading indicator if we've loaded everything
+            if (currentlyLoaded >= images.length) {
+                loadingIndicator.style.display = 'none';
+            } else {
+                loadingIndicator.textContent = `Scroll down to load more... (${currentlyLoaded} of ${images.length} loaded)`;
+            }
+            
+            isLoading = false;
+        }
+
+        // Intersection Observer for infinite scroll
+        function setupInfiniteScroll() {
+            const loadingIndicator = document.getElementById('loading-indicator');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !isLoading) {
+                        loadMoreImages();
+                    }
+                });
+            }, {
+                rootMargin: '200px' // Start loading 200px before the indicator is visible
             });
+            
+            observer.observe(loadingIndicator);
         }
 
         // Lightbox functions
@@ -421,7 +489,8 @@
         // Initialize
         window.addEventListener('DOMContentLoaded', () => {
             createMarquee();
-            loadGalleryImages();
+            loadMoreImages(); // Load initial batch
+            setupInfiniteScroll(); // Setup infinite scroll
             createFloatingEmojis();
         });
     </script>
