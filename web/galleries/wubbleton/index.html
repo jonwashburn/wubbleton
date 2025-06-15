@@ -294,10 +294,14 @@
         <img id="lightbox-img" src="" alt="">
     </div>
     
+    <!-- Add images list from new collection -->
+    <script src="../new-collection/images.js"></script>
+    
     <script>
         // Supabase configuration
-        const SUPABASE_URL = 'https://ozxhahlykxeeiuvmzrbb.supabase.co';
-        const BUCKET_NAME = 'gallery-images';
+        const SUPABASE_URL = 'https://ybejyjqqxfwecpxllmqv.supabase.co';
+        const BUCKET_NAME = 'wubbleton-images';
+        const DIR = 'new-collection';
         
         // Function to get Supabase URL
         function getSupabaseUrl(path) {
@@ -320,15 +324,12 @@
         // Create hearts periodically
         setInterval(createHeart, 2000);
         
-        // Generate array of all 319 wubbleton images
-        const images = [];
-        for (let i = 1; i <= 319; i++) {
-            images.push(`wubbleton_${i}.jpg`);
-        }
+        // Remove old hard-coded images array and instead use newCollectionImages
+        const images = newCollectionImages;
         
         // Load hero image
         const heroImage = document.getElementById('hero-image');
-        const heroImageUrl = getSupabaseUrl(`wubbleton/full/${images[Math.floor(Math.random() * images.length)]}`);
+        const heroImageUrl = getSupabaseUrl(`${DIR}/full/${images[Math.floor(Math.random() * images.length)]}`);
         heroImage.src = heroImageUrl;
         heroImage.onload = () => heroImage.classList.add('loaded');
         
@@ -337,7 +338,7 @@
         // Load images after they've finished downloading to prevent layout shifts
         function loadImage(img, index) {
             return new Promise((resolve) => {
-                const imageUrl = getSupabaseUrl(`wubbleton/full/${img}`);
+                const imageUrl = getSupabaseUrl(`${DIR}/full/${img}`);
                 const tempImg = new Image();
                 tempImg.src = imageUrl;
                 tempImg.onload = () => {
