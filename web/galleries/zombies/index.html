@@ -251,13 +251,12 @@
     </div>
     
     <script>
-        // Supabase configuration
-        const SUPABASE_URL = 'https://ozxhahlykxeeiuvmzrbb.supabase.co';
-        const BUCKET_NAME = 'gallery-images';
+        // Cloudinary configuration
+        const CLOUDINARY_URL = 'https://res.cloudinary.com/dqwxeg4qw/image/upload';
         
-        // Function to get Supabase URL
-        function getSupabaseUrl(path) {
-            return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${path}`;
+        // Function to get Cloudinary URL
+        function getCloudinaryUrl(path) {
+            return `${CLOUDINARY_URL}/${path}`;
         }
         
         // Create floating emojis
@@ -289,7 +288,8 @@
         
         // Load hero image
         const heroImage = document.getElementById('hero-image');
-        const heroImageUrl = getSupabaseUrl(`zombies/full/${images[Math.floor(Math.random() * images.length)]}`);
+        const randomImage = images[Math.floor(Math.random() * images.length)];
+        const heroImageUrl = getCloudinaryUrl(`zombies/full/${randomImage.replace('.jpg', '')}`);
         heroImage.src = heroImageUrl;
         heroImage.onload = () => heroImage.classList.add('loaded');
         
@@ -298,7 +298,7 @@
         // Load images after they've finished downloading to prevent layout shifts
         function loadImage(img, index) {
             return new Promise((resolve) => {
-                const imageUrl = getSupabaseUrl(`zombies/full/${img}`);
+                const imageUrl = getCloudinaryUrl(`zombies/full/${img.replace('.jpg', '')}`);
                 const tempImg = new Image();
                 tempImg.src = imageUrl;
                 tempImg.onload = () => {

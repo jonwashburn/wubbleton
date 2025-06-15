@@ -251,13 +251,12 @@
     </div>
     
     <script>
-        // Supabase configuration
-        const SUPABASE_URL = 'https://ozxhahlykxeeiuvmzrbb.supabase.co';
-        const BUCKET_NAME = 'gallery-images';
+        // Cloudinary configuration
+        const CLOUDINARY_URL = 'https://res.cloudinary.com/dqwxeg4qw/image/upload';
         
-        // Function to get Supabase URL
-        function getSupabaseUrl(path) {
-            return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${path}`;
+        // Function to get Cloudinary URL
+        function getCloudinaryUrl(path) {
+            return `${CLOUDINARY_URL}/${path}`;
         }
         
         // Create floating emojis
@@ -305,43 +304,89 @@
         
         // Load hero image
         const heroImage = document.getElementById('hero-image');
-        const heroImageUrl = getSupabaseUrl(`crisis/full/${images[Math.floor(Math.random() * images.length)]}`);
+        const randomImage = images[Math.floor(Math.random() * images.length)];
+        const heroImageUrl = getCloudinaryUrl(`crisis/full/${randomImage.replace('.jpg', '')}`);
         heroImage.src = heroImageUrl;
         heroImage.onload = () => heroImage.classList.add('loaded');
         
         const gallery = document.getElementById('gallery');
-        
-        // Load images after they've finished downloading to prevent layout shifts
-        function loadImage(img, index) {
-            return new Promise((resolve) => {
-                const imageUrl = getSupabaseUrl(`crisis/full/${img}`);
-                const tempImg = new Image();
-                tempImg.src = imageUrl;
-                tempImg.onload = () => {
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'img-wrapper';
-                    tempImg.alt = `Crisis ${index + 1}`;
-                    tempImg.onclick = () => openLightbox(imageUrl);
-                    wrapper.appendChild(tempImg);
-                    gallery.appendChild(wrapper);
-                    setTimeout(() => wrapper.classList.add('loaded'), index * 30);
-                    resolve();
-                };
-            });
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.id = 'loading-indicator';
+        loadingIndicator.style.textAlign = 'center';
+        loadingIndicator.style.padding = '40px';
+        loadingIndicator.style.color = '#999';
+        loadingIndicator.style.fontSize = '14px';
+        loadingIndicator.textContent = 'Loading images...';
+        gallery.parentNode.appendChild(loadingIndicator);
+
+        // Lazy loading config
+        const IMAGES_PER_LOAD = 20;
+        let currentlyLoaded = 0;
+        let isLoading = false;
+
+        // Create image element and append to gallery
+        function appendImage(filename, index) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'img-wrapper';
+
+            const imageUrl = getCloudinaryUrl(`crisis/full/${filename.replace('.jpg', '')}`);
+            const tempImg = new Image();
+            tempImg.src = imageUrl;
+            tempImg.alt = `Crisis ${index + 1}`;
+            tempImg.loading = 'lazy';
+            tempImg.onclick = () => openLightbox(imageUrl);
+
+            // placeholder skeleton
+            const skeleton = document.createElement('div');
+            skeleton.className = 'skeleton';
+            wrapper.appendChild(skeleton);
+
+            tempImg.onload = () => {
+                wrapper.replaceChild(tempImg, skeleton);
+                setTimeout(() => wrapper.classList.add('loaded'), 10);
+            };
+            tempImg.onerror = () => {
+                wrapper.remove();
+            };
+
+            gallery.appendChild(wrapper);
         }
-        
-        // Load images in batches for better performance
-        async function loadGallery() {
-            const batchSize = 10;
-            for (let i = 0; i < images.length; i += batchSize) {
-                const batch = images.slice(i, i + batchSize);
-                const promises = batch.map((img, idx) => loadImage(img, i + idx));
-                await Promise.all(promises);
+
+        function loadMoreImages() {
+            if (isLoading || currentlyLoaded >= images.length) return;
+            isLoading = true;
+
+            const endIndex = Math.min(currentlyLoaded + IMAGES_PER_LOAD, images.length);
+            for (let i = currentlyLoaded; i < endIndex; i++) {
+                appendImage(images[i], i);
             }
+
+            currentlyLoaded = endIndex;
+
+            if (currentlyLoaded >= images.length) {
+                loadingIndicator.style.display = 'none';
+            } else {
+                loadingIndicator.textContent = `Scroll down to load more... (${currentlyLoaded} of ${images.length} loaded)`;
+            }
+
+            isLoading = false;
         }
-        
-        // Start loading gallery
-        loadGallery();
+
+        function setupInfiniteScroll() {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        loadMoreImages();
+                    }
+                });
+            }, { rootMargin: '200px' });
+
+            observer.observe(loadingIndicator);
+        }
+
+        // Initialize lazy loading
+        loadMoreImages();
+        setupInfiniteScroll();
         
         function openLightbox(src) {
             const lightbox = document.getElementById('lightbox');
