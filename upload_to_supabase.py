@@ -42,6 +42,9 @@ def main():
     print("🚀 Uploading gallery images to Supabase...")
     
     galleries = ['crisis', 'zombies', 'rapture', 'wubbleton']
+    # Include newly added gallery
+    if Path('web/galleries/new-collection').exists():
+        galleries.append('new-collection')
     types = ['thumbs', 'full']
     
     total_uploaded = 0

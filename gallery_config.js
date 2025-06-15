@@ -9,7 +9,8 @@ const GALLERY_CONFIG = {
         crisis: 'The Crisis',
         zombies: 'Modern Zombies', 
         rapture: 'The Rapture',
-        wubbleton: 'Daily Visions'
+        wubbleton: 'Daily Visions',
+        'new-collection': 'Wubbleton'
     }
 };
 
